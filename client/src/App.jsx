@@ -2,8 +2,8 @@ import "./App.css";
 
 // Importing routing utilities from react-router-dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SignUp from "./Component/SignUp.jsx";
-import Login from "./Component/Login.jsx";
+import SignUp from "./components/SignUp.jsx";
+import Login from "./components/Login.jsx";
 
 function App() {
   const router = createBrowserRouter([
