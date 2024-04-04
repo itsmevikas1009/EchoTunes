@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useInputValidation, useStrongPassword } from "6pp";
+import Navbar from "./Navbar";
 
 const SignUp = () => {
 
@@ -13,6 +14,8 @@ const SignUp = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="h-screen w-full ">
       <div className=" hidden md:flex md:w-[50%]  flex-col items-center bg-[rgb(213,129,53)] h-full">
         <img src="https://staticfe.saavn.com/web6/jioindw/dist/1712206575/_i/artist/Badshah.png" className="h-96 mt-[6rem]" alt="" />
@@ -56,6 +59,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
