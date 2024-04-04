@@ -1,4 +1,4 @@
-import Logo from "../assest/spotify-logo.png";
+import Logo from "../assets/spotify-logo.png";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
