@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useInputValidation, useStrongPassword } from "6pp";
 
 const SignUp = () => {
+
+  const name = useInputValidation("");
+  const email = useInputValidation("");
+  const password = useStrongPassword();
 
 
   const handleSubmit = (e) => {
@@ -17,29 +22,34 @@ const SignUp = () => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center w-full  md:w-[50%] mx-auto absolute right-0 top-[7rem] p-[2.5rem] ">
-        <div className="w-11/12 md:w-9/12">
+      <div className="flex flex-col items-center justify-center w-full  md:w-[50%] mx-auto absolute right-0 top-[1rem] p-[2.5rem] ">
+        <div className="w-11/12 md:w-6/12">
           <h1 className="text-4xl font-bold ">Welcome to Spotify</h1>
           <p className="text-xl p-1">Sign up with your details...</p>
 
-          <form className="flex flex-col gap-4 mt-12 " onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-4 mt-6 " onSubmit={handleSubmit}>
             <div className="">
               <label htmlFor="" className="block font-medium">Name</label>
-              <input type="text" placeholder="Name" className="w-full p-2 rounded-md outline-none  text-black border border-gray-200 px-4" />
+              <input type="text" placeholder="Name" value={name.value} onChange={name.changeHandler} className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4" />
             </div>
 
             <div className="w-full">
               <label htmlFor="" className="block font-medium">Email</label>
-              <input type="email" placeholder="Email" className="w-full p-2 rounded-md outline-none  text-black border border-gray-200 px-4" />
+              <input type="email" placeholder="Email" value={email.value} onChange={email.changeHandler} className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4" />
             </div>
 
             <div className="w-full">
               <label htmlFor="" className="block font-medium">Password</label>
-              <input type="password" placeholder="Password" className="w-full p-2 rounded-md outline-none  text-black border border-gray-200 px-4" />
+              <input type="password" placeholder="Password" value={password.value} onChange={password.changeHandler} className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4" />
+              {password.error && <p className='text-sm p-1 text-red-500'>{password.error}</p>}
             </div>
 
 
-            <button className="w-full bg-green-500 rounded-md p-2 mt-6 font-semibold text-lg">SignUp</button>
+            <button className="w-full bg-green-500 rounded-lg p-3 mt-4 font-semibold text-lg">SignUp</button>
+            <div className="text-center font-bold text-lg">Or</div>
+            <button className="w-full bg-green-500 rounded-lg p-3  font-semibold text-lg">
+              Sign Up With Google
+            </button>
           </form>
 
           <p className="mt-6 text-lg">Already Have a Account ? <Link to="/login" className="text-blue-500">Login</Link> </p>
