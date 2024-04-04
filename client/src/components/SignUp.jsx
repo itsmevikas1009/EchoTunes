@@ -1,14 +1,40 @@
 import { Link } from "react-router-dom";
 import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
+import axios from "axios";
+import { server } from "../services/api";
+import { useNavigate } from 'react-router-dom';
+import toast from "react-hot-toast";
 
 const SignUp = () => {
+
+  const navigate = useNavigate();
   const name = useInputValidation("");
   const email = useInputValidation("");
   const password = useStrongPassword();
 
-  const handleSubmit = (e) => {
+  const data = {
+    name: name.value,
+    email: email.value,
+    password: password.value
+  }
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const res = await axios.post(`${server}/signup`, data, { withCredentials: true });
+      console.log(res);
+      if (res.status === 200) {
+        navigate("/login");
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (

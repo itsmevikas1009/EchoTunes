@@ -1,24 +1,32 @@
 import { User } from "../models/user.model.js";
+import { ErrorHandler } from "../utility/ErrorHandler.js";
 
-const SignUp = async (req, res) => {
+const SignUp = async (req, res, next) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-        return res.json({ status: 401, message: 'Missing fields' });
+        return res.status(401).json({
+            message: 'Missing fields'
+        });
     };
 
     const existedUser = await User.findOne({ email });
     if (existedUser) {
-        return res({ status: 403, message: 'Email has already been used' });
+        return next(new ErrorHandler("Email has been used", 409));
     }
 
     // Create a new user from the request data and save it to the database
-    const user = await User.create({
-        name,
-        email: email.toLowerCase(),
-        password
-    })
-    return res.json({ status: 200, message: "Registerd Successfully!" });
+    try {
+        const user = await User.create({
+            name,
+            email: email.toLowerCase(),
+            password
+        })
+        return res.status(200).json({ message: "Registerd Successfully!" });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+
+    }
 }
 
 export default SignUp;

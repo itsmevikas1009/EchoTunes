@@ -12,7 +12,7 @@ const app = express();
 const localURL = "http://localhost:5173";
 
 const corsOption = {
-    origin: URL,
+    origin: localURL,
     methods: ['POST', 'GET'],
     credentials: true,
     optionSuccessStatus: 200
