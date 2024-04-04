@@ -12,8 +12,9 @@ const Navbar = () => {
                 </div>
 
                 <div className='flex gap-6 text-lg font-semibold'>
-                   <button>SignUp</button>
-                   <button>Login</button>
+                   <Link to="/signup">Signup</Link>
+                   <Link to="/login">Login</Link>
+
                 </div>
             </div>
         </div>
