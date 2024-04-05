@@ -39,7 +39,7 @@ const Login = async (req, res) => {
 
         // Generate a JSON Web Token (JWT) using user ID and a secret key
         const cookieOptions = {
-            maxAge: 15 * 24 * 60 * 60 * 1000,
+            maxAge: 3 * 24 * 60 * 60 * 1000,
             sameSite: "none",
             httpOnly: true,
             secure: true,
