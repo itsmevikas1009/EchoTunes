@@ -7,14 +7,15 @@ import Login from "./components/Login.jsx";
 import { Toaster } from "react-hot-toast";
 import Dashboard from "./pages/Dashboard.jsx";
 import Search from "./pages/Search.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx"
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: (
+      element:
         <Dashboard />
-      ),
+      ,
     },
     {
       path: "/signup",

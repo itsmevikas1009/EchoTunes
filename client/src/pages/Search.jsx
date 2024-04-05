@@ -49,7 +49,7 @@ const Search = () => {
                     <Link to="/">  <FaArrowLeft size={24} color='white' className='m-4' /></Link>
 
                     <form className='w-full py-4'>
-                        <div className='relative'>
+                        <div className='relatisve'>
                             <input type="text" className='w-[35%] p-4 px-12 rounded-3xl bg-[#1a1a1a] outline-none text-white '
                                 placeholder='What do you want to play ?' />
 
@@ -63,7 +63,6 @@ const Search = () => {
 
             <div className='bg-[#1a1a1a] min-h-[85vh] p-8 h-full text-white rounded-md'>
                 <h1 className='text-2xl font-bold'>Browse all </h1>
-
                 <div className='mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 z-10 '>
                     {
                         browse.map((i, index) => {

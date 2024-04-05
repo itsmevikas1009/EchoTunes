@@ -2,16 +2,21 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Google from "./Google";
 import { useInputValidation, useStrongPassword } from "6pp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { server } from "../services/api";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
 
 
 const Login = () => {
+  const { user } = useSelector(state => state.auth);
+
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
 
   const email = useInputValidation("");
@@ -21,6 +26,12 @@ const Login = () => {
     email: email.value,
     password: password.value,
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,15 +47,18 @@ const Login = () => {
         if (res.data.success === true) {
           toast.success(res.data.message);
           setLoading(false);
+          localStorage.setItem("user", JSON.stringify(res.data.rest));
+          dispatch(signUpSuccess(res.data.rest));
           navigate("/");
         } else {
           toast.success(res.data.message);
+          dispatch(signUpFailure());
           setLoading(false);
         }
       }
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      dispatch(signUpFailure());
       toast.error(err?.response?.data?.message || "Failed to login.");
     }
   };
@@ -101,7 +115,7 @@ const Login = () => {
               </div>
 
               <button className=" w-full mx-auto  bg-green-500 rounded-lg p-3 mt-6 font-semibold text-lg">
-                Login
+                {loading ? "Signing..." : "SignIn"}
               </button>
 
               <div className="text-center font-bold text-lg">Or</div>

@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar";
 
 const AppLayout = ({ children }) => {
 
+
   return (
     <>
       <Navbar bg={"black"} text={"white"} />

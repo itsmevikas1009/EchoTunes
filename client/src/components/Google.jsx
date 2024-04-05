@@ -5,11 +5,14 @@ import { app } from '../firebase';
 import { server } from "../services/api"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { signUpFailure, signUpSuccess } from '../redux/reducers/auth';
+import { useDispatch } from 'react-redux';
 
 
 const Google = () => {
     const auth = getAuth(app);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
 
     const handleGoogleClick = async () => {
@@ -25,15 +28,16 @@ const Google = () => {
             }
 
             const res = await axios.post(`${server}/google`, data, { withCredentials: true });
-            console.log(res);
+            // console.log(res);
 
             if (res.data.success === true) {
-                // dispatch(signInSuccess(res.data.rest));
+                localStorage.setItem("user", JSON.stringify(res.data.rest));
+                dispatch(signUpSuccess(res.data.rest));
                 toast.success("Login Successfully");
                 navigate("/");
             }
-
         } catch (error) {
+            dispatch(signUpFailure());
             console.log(error || "Something Went Wrong !");
         }
     }
