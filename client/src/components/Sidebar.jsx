@@ -1,18 +1,68 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { MdHome } from "react-icons/md";
-
+import { MdHomeFilled } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
+import { VscLibrary } from "react-icons/vsc";
+import { FaPlus } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-    return (
-        <div className='flex flex-col gap-4'>
-            <div className='px-8 py-4 flex items-center gap-4'>
-                <MdHome size={30} />
-                <Link><h1 className="text-xl font-bold">Home</h1></Link>
-            </div>
-
+  return (
+    <div className="w-[25%]">
+      <div className="bg-[#121212] rounded-md flex flex-col justify-center h-[100px] px-3 py-2 mx-2 my-3">
+        <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
+          {/* <i className="fa-solid fa-house"></i> */}
+          <MdHomeFilled />
+          <a className="text-2xl" href="#">
+            Home
+          </a>
         </div>
-    )
-}
+        <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
+          {/* <i className="fa-solid fa-magnifying-glass"></i> */}
+          <IoSearch />
+          <a className="text-2xl" href="#">
+            Search
+          </a>
+        </div>
+      </div>
+      <div className="bg-[#121212] rounded-lg px-4 py-3 mx-2 my-3">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
+            {/* <img src="./assets/library_icon.png" alt="lib" /> */}
+            <VscLibrary />
+            <a className="text-2xl" href="#">
+              Your Library
+            </a>
+          </div>
+          <div className="text-2xl opacity-70 hover:opacity-100">
+            <FaPlus />
+          </div>
+        </div>
+        <div className="">
+          <div className="bg-[#232323] rounded-lg h-auto mt-2 mb-4 px-5 py-5">
+            <div className="text-lg font-bold mb-3">
+              Create your frist playlist
+            </div>
+            <div className="text-base font-semibold mb-5">
+              It&apos;s easy, we&apos;ll help you
+            </div>
+            <Link className="bg-white rounded-3xl px-4 py-2 font-semibold text-black text-md">
+              Create playlist
+            </Link>
+          </div>
+          <div className="box2 bg-[#232323] rounded-lg h-auto mt-2 mb-4 px-5 py-5">
+            <div className="text-lg font-bold mb-3">
+              Let&apos;s find some podcast to follow
+            </div>
+            <div className="text-base font-semibold mb-5">
+              We&apos;ll keep you updated on new episodes
+            </div>
+            <Link className="bg-white rounded-3xl px-4 py-2 font-semibold text-black text-md">
+              Browse podcasts
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Sidebar
+export default Sidebar;
