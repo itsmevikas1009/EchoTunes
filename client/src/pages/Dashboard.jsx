@@ -1,12 +1,10 @@
-import React from 'react'
-import AppLayout from '../components/AppLayout'
+import AppLayout from "../components/AppLayout";
 
 const Dashboard = () => {
-    return (
-        <AppLayout>
-
-        </AppLayout>
-    )
+  return (
+    <AppLayout>
+    </AppLayout>
+  )
 }
 
-export default Dashboard
+export default Dashboard;
