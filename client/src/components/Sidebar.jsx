@@ -5,20 +5,22 @@ import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-
   return (
     <div className="w-[25%]">
-      <div className="bg-[#1a1a1a] rounded-md flex flex-col justify-center gap-3 px-3 py-6 mx-2 my-3">
+      <div className="bg-[#1a1a1a] rounded-lg flex flex-col justify-center gap-3 px-3 py-6 mx-2 my-3">
         <div className="flex items-center opacity-70  hover:opacity-100 py-1 px-3 text-3xl gap-4">
           {/* <i className="fa-solid fa-house"></i> */}
           <MdHomeFilled />
-          <Link to="/" className="text-xl">Home</Link>
-
+          <Link to="/" className="text-xl">
+            Home
+          </Link>
         </div>
         <div className="flex items-center opacity-70 hover:opacity-100 py-1 px-3 text-3xl gap-4">
           {/* <i className="fa-solid fa-magnifying-glass"></i> */}
           <IoSearch />
-          <Link to="/search" className="text-xl">Search</Link>
+          <Link to="/search" className="text-xl">
+            Search
+          </Link>
         </div>
       </div>
       <div className="bg-[#1a1a1a] rounded-lg px-4 py-3 mx-2 my-3">
