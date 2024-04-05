@@ -5,6 +5,7 @@ import { logout } from "../redux/reducers/auth";
 import { useNavigate } from "react-router-dom";
 
 
+
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector(state => state.auth);
   const dispatch = useDispatch();
