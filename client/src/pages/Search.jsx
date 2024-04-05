@@ -54,18 +54,17 @@ const browse = [
     title: "Blinding Lights",
     image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
   },
-
 ];
 
 const Search = () => {
   return (
     <AppLayout>
-      <div className="bg-[#1a1a1a] flex-1 overflow-auto px-6 h-full text-white rounded-lg mx-1 my-3">
+      <div className="bg-[#1a1a1a] flex-1 overflow-auto px-8 h-full text-white rounded-lg mx-1 my-3">
         <div className="bg-opacity-95 z-40 hidden md:block my-2 sticky top-0 bg-[#1a1a1a]">
-          <div className="flex items-center gap-4 z-10">
+          <div className="flex items-center gap-6 z-10">
             <Link to="/">
               {" "}
-              <FaArrowLeft size={24} color="white" className="m-4" />
+              <FaArrowLeft size={24} color="white" />
             </Link>
 
             <form className="w-full py-4">

@@ -8,17 +8,21 @@ const Sidebar = () => {
   return (
     <div className="w-[25%]">
       <div className="bg-[#1a1a1a] rounded-lg flex flex-col justify-center gap-3 px-3 py-6 mx-2 my-3">
-        <div className="flex items-center opacity-70  hover:opacity-100 py-1 px-3 text-3xl gap-4">
-          {/* <i className="fa-solid fa-house"></i> */}
-          <MdHomeFilled />
-          <Link to="/" className="text-xl">
+        <div>
+          <Link
+            to="/"
+            className="flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl"
+          >
+            <MdHomeFilled size={30} />
             Home
           </Link>
         </div>
-        <div className="flex items-center opacity-70 hover:opacity-100 py-1 px-3 text-3xl gap-4">
-          {/* <i className="fa-solid fa-magnifying-glass"></i> */}
-          <IoSearch />
-          <Link to="/search" className="text-xl">
+        <div>
+          <Link
+            to="/search"
+            className="flex items-center opacity-70 hover:opacity-100 py-1 px-3 gap-4 text-xl"
+          >
+            <IoSearch size={30} />
             Search
           </Link>
         </div>
