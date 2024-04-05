@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
-import axios from "axios";
-import toast from "react-hot-toast";
 import Google from "./Google";
 
 const Login = () => {
@@ -11,11 +9,8 @@ const Login = () => {
 
   const data = {
     email: email.value,
-    password: password.value
-  }
-
-
-
+    password: password.value,
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
