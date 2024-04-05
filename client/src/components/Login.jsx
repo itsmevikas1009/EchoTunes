@@ -3,11 +3,19 @@ import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Google from "./Google";
 
 const Login = () => {
-  const name = useInputValidation("");
-  const bio = useInputValidation("");
+  const email = useInputValidation("");
   const password = useStrongPassword();
+
+  const data = {
+    email: email.value,
+    password: password.value
+  }
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +53,8 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="Email"
+                  value={email.value}
+                  onChange={email.changeHandler}
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
@@ -56,6 +66,8 @@ const Login = () => {
                 <input
                   type="password"
                   placeholder="Password"
+                  value={password.value}
+                  onChange={password.changeHandler}
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
@@ -65,9 +77,7 @@ const Login = () => {
               </button>
 
               <div className="text-center font-bold text-lg">Or</div>
-              <button className="w-full bg-green-500 rounded-lg p-3  font-semibold text-lg">
-                Login Up With Google
-              </button>
+              <Google />
             </form>
 
             <p className="mt-6 text-lg ">
