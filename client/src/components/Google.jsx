@@ -1,4 +1,3 @@
-import React from 'react'
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import toast from "react-hot-toast"
 import { app } from '../firebase';
