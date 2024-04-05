@@ -6,6 +6,7 @@ export const apiProtected = express.Router();
 
 //SignUp route
 apiRoute.post('/signup', SignUp);
+// apiRoute.post('/google', goo);
 
 //LogIn Route
 // apiRoute.post("/login", LogIn);

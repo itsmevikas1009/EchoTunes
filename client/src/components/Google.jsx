@@ -2,6 +2,7 @@ import React from 'react'
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import toast from "react-hot-toast"
 import { app } from '../firebase';
+import { server } from "../services/api"
 
 
 const Google = () => {
@@ -13,18 +14,18 @@ const Google = () => {
         provider.setCustomParameters({ prompt: 'select_account' })
         try {
             const resultsFromGoogle = await signInWithPopup(auth, provider)
-            console.log(resultsFromGoogle);
+            // console.log(resultsFromGoogle);
 
             const data = {
                 name: resultsFromGoogle.user.displayName,
                 email: resultsFromGoogle.user.email,
                 googlePhotoUrl: resultsFromGoogle.user.photoURL,
             }
-            const res = await googleSignInApi(data);
+            const res = await axios.post(`${server}/google`, data, { withCredentials: true });
             console.log(res);
 
             if (res.data.success === true) {
-                dispatch(signInSuccess(res.data.rest));
+                // dispatch(signInSuccess(res.data.rest));
                 toast.success("Login Successfully");
                 navigate("/");
             }

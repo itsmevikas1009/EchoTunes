@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
 import { server } from "../services/api";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -10,7 +10,6 @@ import Google from "./Google";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
 
   const name = useInputValidation("");
@@ -20,35 +19,34 @@ const SignUp = () => {
   const data = {
     name: name.value,
     email: email.value,
-    password: password.value
-  }
-
+    password: password.value,
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const res = await axios.post(`${server}/signup`, data, { withCredentials: true });
-      // console.log(res);
+      const res = await axios.post(`${server}/signup`, data, {
+        withCredentials: true,
+      });
+
       if (res.status === 200) {
         if (res.data.success === true) {
-          setLoading(false);
           toast.success(res.data.message);
-          navigate('/login');
+          setLoading(false);
+          navigate("/login");
         } else {
-          setLoading(false);
           toast.success(res.data.message);
+          setLoading(false);
         }
       }
-
     } catch (err) {
       setLoading(false);
       console.log(err);
       toast.error(err?.response?.data?.message || "Failed to sign up.");
     }
   };
-
 
   return (
     <>
