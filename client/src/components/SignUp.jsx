@@ -30,15 +30,14 @@ const SignUp = () => {
       const res = await axios.post(`${server}/signup`, data, {
         withCredentials: true,
       });
-      // console.log(res);
       if (res.status === 200) {
         if (res.data.success === true) {
-          setLoading(false);
           toast.success(res.data.message);
+          setLoading(false);
           navigate("/login");
         } else {
-          setLoading(false);
           toast.success(res.data.message);
+          setLoading(false);
         }
       }
     } catch (err) {
