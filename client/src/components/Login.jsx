@@ -1,17 +1,8 @@
 import { Link } from "react-router-dom";
-import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
 import Google from "./Google";
 
 const Login = () => {
-  const email = useInputValidation("");
-  const password = useStrongPassword();
-
-  const data = {
-    email: email.value,
-    password: password.value,
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
