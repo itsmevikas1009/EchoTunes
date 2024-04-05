@@ -34,23 +34,28 @@ const Login = async (req, res) => {
     }
 
     try {
-        // Extract user ID from user object
-        const userId = user._id;
+
+        const { password: pass, ...rest } = user._doc;
 
         // Generate a JSON Web Token (JWT) using user ID and a secret key
-        const token = jwt.sign({ userId }, "jwt-secret-key");
+        const cookieOptions = {
+            maxAge: 15 * 24 * 60 * 60 * 1000,
+            sameSite: "none",
+            httpOnly: true,
+            secure: true,
+        };
 
         // Return user data, token, and success message
-        return res.status(200).json({
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+
+        return res.status(200).cookie("access-token", token, cookieOptions).json({
             success: true,
-            userId: user._id,
-            token: token,
-            firstName: user.firstName,
-            message: "Logged in successfully.",
-        })
+            rest,
+            message: `Welcome Back ${user.name}`,
+        });
     } catch (err) {
         // Log any errors during token generation
-        console.log('Login error', err)
+        console.log('Login error', err);
 
         // Return an error message and error details
         return res.status(500).json({

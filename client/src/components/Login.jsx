@@ -1,10 +1,52 @@
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Google from "./Google";
+import { useInputValidation, useStrongPassword } from "6pp";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { server } from "../services/api";
+
 
 const Login = () => {
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+
+  const email = useInputValidation("");
+  const password = useStrongPassword();
+
+  const data = {
+    email: email.value,
+    password: password.value,
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await axios.post(`${server}/login`, data, {
+        withCredentials: true,
+      });
+      console.log(res);
+
+      if (res.status === 200) {
+        if (res.data.success === true) {
+          toast.success(res.data.message);
+          setLoading(false);
+          navigate("/");
+        } else {
+          toast.success(res.data.message);
+          setLoading(false);
+        }
+      }
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      toast.error(err?.response?.data?.message || "Failed to login.");
+    }
   };
 
   return (

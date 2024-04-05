@@ -4,10 +4,14 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { apiProtected, apiRoute } from "./src/routes/api.js";
 import AuthMiddleware from "./src/middlewares/AuthMiddleware.js";
+import dotenv from "dotenv"
 
 const connectDB = mongoose.connect('mongodb+srv://spotify-sms:3wEP40zDugishYwG@cluster0.fcgapxd.mongodb.net/spotify', { useNewUrlParser: true });
 const PORT = 3000;
 const app = express();
+
+// Load environment variables from .env file
+dotenv.config();
 
 const localURL = "http://localhost:5173";
 
