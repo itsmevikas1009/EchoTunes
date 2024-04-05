@@ -5,15 +5,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignUp from "./components/SignUp.jsx";
 import Login from "./components/Login.jsx";
 import { Toaster } from "react-hot-toast";
+import Dashboard from "./pages/Dashboard.jsx";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        <>
-          <h1>Welcome to our website!</h1>
-        </>
+        <Dashboard />
       ),
     },
     {
