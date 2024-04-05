@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import Google from "./Google";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
@@ -117,9 +118,7 @@ const SignUp = () => {
                 {loading ? "Registering..." : "Register"}
               </button>
               <div className="text-center font-bold text-lg">Or</div>
-              <button className="w-full bg-green-500 rounded-lg p-3  font-semibold text-lg">
-                Sign Up With Google
-              </button>
+              <Google />
             </form>
 
             <p className="mt-4 text-lg">

@@ -1,11 +1,9 @@
 import { User } from "../models/user.model.js";
-import { ErrorHandler } from "../utility/ErrorHandler.js";
 
 const SignUp = async (req, res, next) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-        // return next(new ErrorHandler("All fields are required !", 200));
         return res.status(200).json({
             success: false,
             message: "All fields are required!"
@@ -14,7 +12,6 @@ const SignUp = async (req, res, next) => {
 
     const existedUser = await User.findOne({ email });
     if (existedUser) {
-        // return next(new ErrorHandler("Email has been used", 200));
         return res.status(200).json({
             success: false,
             message: "Email has been used"
