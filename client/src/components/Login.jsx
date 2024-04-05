@@ -115,7 +115,7 @@ const Login = () => {
               </div>
 
               <button className=" w-full mx-auto  bg-green-500 rounded-lg p-3 mt-6 font-semibold text-lg">
-                Login
+                {loading ? "Signing..." : "SignIn"}
               </button>
 
               <div className="text-center font-bold text-lg">Or</div>
