@@ -5,7 +5,7 @@ const AppLayout = ({ children }) => {
   return (
     <>
       <Navbar bg={"black"} text={"white"} />
-      <div className="flex h-screen pt-16">
+      <div className="flex h-screen pt-16 bg-black text-white">
         <Sidebar />
         <div className="w-[75%] overflow-hidden ">{children}</div>
       </div>
