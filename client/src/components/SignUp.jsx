@@ -3,13 +3,19 @@ import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
 import { server } from "../services/api";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
+=======
 import axios from "axios";
+>>>>>>> e2dc643aeefbf00d8be394652e3f1b2e1bd7bdc0
 import toast from "react-hot-toast";
 import { useState } from "react";
 
 const SignUp = () => {
+<<<<<<< HEAD
+=======
   const [loading, setLoading] = useState(false);
 
+>>>>>>> e2dc643aeefbf00d8be394652e3f1b2e1bd7bdc0
   const navigate = useNavigate();
 
   const name = useInputValidation("");
@@ -30,6 +36,10 @@ const SignUp = () => {
       const res = await axios.post(`${server}/signup`, data, {
         withCredentials: true,
       });
+<<<<<<< HEAD
+      console.log(res);
+=======
+>>>>>>> e2dc643aeefbf00d8be394652e3f1b2e1bd7bdc0
       if (res.status === 200) {
         if (res.data.success === true) {
           toast.success(res.data.message);
