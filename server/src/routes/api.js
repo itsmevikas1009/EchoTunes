@@ -1,5 +1,6 @@
 import express from "express";
 import SignUp from "../controllers/SignUp.controller.js";
+import Login from "../controllers/Login.controller.js";
 
 export const apiRoute = express.Router();
 export const apiProtected = express.Router();
@@ -9,4 +10,4 @@ apiRoute.post('/signup', SignUp);
 // apiRoute.post('/google', goo);
 
 //LogIn Route
-// apiRoute.post("/login", LogIn);
+apiRoute.post("/login", Login);

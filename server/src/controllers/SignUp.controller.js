@@ -1,14 +1,17 @@
 import { User } from "../models/user.model.js";
 
-<<<<<<< HEAD
+/**
+ * Asynchronous function to handle user sign-up.
+ * @param {Request} req - The request object from the client.
+ * @param {Response} res - The response object to send back to the client.
+ */
+
 const SignUp = async (req, res) => {
-=======
-const SignUp = async (req, res, next) => {
-    // Extract user data from the request body
->>>>>>> e2dc643aeefbf00d8be394652e3f1b2e1bd7bdc0
+
+    // Destructure the request body to get name, email, and password.
     const { name, email, password } = req.body;
 
-    // Check if all required fields are present
+    // Check if all required fields are present.
     if (!name || !email || !password) {
         return res.status(200).json({
             success: false,
@@ -16,9 +19,10 @@ const SignUp = async (req, res, next) => {
         });
     };
 
-    // Check if the email is already in use
+    // Check if the email is already in use.
     const existedUser = await User.findOne({ email });
     if (existedUser) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -27,18 +31,19 @@ const SignUp = async (req, res, next) => {
         })
 =======
 >>>>>>> cde8cb85ad0872b4f8e9e45df23432ac1d7d1787
+=======
+>>>>>>> 7ccb5b2abc57b715d43b13d1298a71cfeb8c91b9
         return res.status(200).json({
             success: false,
             message: "Email has been used"
         });
->>>>>>> e2dc643aeefbf00d8be394652e3f1b2e1bd7bdc0
     }
 
-    // Create a new user from the request data and save it to the database
+    // Create a new user from the request data and save it to the database.
     try {
         const user = await User.create({
             name,
-            email: email.toLowerCase(), // Convert email to lowercase before saving
+            email: email.toLowerCase(), // Convert email to lowercase before saving.
             password
         });
 
