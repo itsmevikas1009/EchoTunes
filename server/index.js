@@ -22,11 +22,11 @@ app.use(cors(corsOption));
 app.use(express.json());
 app.use(cookieParser());
 
-
+// Use the AuthMiddleware to protect the /api/ route
 app.use("/api/", apiRoute);
 app.use("/api/", AuthMiddleware, apiProtected);
 
-// Connect the database 
+// Connect the database
 connectDB.then(() => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }).catch((err) => console.error(err));

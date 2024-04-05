@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const name = useInputValidation("");

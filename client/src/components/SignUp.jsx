@@ -1,13 +1,23 @@
 import { Link } from "react-router-dom";
 import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
-import axios from "axios";
 import { server } from "../services/api";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
+=======
+import axios from "axios";
+>>>>>>> e2dc643aeefbf00d8be394652e3f1b2e1bd7bdc0
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const SignUp = () => {
+<<<<<<< HEAD
+=======
+  const [loading, setLoading] = useState(false);
+
+>>>>>>> e2dc643aeefbf00d8be394652e3f1b2e1bd7bdc0
   const navigate = useNavigate();
+
   const name = useInputValidation("");
   const email = useInputValidation("");
   const password = useStrongPassword();
@@ -20,20 +30,30 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const res = await axios.post(`${server}/signup`, data, {
         withCredentials: true,
       });
+<<<<<<< HEAD
       console.log(res);
+=======
+>>>>>>> e2dc643aeefbf00d8be394652e3f1b2e1bd7bdc0
       if (res.status === 200) {
-        navigate("/login");
-        toast.success(res.data.message);
-      } else {
-        toast.error(res.data.message);
+        if (res.data.success === true) {
+          toast.success(res.data.message);
+          setLoading(false);
+          navigate("/login");
+        } else {
+          toast.success(res.data.message);
+          setLoading(false);
+        }
       }
-    } catch (error) {
-      toast.error(error.message);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      toast.error(err?.response?.data?.message || "Failed to sign up.");
     }
   };
 
@@ -102,7 +122,7 @@ const SignUp = () => {
               </div>
 
               <button className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg">
-                SignUp
+                {loading ? "Registering..." : "Register"}
               </button>
               <div className="text-center font-bold text-lg">Or</div>
               <button className="w-full bg-green-500 rounded-lg p-3  font-semibold text-lg">
