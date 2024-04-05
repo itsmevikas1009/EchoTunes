@@ -32,7 +32,6 @@ const Google = () => {
                 toast.success("Login Successfully");
                 navigate("/");
             }
-
         } catch (error) {
             console.log(error || "Something Went Wrong !");
         }

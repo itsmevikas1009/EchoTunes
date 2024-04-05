@@ -5,11 +5,14 @@ import { server } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Google from "./Google";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const { user } = useSelector(state => state.auth);
+
   const navigate = useNavigate();
 
   const name = useInputValidation("");
@@ -21,6 +24,13 @@ const SignUp = () => {
     email: email.value,
     password: password.value,
   };
+
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
