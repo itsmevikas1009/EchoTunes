@@ -34,13 +34,34 @@ const browse = [
     title: "Blinding Lights",
     image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
   },
+  {
+    title: "Blinding Lights",
+    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+  },
+  {
+    title: "Blinding Lights",
+    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+  },
+  {
+    title: "Blinding Lights",
+    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+  },
+  {
+    title: "Blinding Lights",
+    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+  },
+  {
+    title: "Blinding Lights",
+    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+  },
+
 ];
 
 const Search = () => {
   return (
     <AppLayout>
       <div className="bg-[#1a1a1a] flex-1 overflow-auto px-6 h-full text-white rounded-lg mx-1 my-3">
-        <div className="bg-opacity-85 z-50 hidden md:block my-2">
+        <div className="bg-opacity-95 z-40 hidden md:block my-2 sticky top-0 bg-[#1a1a1a]">
           <div className="flex items-center gap-4 z-10">
             <Link to="/">
               {" "}
@@ -51,7 +72,7 @@ const Search = () => {
               <div className="relative">
                 <input
                   type="text"
-                  className="w-[35%] p-4 px-12 rounded-full bg-[#232323] outline-none text-white "
+                  className="w-[35%] p-4 px-12 rounded-full bg-[#232323]  shadow-slate-50 shadow-sm outline-none text-white "
                   placeholder="What do you want to play ?"
                 />
 

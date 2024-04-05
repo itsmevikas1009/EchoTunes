@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from "../redux/reducers/auth";
 import { useNavigate } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { useState } from "react";
 
 
 
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector(state => state.auth);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,7 +35,30 @@ const Navbar = ({ bg, text = "black" }) => {
         <div className="flex  items-center gap-6 text-lg font-semibold">
           {
             user ? (
-              <button onClick={handleLogout}>Logout</button>
+              <div className="flex items-center">
+                <button onClick={() => setShowUserMenu(!showUserMenu)}>
+                  {
+                    user?.profilePicture ? (
+                      <img
+                        src={user?.profilePicture}
+                        alt={user?.name}
+                        className="rounded-full h-10 w-10 object-contain"
+                      />
+                    ) : (
+                      <CgProfile size={30} />
+                    )
+                  }
+                </button>
+
+                {
+                  showUserMenu && (
+                    <div className="absolute top-[4rem] bg-black p-6 px-8 right-[1.5rem] rounded-lg  transition-all duration-500 z-50">
+                      <p className='mb-4 hover:opacity-85'>Profile</p>
+                      <button onClick={handleLogout} className="hover:opacity-85">Logout</button>
+                    </div>
+                  )
+                }
+              </div>
             ) : (
               <>
                 <Link to="/signup" className="border p-2 bg-black text-white  px-6 rounded-3xl hover:scale-105 transition-all duration-200">Signup</Link>

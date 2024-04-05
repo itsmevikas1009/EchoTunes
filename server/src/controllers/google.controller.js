@@ -32,8 +32,8 @@ export const google = async (req, res) => {
             const newUser = await User.create({
                 name,
                 email,
-                password
-                // profilePicture: googlePhotoUrl
+                password,
+                profilePicture: googlePhotoUrl
             })
 
             const { password: pass, ...rest } = newUser._doc;

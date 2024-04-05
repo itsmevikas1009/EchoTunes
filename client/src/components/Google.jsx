@@ -23,7 +23,7 @@ const Google = () => {
             const data = {
                 name: resultsFromGoogle.user.displayName,
                 email: resultsFromGoogle.user.email,
-                // googlePhotoUrl: resultsFromGoogle.user.photoURL,
+                googlePhotoUrl: resultsFromGoogle.user.photoURL,
             }
 
             const res = await axios.post(`${server}/google`, data, { withCredentials: true });
