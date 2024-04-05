@@ -5,9 +5,13 @@ import { server } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+
   const name = useInputValidation("");
   const email = useInputValidation("");
   const password = useStrongPassword();
@@ -20,20 +24,25 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const res = await axios.post(`${server}/signup`, data, {
         withCredentials: true,
       });
+      // console.log(res);
       if (res.status === 200) {
         if (res.data.success === true) {
+          setLoading(false);
           toast.success(res.data.message);
           navigate("/login");
         } else {
+          setLoading(false);
           toast.success(res.data.message);
         }
       }
     } catch (err) {
+      setLoading(false);
       console.log(err);
       toast.error(err?.response?.data?.message || "Failed to sign up.");
     }
@@ -104,7 +113,7 @@ const SignUp = () => {
               </div>
 
               <button className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg">
-                SignUp
+                {loading ? "Registering..." : "Register"}
               </button>
               <div className="text-center font-bold text-lg">Or</div>
               <button className="w-full bg-green-500 rounded-lg p-3  font-semibold text-lg">
