@@ -22,6 +22,17 @@ const SignUp = async (req, res) => {
     // Check if the email is already in use.
     const existedUser = await User.findOne({ email });
     if (existedUser) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        return res.status(409).json({
+            message: 'Email has been used.'
+        })
+=======
+>>>>>>> cde8cb85ad0872b4f8e9e45df23432ac1d7d1787
+=======
+>>>>>>> 7ccb5b2abc57b715d43b13d1298a71cfeb8c91b9
         return res.status(200).json({
             success: false,
             message: "Email has been used"
