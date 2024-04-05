@@ -5,9 +5,9 @@ import Sidebar from './Sidebar'
 const AppLayout = ({ children }) => {
     return (
         <>
-            <Navbar />
-            <div className="flex h-screen pt-20">
-                <div className='bg-gray-200 w-[25%]'>
+            <Navbar bg={'black'} text={'white'} />
+            <div className="flex h-screen pt-16">
+                <div className=' w-[25%] bg-black text-white'>
                     <Sidebar />
                 </div>
                 <div className='w-[75%] overflow-hidden '>
