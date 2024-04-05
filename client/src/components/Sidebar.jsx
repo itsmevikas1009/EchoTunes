@@ -7,8 +7,8 @@ import { FaSearch } from "react-icons/fa";
 
 const Sidebar = () => {
     return (
-        <div className=' p-3'>
-            <div className='px-8 py-8  pl-16 flex flex-col gap-6 bg-[#1a1a1a] rounded-lg '>
+        <div className=' p-3 h-full'>
+            <div className='px-8 py-8  pl-16 flex flex-col gap-6 h-full bg-[#1a1a1a] rounded-lg '>
                 <Link to="/" className='flex items-center gap-6'>
                     <MdHome size={30} />
                     <h1 className="text-xl font-bold">Home</h1>

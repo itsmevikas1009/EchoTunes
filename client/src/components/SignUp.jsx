@@ -69,7 +69,7 @@ const SignUp = () => {
             <h1 className="text-4xl font-bold ">Welcome to Spotify</h1>
             <p className="text-xl p-1">Sign up with your details...</p>
 
-            <form className="flex flex-col gap-3 mt-6 " onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-3 mt-6 mb-3" onSubmit={handleSubmit}>
               <div className="">
                 <label htmlFor="" className="block font-medium">
                   Name
@@ -116,8 +116,8 @@ const SignUp = () => {
                 {loading ? "Registering..." : "Register"}
               </button>
               <div className="text-center font-bold text-lg">Or</div>
-              <Google />
             </form>
+            <Google />
 
             <p className="mt-4 text-lg">
               Already Have a Account ?{" "}

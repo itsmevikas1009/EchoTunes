@@ -10,7 +10,7 @@ const AppLayout = ({ children }) => {
                 <div className=' w-[25%] bg-black text-white'>
                     <Sidebar />
                 </div>
-                <div className='w-[75%] overflow-hidden '>
+                <div className='w-[75%] overflow-auto scroll-auto bg-black'>
                     {children}
                 </div>
 

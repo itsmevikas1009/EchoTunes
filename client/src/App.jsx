@@ -6,6 +6,7 @@ import SignUp from "./components/SignUp.jsx";
 import Login from "./components/Login.jsx";
 import { Toaster } from "react-hot-toast";
 import Dashboard from "./pages/Dashboard.jsx";
+import Search from "./pages/Search.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/search",
+      element: <Search />,
     },
   ]);
   return (

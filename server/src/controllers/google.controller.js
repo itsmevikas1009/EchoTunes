@@ -2,6 +2,12 @@ import { User } from "../models/user.model.js";
 // import  bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 
+const cookieOptions = {
+    maxAge: 3 * 24 * 60 * 60 * 1000,
+    sameSite: "none",
+    httpOnly: true,
+    secure: true,
+};
 
 export const google = async (req, res) => {
     const { name, email, googlePhotoUrl } = req.body;
@@ -10,21 +16,16 @@ export const google = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (user) {
-            const token = jwt.sign({
-                id: user._id
-            }, process.env.JWTSECRET);
-
             const { password: pass, ...rest } = user._doc;
 
-            return res.status(200)
-                .cookie('access_token', token, {
-                    httpOnly: true
-                })
-                .json({
-                    success: true,
-                    message: "Login Successfully !",
-                    rest
-                });
+            // Return user data, token, and success message
+            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+
+            return res.status(200).cookie("access-token", token, cookieOptions).json({
+                success: true,
+                rest,
+                message: `Welcome Back ${user.name}`,
+            });
         } else {
             const password = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
 
@@ -35,22 +36,18 @@ export const google = async (req, res) => {
                 // profilePicture: googlePhotoUrl
             })
 
-
-            const token = jwt.sign({
-                id: newUser._id,
-            }, process.env.JWTSECRET);
-
             const { password: pass, ...rest } = newUser._doc;
 
-            return res.status(200)
-                .cookie('access_token', token, {
-                    httpOnly: true
-                })
-                .json({
-                    success: true,
-                    message: "Login Successfully !",
-                    rest
-                });
+
+
+            // Return user data, token, and success message
+            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+
+            return res.status(200).cookie("access-token", token, cookieOptions).json({
+                success: true,
+                rest,
+                message: `Registered Successfully, ${user.name}`,
+            });
         }
 
     } catch (err) {

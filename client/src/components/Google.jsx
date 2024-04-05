@@ -3,10 +3,13 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import toast from "react-hot-toast"
 import { app } from '../firebase';
 import { server } from "../services/api"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const Google = () => {
-    const auth = getAuth(app)
+    const auth = getAuth(app);
+    const navigate = useNavigate();
 
 
     const handleGoogleClick = async () => {
@@ -14,13 +17,13 @@ const Google = () => {
         provider.setCustomParameters({ prompt: 'select_account' })
         try {
             const resultsFromGoogle = await signInWithPopup(auth, provider)
-            // console.log(resultsFromGoogle);
 
             const data = {
                 name: resultsFromGoogle.user.displayName,
                 email: resultsFromGoogle.user.email,
-                googlePhotoUrl: resultsFromGoogle.user.photoURL,
+                // googlePhotoUrl: resultsFromGoogle.user.photoURL,
             }
+
             const res = await axios.post(`${server}/google`, data, { withCredentials: true });
             console.log(res);
 
@@ -31,7 +34,7 @@ const Google = () => {
             }
 
         } catch (error) {
-            console.log(error?.response?.data?.message || "Something Went Wrong !");
+            console.log(error || "Something Went Wrong !");
         }
     }
 

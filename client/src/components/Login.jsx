@@ -71,7 +71,7 @@ const Login = () => {
             <p className="text-xl p-1">Login with your email...</p>
 
             <form
-              className="flex flex-col gap-4 mt-10 "
+              className="flex flex-col gap-4 mt-10 mb-3"
               onSubmit={handleSubmit}
             >
               <div className="w-full">
@@ -105,8 +105,8 @@ const Login = () => {
               </button>
 
               <div className="text-center font-bold text-lg">Or</div>
-              <Google />
             </form>
+            <Google />
 
             <p className="mt-6 text-lg ">
               New User ?{" "}
