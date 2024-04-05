@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
-import axios from "axios";
 import { server } from "../services/api";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import toast from "react-hot-toast";
 
 const SignUp = () => {
@@ -27,15 +27,20 @@ const SignUp = () => {
       const res = await axios.post(`${server}/signup`, data, { withCredentials: true });
       console.log(res);
       if (res.status === 200) {
-        navigate("/login");
-        toast.success(res.data.message);
-      } else {
-        toast.error(res.data.message);
+        if (res.data.success === true) {
+          toast.success(res.data.message);
+          navigate('/login');
+        } else {
+          toast.success(res.data.message);
+        }
       }
-    } catch (error) {
-      toast.error(error.message);
+
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.response?.data?.message || "Failed to sign up.");
     }
   };
+
 
   return (
     <>

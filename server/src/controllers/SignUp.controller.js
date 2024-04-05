@@ -5,14 +5,20 @@ const SignUp = async (req, res, next) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-        return res.status(401).json({
-            message: 'Missing fields'
-        });
+        // return next(new ErrorHandler("All fields are required !", 200));
+        return res.status(200).json({
+            success: false,
+            message: "All fields are required!"
+        })
     };
 
     const existedUser = await User.findOne({ email });
     if (existedUser) {
-        return next(new ErrorHandler("Email has been used", 409));
+        // return next(new ErrorHandler("Email has been used", 200));
+        return res.status(200).json({
+            success: false,
+            message: "Email has been used"
+        })
     }
 
     // Create a new user from the request data and save it to the database
@@ -22,10 +28,17 @@ const SignUp = async (req, res, next) => {
             email: email.toLowerCase(),
             password
         })
-        return res.status(200).json({ message: "Registerd Successfully!" });
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(200).json({
+            success: true,
+            message: "Registerd Successfully!"
+        });
 
+    } catch (error) {
+        console.log('Signup error', error);
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
     }
 }
 
