@@ -8,28 +8,25 @@ const Sidebar = () => {
 
   return (
     <div className="w-[25%]">
-      <div className="bg-[#121212] rounded-md flex flex-col justify-center h-[100px] px-3 py-2 mx-2 my-3">
-        <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
+      <div className="bg-[#1a1a1a] rounded-md flex flex-col justify-center gap-3 px-3 py-6 mx-2 my-3">
+        <div className="flex items-center opacity-70  hover:opacity-100 py-1 px-3 text-3xl gap-4">
           {/* <i className="fa-solid fa-house"></i> */}
           <MdHomeFilled />
-          <a className="text-2xl" href="#">
-            Home
-          </a>
+          <Link to="/" className="text-xl">Home</Link>
+
         </div>
-        <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
+        <div className="flex items-center opacity-70 hover:opacity-100 py-1 px-3 text-3xl gap-4">
           {/* <i className="fa-solid fa-magnifying-glass"></i> */}
           <IoSearch />
-          <a className="text-2xl" href="#">
-            Search
-          </a>
+          <Link to="/search" className="text-xl">Search</Link>
         </div>
       </div>
-      <div className="bg-[#121212] rounded-lg px-4 py-3 mx-2 my-3">
+      <div className="bg-[#1a1a1a] rounded-lg px-4 py-3 mx-2 my-3">
         <div className="flex justify-between items-center">
           <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
             {/* <img src="./assets/library_icon.png" alt="lib" /> */}
             <VscLibrary />
-            <a className="text-2xl" href="#">
+            <a className="text-xl" href="#">
               Your Library
             </a>
           </div>
