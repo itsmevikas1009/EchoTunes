@@ -58,8 +58,8 @@ const Navbar = ({ bg, text = "black" }) => {
               </button>
 
               {showUserMenu && (
-                <div className="absolute top-[4rem] bg-black p-6 px-8 right-[1.5rem] rounded-lg  transition-all duration-500 z-50">
-                  <p className="mb-4 hover:opacity-85">Profile</p>
+                <div className="absolute top-[4rem] bg-black p-6 px-8 right-[1.5rem] rounded-lg  transition-all duration-500 z-50 flex justify-center flex-col ">
+                  <Link to={`/profile/${user?._id}`} className="mb-4 hover:opacity-85">Profile</Link>
                   <button onClick={handleLogout} className="hover:opacity-85">
                     Logout
                   </button>

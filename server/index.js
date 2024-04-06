@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { apiProtected, apiRoute } from "./src/routes/api.js";
+import { apiRoute } from "./src/routes/api.js";
 import AuthMiddleware from "./src/middlewares/AuthMiddleware.js";
 import dotenv from "dotenv"
 
@@ -17,7 +17,7 @@ const localURL = "http://localhost:5173";
 
 const corsOption = {
     origin: localURL,
-    methods: ['POST', 'GET'],
+    methods: ['POST', 'GET', 'PUT'],
     credentials: true,
     optionSuccessStatus: 200
 }
@@ -27,8 +27,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Use the AuthMiddleware to protect the /api/ route
-app.use("/api/", apiRoute);
-app.use("/api/", AuthMiddleware, apiProtected);
+app.use("/api", apiRoute);
 
 // Connect the database
 connectDB.then(() => {

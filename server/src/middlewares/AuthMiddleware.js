@@ -1,33 +1,16 @@
 import jwt from 'jsonwebtoken';
 
 const AuthMiddleware = (req, res, next) => {
-    // Check if the authorization header is present
-    if (req.headers["auth"] === undefined) {
-        return res.json({
-            status: 401,
-            message: "Authorization header is missing!"
-        });
-    };
+    const token = req.cookies["access-token"];
 
-    // Extract the token from the authorization header
-    const token = req.headers["auth"];
+    if (!token)
+        return res.status(401).send({ success: false, message: "Please login to access this route" });
 
-    try {
-        // Verify the token and extract the user id
-        const decoded = jwt.verify(token, "jwt-secret-key");
-        req.userId = decoded.userId;
+    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
-        // If the token is valid, continue to the next middleware
-        return next();
+    req.userId = decodedData.userId;
 
-    } catch (err) {
-        // If the token is invalid, send back an authentication failure message
-        return res.json({
-            status: 403,
-            auth: false,
-            message: "Failed to authenticate token."
-        });
-    }
+    next();
 };
 
 export default AuthMiddleware;

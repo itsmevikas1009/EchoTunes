@@ -3,8 +3,13 @@ import { IoSearch } from "react-icons/io5";
 import { VscLibrary } from "react-icons/vsc";
 import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { useSelector, useDispatch } from "react-redux";
+
 
 const Sidebar = () => {
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <div className="w-[25%]">
       <div className="bg-[#1a1a1a] rounded-lg flex flex-col justify-center gap-3 px-3 py-6 mx-2 my-3">
@@ -26,6 +31,17 @@ const Sidebar = () => {
             Search
           </Link>
         </div>
+        {user &&
+          <div>
+            <Link
+              to={`/profile/${user?._id}`}
+              className="flex items-center opacity-70 hover:opacity-100 py-1 px-3 gap-4 text-xl"
+            >
+              <CgProfile size={28} />
+              Profile
+            </Link>
+          </div>}
+
       </div>
       <div className="bg-[#1a1a1a] rounded-lg px-4 py-3 mx-2 my-3">
         <div className="flex justify-between items-center">

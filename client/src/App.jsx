@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Dashboard from "./pages/Dashboard.jsx";
 import Search from "./pages/Search.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx"
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,7 @@ function App() {
       path: "/signup",
       element: <SignUp />,
     },
+
     {
       path: "/login",
       element: <Login />,
@@ -28,6 +30,12 @@ function App() {
     {
       path: "/search",
       element: <Search />,
+    },
+    {
+      path: "/profile/:id",
+      element: <PrivateRoute>
+        <Profile />
+      </PrivateRoute>,
     },
   ]);
   return (
