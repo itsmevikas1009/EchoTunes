@@ -41,20 +41,20 @@ export const google = async (req, res) => {
 
 
             // Return user data, token, and success message
-            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+            const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET);
 
             return res.status(200).cookie("access-token", token, cookieOptions).json({
                 success: true,
                 rest,
-                message: `Registered Successfully, ${user.name}`,
+                message: `Registered Successfully, ${newUser.name}`,
             });
         }
-
     } catch (err) {
+        // console.log(err);
         return res.status(500).json({
             success: false,
             message: "Something  went wrong",
-            data: err
+            data: err.message
         });
     }
 }

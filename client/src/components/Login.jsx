@@ -9,12 +9,15 @@ import toast from "react-hot-toast";
 import { server } from "../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
-
+import { IoEye } from "react-icons/io5";
+import { IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
   const { user } = useSelector(state => state.auth);
 
   const [loading, setLoading] = useState(false);
+  const [seePassword, setSeePassword] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -101,17 +104,21 @@ const Login = () => {
                 />
               </div>
 
-              <div className="w-full">
+              <div className="w-full relative">
                 <label htmlFor="" className="block font-medium">
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={seePassword ? "text" : "password"}
                   placeholder="Password"
                   value={password.value}
                   onChange={password.changeHandler}
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
+
+                <span className='absolute right-4 my-4 cursor-pointer ' onClick={() => setSeePassword(!seePassword)}>
+                  {seePassword ? <IoMdEyeOff size={20} /> : <IoEye size={20} />}
+                </span>
               </div>
 
               <button className=" w-full mx-auto  bg-green-500 rounded-lg p-3 mt-6 font-semibold text-lg">

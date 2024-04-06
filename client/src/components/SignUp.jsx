@@ -8,9 +8,13 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import Google from "./Google";
 import { useSelector } from "react-redux";
+import { IoEye } from "react-icons/io5";
+import { IoMdEyeOff } from "react-icons/io";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const [seePassword, setSeePassword] = useState(false);
+
   const { user } = useSelector(state => state.auth);
 
   const navigate = useNavigate();
@@ -106,23 +110,27 @@ const SignUp = () => {
                 />
               </div>
 
-              <div className="w-full">
+              <div className="w-full relative">
                 <label htmlFor="" className="block font-medium">
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={seePassword ? "text" : "password"}
                   placeholder="Password"
                   value={password.value}
                   onChange={password.changeHandler}
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
+
+                <span className='absolute right-4 my-4 cursor-pointer ' onClick={() => setSeePassword(!seePassword)}>
+                  {seePassword ? <IoMdEyeOff size={20} /> : <IoEye size={20} />}
+                </span>
                 {password.error && (
                   <p className="text-sm p-1 text-red-500">{password.error}</p>
                 )}
               </div>
 
-              <button className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg">
+              <button className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg" disabled={password.error}>
                 {loading ? "Registering..." : "Register"}
               </button>
               <div className="text-center font-bold text-lg">Or</div>

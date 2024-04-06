@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppLayout from '../components/AppLayout'
 import { Link, useParams } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa6'
@@ -7,12 +7,16 @@ import axios from "axios";
 import { server } from '../services/api';
 import { useInputValidation, useStrongPassword } from "6pp";
 import toast from 'react-hot-toast';
-
+import { updateFailure, updateSuccess } from '../redux/reducers/auth';
+import { IoEye } from "react-icons/io5";
+import { IoMdEyeOff } from "react-icons/io";
 
 const Profile = () => {
     const { user } = useSelector((state) => state.auth);
     const { id } = useParams();
+    const dispatch = useDispatch();
 
+    const [seePassword, setSeePassword] = useState(false);
 
     const name = useInputValidation(user && user.name);
     const password = useStrongPassword();
@@ -32,6 +36,8 @@ const Profile = () => {
 
             if (res.data.success === true) {
                 toast.success(res.data.message);
+                localStorage.setItem("user", JSON.stringify(res.data.rest));
+                dispatch(updateSuccess(res.data.rest));
             } else {
                 toast.error(res.data.message);
             }
@@ -87,17 +93,20 @@ const Profile = () => {
                             </div>
 
 
-                            <div className="w-full">
+                            <div className="w-full relative">
                                 <label htmlFor="" className="block font-medium">
                                     Password
                                 </label>
                                 <input
-                                    type="password"
-                                    placeholder="Password"
+                                    type={seePassword ? "text" : "password"}
+                                    placeholder="Enter Old Password Or Create New One "
                                     value={password.value}
                                     onChange={password.changeHandler}
                                     className="w-full p-3 rounded-lg outline-none  text-black border border-gray-300 px-4"
                                 />
+                                <span className='absolute right-4 my-4 cursor-pointer' onClick={() => setSeePassword(!seePassword)}>
+                                    {seePassword ? <IoMdEyeOff color='black' size={20} /> : <IoEye color='black' size={20} />}
+                                </span>
 
                                 {password.error && (
                                     <p className="text-sm p-1 text-red-500">{password.error}</p>
@@ -105,8 +114,8 @@ const Profile = () => {
                             </div>
 
 
-                            <button className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg text-black">
-                                {false ? "Registering..." : "Save Changes"}
+                            <button className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg text-black cursor-pointer" disabled={password.error}>
+                                {false ? "Saving..." : "Save Changes"}
                             </button>
                         </form>
                     </div>

@@ -17,9 +17,14 @@ const authSlice = createSlice({
         logout: (state) => {
             state.user = null;
         },
-
+        updateSuccess: (state, action) => {
+            state.user = action.payload;
+        },
+        updateFailure: (state) => {
+            state.user = null;
+        },
     },
 });
 
 export default authSlice;
-export const { signUpSuccess, signUpFailure, logout } = authSlice.actions;
+export const { signUpSuccess, signUpFailure, logout, updateSuccess, updateFailure } = authSlice.actions;

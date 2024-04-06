@@ -32,12 +32,12 @@ const Google = () => {
             if (res.data.success === true) {
                 localStorage.setItem("user", JSON.stringify(res.data.rest));
                 dispatch(signUpSuccess(res.data.rest));
-                toast.success("Login Successfully");
+                toast.success(res.data.message);
                 navigate("/");
             }
         } catch (error) {
             dispatch(signUpFailure());
-            console.log(error || "Something Went Wrong !");
+            toast.error(error.response.data.message || "Something Went Wrong !");
         }
     }
 

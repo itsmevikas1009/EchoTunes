@@ -23,11 +23,11 @@ export const updateProfile = async (req, res) => {
 
     try {
         const user = await User.findByIdAndUpdate(req.userId, { name, password: hashedPasword }, { new: true });
-
+        const { password: pass, ...rest } = user._doc;
         return res.status(200).json({
             success: true,
             message: "Profile Updated",
-            user
+            rest
         })
     } catch (err) {
         return res.status(500).json({
