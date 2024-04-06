@@ -3,7 +3,7 @@ import AppLayout from "../components/AppLayout";
 const Dashboard = () => {
   return (
     <AppLayout>
-      <div className="bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 h-full text-white rounded-lg mx-1 my-3">
+      <div className="h-[85%] bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3">
         <h2 className="text-2xl font-bold">Recently Played</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           <div className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4">
