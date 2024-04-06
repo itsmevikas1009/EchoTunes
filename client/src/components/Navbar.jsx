@@ -5,6 +5,9 @@ import { logout } from "../redux/reducers/auth";
 import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
+import axios from "axios";
+import { server } from "../services/api"
+import toast from "react-hot-toast";
 
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector((state) => state.auth);
@@ -13,9 +16,18 @@ const Navbar = ({ bg, text = "black" }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    localStorage.removeItem("user");
-    dispatch(logout());
-    navigate("/login");
+    try {
+      const res = await axios.get(`${server}/logout`, { withCredentials: true });
+      if (res.data.success) {
+        localStorage.removeItem("user");
+        dispatch(logout());
+        toast.success("Successfully logged out!");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    }
   };
 
   return (

@@ -61,8 +61,8 @@ const SignUp = () => {
   return (
     <>
       <Navbar />
-      <div className="h-screen w-full ">
-        <div className=" hidden md:flex md:w-[50%]  flex-col items-center bg-[rgb(213,129,53)] h-full ">
+      <div className=" w-full h-screen ">
+        <div className=" hidden md:flex md:w-[50%]  flex-col items-center bg-[rgb(213,129,53)]  h-screen">
           <img
             src="https://staticfe.saavn.com/web6/jioindw/dist/1712206575/_i/artist/Badshah.png"
             className="h-96 mt-[6rem]"
@@ -74,12 +74,12 @@ const SignUp = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full  md:w-[50%] mx-auto absolute right-0 top-[3rem] p-[2.5rem] ">
-          <div className="w-11/12 md:w-6/12">
+        <div className="flex flex-col items-center justify-center w-full   md:w-[50%] mx-auto absolute right-0 top-[3rem] p-[2.5rem] ">
+          <div className="w-11/12 md:max-w-sm">
             <h1 className="text-4xl font-bold ">Welcome to Spotify</h1>
             <p className="text-xl p-1">Sign up with your details...</p>
 
-            <form className="flex flex-col gap-3 mt-6 mb-3" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-3 mt-4 mb-3" onSubmit={handleSubmit}>
               <div className="">
                 <label htmlFor="" className="block font-medium">
                   Name
