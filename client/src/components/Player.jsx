@@ -27,8 +27,6 @@ const Player = () => {
         </div>
         <FaRegHeart size={20} className="ms-3" />
         <FaLaptop size={20} className="ms-3" />
-        {/* <i className="fa-regular fa-heart"></i> */}
-        {/* <i className="fa-solid fa-laptop"></i> */}
       </div>
       <div className="w-[50%]">
         <div className="flex justify-center items-center">
@@ -49,13 +47,8 @@ const Player = () => {
         <GiMicrophone size={20} className="mx-2 opacity-70" />
         <HiOutlineQueueList size={20} className="mx-2 opacity-70" />
         <LuVolume2 size={20} className="mx-2 opacity-70" />
-        {/* <img src="./assets/now-playing.svg" alt="" className="controls-icon"> */}
-        {/* <img src="./assets/queue.svg" alt="" className="controls-icon"> */}
-        {/* <img src="./assets/connect-device.svg" alt="" className="controls-icon"> */}
-        {/* <img src="./assets/volume.svg" alt="" className="controls-icon"> */}
         <input type="range" min="0" max="100" className="volume-bar" />
         <RiPictureInPictureFill size={20} className="mx-2 opacity-70" />
-        {/* <img src="./assets/pic-in-pic.svg" alt="" className="controls-icon"> */}
       </div>
     </div>
   );
