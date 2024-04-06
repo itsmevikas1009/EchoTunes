@@ -2,7 +2,7 @@ import { MdHomeFilled } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { VscLibrary } from "react-icons/vsc";
 import { FaPlus } from "react-icons/fa6";
-import { Link, Route, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
 
@@ -17,7 +17,9 @@ const Sidebar = () => {
         <div>
           <Link
             to="/"
-            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/" && "opacity-100 font-bold"}`}
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
+              path === "/" && "opacity-100 font-bold"
+            }`}
           >
             <MdHomeFilled size={30} />
             Home
@@ -26,7 +28,9 @@ const Sidebar = () => {
         <div>
           <Link
             to="/search"
-            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/search" && "opacity-100 font-bold"}`}
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
+              path === "/search" && "opacity-100 font-bold"
+            }`}
           >
             <IoSearch size={30} />
             Search
@@ -36,7 +40,9 @@ const Sidebar = () => {
           <div>
             <Link
               to={`/profile/${user?._id}`}
-              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` && "opacity-100 font-bold"}`}
+              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
+                path === `/profile/${user?._id}` && "opacity-100 font-bold"
+              }`}
             >
               <CgProfile size={30} />
               Profile
