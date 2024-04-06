@@ -2,7 +2,7 @@ import { MdHomeFilled } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { VscLibrary } from "react-icons/vsc";
 import { FaPlus } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, Route, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -10,13 +10,15 @@ import { useSelector, useDispatch } from "react-redux";
 const Sidebar = () => {
   const { user } = useSelector((state) => state.auth);
 
+  const path = useLocation().pathname;
+
   return (
     <div className="w-[25%]">
       <div className="bg-[#1a1a1a] rounded-lg flex flex-col justify-center gap-3 px-3 py-6 mx-2 my-3">
         <div>
           <Link
             to="/"
-            className="flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl"
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/" && "opacity-100 font-bold"}`}
           >
             <MdHomeFilled size={30} />
             Home
@@ -25,7 +27,7 @@ const Sidebar = () => {
         <div>
           <Link
             to="/search"
-            className="flex items-center opacity-70 hover:opacity-100 py-1 px-3 gap-4 text-xl"
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/search" && "opacity-100 font-bold"}`}
           >
             <IoSearch size={30} />
             Search
@@ -35,7 +37,7 @@ const Sidebar = () => {
           <div>
             <Link
               to={`/profile/${user?._id}`}
-              className="flex items-center opacity-70 hover:opacity-100 py-1 px-3 gap-4 text-xl"
+              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` && "opacity-100 font-bold"}`}
             >
               <CgProfile size={28} />
               Profile
