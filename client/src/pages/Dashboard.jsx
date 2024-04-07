@@ -6,11 +6,21 @@ const Dashboard = () => {
   const [data, setData] = useState(null);
 
   const newRelaeses = async () => {
-    let response = await axios.get(
-      "https://v1.nocodeapi.com/amn123/spotify/dMGVLtPyXiNWgLWG/browse/new?country=india"
-    );
-    if (response.status === true) {
-      setData(response.data.albums.items);
+    const options = {
+      method: 'GET',
+      url: 'https://spotify-web-api3.p.rapidapi.com/v1/social/spotify/homepage',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RapidAPI-Key': 'e1b704054dmsh4f783964b0b5ba8p16250ajsn2d3afc5848e3',
+        'X-RapidAPI-Host': 'spotify-web-api3.p.rapidapi.com'
+      }
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
     }
   };
 

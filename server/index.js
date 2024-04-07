@@ -2,8 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { apiRoute } from "./src/routes/api.js";
-import AuthMiddleware from "./src/middlewares/AuthMiddleware.js";
+import { userRoute } from "./src/routes/user.js";
+import { songRoute } from "./src/routes/song.js";
+
 import dotenv from "dotenv"
 
 const connectDB = mongoose.connect('mongodb+srv://spotify-sms:3wEP40zDugishYwG@cluster0.fcgapxd.mongodb.net/spotify', { useNewUrlParser: true });
@@ -27,7 +28,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Use the AuthMiddleware to protect the /api/ route
-app.use("/api", apiRoute);
+app.use("/api", userRoute);
+app.use("/api/song", songRoute);
 
 // Connect the database
 connectDB.then(() => {
