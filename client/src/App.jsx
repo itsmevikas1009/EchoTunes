@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Search from "./pages/Search.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx"
 import Profile from "./pages/Profile.jsx";
+import AddSong from "./pages/AddSong.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -30,6 +31,10 @@ function App() {
     {
       path: "/search",
       element: <Search />,
+    },
+    {
+      path: "/create-song",
+      element: <AddSong />,
     },
     {
       path: "/profile/:id",

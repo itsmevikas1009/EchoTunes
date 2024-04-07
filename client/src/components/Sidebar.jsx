@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
+import { FaMusic } from "react-icons/fa";
 
 const Sidebar = () => {
   const { user } = useSelector((state) => state.auth);
@@ -13,13 +14,12 @@ const Sidebar = () => {
 
   return (
     <div className="w-[25%]">
-      <div className="bg-[#1a1a1a] rounded-lg flex flex-col justify-center gap-2 px-3 py-4 mx-2 my-3">
+      <div className="bg-[#1a1a1a] rounded-lg flex flex-col justify-center gap-4 px-3 py-4 mx-2 my-3">
         <div>
           <Link
             to="/"
-            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
-              path === "/" && "opacity-100 font-bold"
-            }`}
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/" && "opacity-100 font-bold"
+              }`}
           >
             <MdHomeFilled size={30} />
             Home
@@ -28,24 +28,35 @@ const Sidebar = () => {
         <div>
           <Link
             to="/search"
-            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
-              path === "/search" && "opacity-100 font-bold"
-            }`}
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/search" && "opacity-100 font-bold"
+              }`}
           >
             <IoSearch size={30} />
             Search
           </Link>
         </div>
-        {user && (
+        {user?.isAdmin && (
           <div>
             <Link
               to={`/profile/${user?._id}`}
-              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
-                path === `/profile/${user?._id}` && "opacity-100 font-bold"
-              }`}
+              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` && "opacity-100 font-bold"
+                }`}
             >
               <CgProfile size={30} />
               Profile
+            </Link>
+          </div>
+        )}
+
+        {user && (
+          <div>
+            <Link
+              to={`/create-song`}
+              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` && "opacity-100 font-bold"
+                }`}
+            >
+              <FaMusic size={24} />
+              Add Song
             </Link>
           </div>
         )}
