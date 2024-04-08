@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
 import axios from "axios";
-import { server } from "../services/api"
+import { server } from "../services/api";
 import toast from "react-hot-toast";
 
 const Navbar = ({ bg, text = "black" }) => {
@@ -17,7 +17,9 @@ const Navbar = ({ bg, text = "black" }) => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get(`${server}/logout`, { withCredentials: true });
+      const res = await axios.get(`${server}/logout`, {
+        withCredentials: true,
+      });
       if (res.data.success) {
         localStorage.removeItem("user");
         dispatch(logout());
@@ -59,7 +61,12 @@ const Navbar = ({ bg, text = "black" }) => {
 
               {showUserMenu && (
                 <div className="absolute top-[4rem] bg-black p-6 px-8 right-[1.5rem] rounded-lg  transition-all duration-500 z-50 flex justify-center flex-col ">
-                  <Link to={`/profile/${user?._id}`} className="mb-4 hover:opacity-85">Profile</Link>
+                  <Link
+                    to={`/profile/${user?._id}`}
+                    className="mb-4 hover:opacity-85"
+                  >
+                    Profile
+                  </Link>
                   <button onClick={handleLogout} className="hover:opacity-85">
                     Logout
                   </button>

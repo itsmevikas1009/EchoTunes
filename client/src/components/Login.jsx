@@ -13,14 +13,13 @@ import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   const [loading, setLoading] = useState(false);
   const [seePassword, setSeePassword] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const email = useInputValidation("");
   const password = useStrongPassword();
@@ -116,7 +115,10 @@ const Login = () => {
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
 
-                <span className='absolute right-4 my-4 cursor-pointer ' onClick={() => setSeePassword(!seePassword)}>
+                <span
+                  className="absolute right-4 my-4 cursor-pointer "
+                  onClick={() => setSeePassword(!seePassword)}
+                >
                   {seePassword ? <IoMdEyeOff size={20} /> : <IoEye size={20} />}
                 </span>
               </div>

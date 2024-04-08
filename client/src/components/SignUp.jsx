@@ -15,7 +15,7 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [seePassword, setSeePassword] = useState(false);
 
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
 
@@ -28,7 +28,6 @@ const SignUp = () => {
     email: email.value,
     password: password.value,
   };
-
 
   useEffect(() => {
     if (user) {
@@ -83,7 +82,10 @@ const SignUp = () => {
             <h1 className="text-4xl font-bold ">Welcome to Spotify</h1>
             <p className="text-xl p-1">Sign up with your details...</p>
 
-            <form className="flex flex-col gap-3 mt-4 mb-3" onSubmit={handleSubmit}>
+            <form
+              className="flex flex-col gap-3 mt-4 mb-3"
+              onSubmit={handleSubmit}
+            >
               <div className="">
                 <label htmlFor="" className="block font-medium">
                   Name
@@ -122,7 +124,10 @@ const SignUp = () => {
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
 
-                <span className='absolute right-4 my-4 cursor-pointer ' onClick={() => setSeePassword(!seePassword)}>
+                <span
+                  className="absolute right-4 my-4 cursor-pointer "
+                  onClick={() => setSeePassword(!seePassword)}
+                >
                   {seePassword ? <IoMdEyeOff size={20} /> : <IoEye size={20} />}
                 </span>
                 {password.error && (
@@ -130,7 +135,10 @@ const SignUp = () => {
                 )}
               </div>
 
-              <button className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg" disabled={password.error}>
+              <button
+                className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg"
+                disabled={password.error}
+              >
                 {loading ? "Registering..." : "Register"}
               </button>
               <div className="text-center font-bold text-lg">Or</div>

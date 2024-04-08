@@ -7,13 +7,13 @@ const Dashboard = () => {
 
   const newRelaeses = async () => {
     const options = {
-      method: 'GET',
-      url: 'https://spotify-web-api3.p.rapidapi.com/v1/social/spotify/homepage',
+      method: "GET",
+      url: "https://spotify-web-api3.p.rapidapi.com/v1/social/spotify/homepage",
       headers: {
-        'Content-Type': 'application/json',
-        'X-RapidAPI-Key': 'e1b704054dmsh4f783964b0b5ba8p16250ajsn2d3afc5848e3',
-        'X-RapidAPI-Host': 'spotify-web-api3.p.rapidapi.com'
-      }
+        "Content-Type": "application/json",
+        "X-RapidAPI-Key": "e1b704054dmsh4f783964b0b5ba8p16250ajsn2d3afc5848e3",
+        "X-RapidAPI-Host": "spotify-web-api3.p.rapidapi.com",
+      },
     };
 
     try {
