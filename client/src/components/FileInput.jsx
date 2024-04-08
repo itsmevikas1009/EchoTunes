@@ -101,7 +101,7 @@ const FileInput = ({
       )}
       {progressShow && progress < 100 && (
         <div style={{ width: 50, height: 50 }}>
-          <CircularProgressbar value={progress} text={`${progress}%`} />;
+          <CircularProgressbar value={progress} text={`${progress}%`} />
         </div>
       )}
       {progress === 100 && (

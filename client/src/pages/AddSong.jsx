@@ -72,6 +72,7 @@ const AddSong = () => {
         withCredentials: true,
       });
       console.log(res);
+      toast.error(res.response.data.message);
     } catch (error) {
       console.log(error);
     }
