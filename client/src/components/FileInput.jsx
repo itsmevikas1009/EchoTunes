@@ -8,6 +8,9 @@ import toast from "react-hot-toast";
 // import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { FaCheckCircle } from "react-icons/fa";
 import storage from "../firebase"
+import { FaCloudUploadAlt } from "react-icons/fa";
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 
 const FileInput = ({
@@ -64,28 +67,19 @@ const FileInput = ({
     };
 
     return (
-        <div>
+        <div className="flex items-center justify-between px-6 border rounded-lg p-1">
+            <label htmlFor={name} className="border p-2 rounded-md">{label}</label>
             <input
                 type="file"
-                ref={inputRef}
+                id={name}
                 onChange={(e) => handleInputState(name, e.currentTarget.files[0])}
                 vlaue={value}
                 {...rest}
                 className="hidden"
             />
-            <button
-                style={{
-                    width: "15rem",
-                    border: "1px solid black",
-                    background: "transparent",
-                }}
-                onClick={() => inputRef.current.click()}
-
-            >{label}</button>
-
 
             {type === "image" && value && (
-                <img
+                <img height={100} width={100} className="object-contain rounded-md"
                     src={typeof value === "string" ? value : URL.createObjectURL(value)}
                     alt="file"
                 />
@@ -96,28 +90,23 @@ const FileInput = ({
                     controls
                 />
             )}
+
             {value !== null && !progressShow && typeof value !== "string" && (
 
                 <button
                     onClick={handleUpload}
-                    // startIcon={<BackupIcon />}
-                    // label="Upload"
-                    style={{ width: "11rem" }}
-                >Upload</button>
+                    className="pr-2"
+                ><FaCloudUploadAlt size={28} />
+                </button>
             )}
             {progressShow && progress < 100 && (
-                <div className="">
-                    {/* <CircularProgress
-                        className=""
-                        variant="determinate"
-                        value={progress}
-                    /> */}
-                    <p>{progress}%</p>
+                <div style={{ width: 50, height: 50 }}>
+                    <CircularProgressbar value={progress} text={`${progress}%`} />;
                 </div>
             )}
             {progress === 100 && (
                 <div className="">
-                    <FaCheckCircle />
+                    <FaCheckCircle size={30} />
                 </div>
             )}
         </div>
