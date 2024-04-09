@@ -70,3 +70,15 @@
   background-color: #1bd760;
   margin-top: -4px;
 }
+
+.rhap_container {
+  background-color: black;
+}
+
+.rhap_time {
+  color: #1bd760;
+}
+
+.rhap_progress-indicator {
+  background-color: #1bd760;
+}

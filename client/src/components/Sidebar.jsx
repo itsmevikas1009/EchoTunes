@@ -18,9 +18,8 @@ const Sidebar = () => {
         <div>
           <Link
             to="/"
-            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
-              path === "/" && "opacity-100 font-bold"
-            }`}
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/" && "opacity-100 font-bold"
+              }`}
           >
             <MdHomeFilled size={30} />
             Home
@@ -29,21 +28,19 @@ const Sidebar = () => {
         <div>
           <Link
             to="/search"
-            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
-              path === "/search" && "opacity-100 font-bold"
-            }`}
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/search" && "opacity-100 font-bold"
+              }`}
           >
             <IoSearch size={30} />
             Search
           </Link>
         </div>
-        {user?.isAdmin && (
+        {user && (
           <div>
             <Link
               to={`/profile/${user?._id}`}
-              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
-                path === `/profile/${user?._id}` && "opacity-100 font-bold"
-              }`}
+              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` && "opacity-100 font-bold"
+                }`}
             >
               <CgProfile size={30} />
               Profile
@@ -51,13 +48,12 @@ const Sidebar = () => {
           </div>
         )}
 
-        {user && (
+        {user?.isAdmin && (
           <div>
             <Link
               to={`/create-song`}
-              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
-                path === `/profile/${user?._id}` && "opacity-100 font-bold"
-              }`}
+              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` && "opacity-100 font-bold"
+                }`}
             >
               <FaMusic size={24} />
               Add Song

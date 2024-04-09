@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import { server } from "../services/api";
 import toast from "react-hot-toast";
+import { setAllSongs, setIsPlaying } from "../redux/reducers/audioPlayer";
 
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector((state) => state.auth);
@@ -21,7 +22,11 @@ const Navbar = ({ bg, text = "black" }) => {
         withCredentials: true,
       });
       if (res.data.success) {
+
         localStorage.removeItem("user");
+        localStorage.removeItem("persist:root");
+        dispatch(setAllSongs([]));
+        dispatch(setIsPlaying(false));
         dispatch(logout());
         toast.success("Successfully logged out!");
         navigate("/login");

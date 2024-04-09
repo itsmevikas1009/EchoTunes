@@ -6,6 +6,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
 import { useDispatch } from "react-redux";
+import { FcGoogle } from "react-icons/fc";
+
 
 const Google = () => {
   const auth = getAuth(app);
@@ -43,9 +45,10 @@ const Google = () => {
 
   return (
     <button
-      className="w-full bg-green-500 rounded-lg p-3  font-semibold text-lg"
+      className="w-full bg-green-500 rounded-lg p-3  flex items-center justify-center gap-6 font-semibold text-lg"
       onClick={handleGoogleClick}
     >
+      <FcGoogle size={28} />
       Login With Google
     </button>
   );

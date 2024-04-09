@@ -10,8 +10,14 @@ import Search from "./pages/Search.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx"
 import Profile from "./pages/Profile.jsx";
 import AddSong from "./pages/AddSong.jsx";
+import MusicPlayer from "./components/MusicPlayer.jsx";
+import { useSelector } from "react-redux";
+
 
 function App() {
+  const { songIndex, allSongs, autoPlay, isPlaying } = useSelector((state) => state.audioPlayer);
+  const { user } = useSelector((state) => state.auth);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -44,9 +50,12 @@ function App() {
     },
   ]);
   return (
+
     <>
       <RouterProvider router={router} />
       <Toaster />
+      {/* <Player /> */}
+      {isPlaying && user && <MusicPlayer />}
     </>
   );
 }

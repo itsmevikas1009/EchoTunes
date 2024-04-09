@@ -8,47 +8,8 @@ import axios from "axios";
 import { server } from "../services/api";
 import { toast } from "react-hot-toast";
 const AddSong = () => {
-  const [progress, setProgress] = useState(0);
-  const [progressShow, setProgressShow] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
-  const handleUpload = () => {
-    setProgressShow(true);
-    const fileName = new Date().getTime() + value.name;
-    const storageRef = ref(
-      storage,
-      type === "audio" ? `/audio/${fileName}` : `/images/${fileName}`
-    );
-    const uploadTask = uploadBytesResumable(storageRef, value);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const uploaded = Math.floor(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(uploaded);
-      },
-      (error) => {
-        console.log(error);
-        toast.error("An error occured while uploading!");
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          handleInputState(name, url);
-          if (type === "audio") {
-            const audio = new Audio(url);
-            audio.addEventListener(
-              "loadedmetadata",
-              () => {
-                const duration = Math.floor(audio.duration);
-                handleInputState("duration", duration);
-              },
-              false
-            );
-          }
-        });
-      }
-    );
-  };
+
+
 
   const [data, setData] = useState({
     name: "",
@@ -71,9 +32,20 @@ const AddSong = () => {
       const res = await axios.post(`${server}/song/create`, data, {
         withCredentials: true,
       });
+
       console.log(res);
-      toast.error(res.response.data.message);
+      toast.success(res.data.message);
+      setData({
+        name: "",
+        artist: "",
+        img: null,
+        song: null,
+        duration: 0,
+      })
+
+
     } catch (error) {
+      toast.error(error?.response?.data?.message);
       console.log(error);
     }
   };
