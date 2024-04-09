@@ -9,12 +9,10 @@ import axios from "axios";
 import { server } from "../services/api";
 import toast from "react-hot-toast";
 import { setAllSongs, setIsPlaying } from "../redux/reducers/audioPlayer";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
-
-
 
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector((state) => state.auth);
@@ -28,7 +26,6 @@ const Navbar = ({ bg, text = "black" }) => {
         withCredentials: true,
       });
       if (res.data.success) {
-
         localStorage.removeItem("user");
         localStorage.removeItem("persist:root");
         dispatch(setAllSongs([]));
@@ -58,15 +55,23 @@ const Navbar = ({ bg, text = "black" }) => {
         <div className="flex  items-center gap-6 text-lg font-semibold">
           {user ? (
             <div className="flex items-center">
-              <button onClick={() => setShowUserMenu(!showUserMenu)} className="flex items-center gap-2">
-                {user?.profilePicture ? (<>
-                  <img
-                    src={user?.profilePicture}
-                    alt={user?.name}
-                    className="rounded-full h-10 w-10 object-contain"
-                  />
-                  {showUserMenu ? <FaCaretUp size={24} /> : <FaCaretDown size={24} />}
-                </>
+              <button
+                onClick={() => setShowUserMenu(!showUserMenu)}
+                className="flex items-center gap-2"
+              >
+                {user?.profilePicture ? (
+                  <>
+                    <img
+                      src={user?.profilePicture}
+                      alt={user?.name}
+                      className="rounded-full h-10 w-10 object-contain"
+                    />
+                    {showUserMenu ? (
+                      <FaCaretUp size={24} />
+                    ) : (
+                      <FaCaretDown size={24} />
+                    )}
+                  </>
                 ) : (
                   <CgProfile size={30} />
                 )}
@@ -87,7 +92,10 @@ const Navbar = ({ bg, text = "black" }) => {
                       <CgProfile />
                       Profile
                     </Link>
-                    <button onClick={handleLogout} className="hover:opacity-85 flex items-center gap-4">
+                    <button
+                      onClick={handleLogout}
+                      className="hover:opacity-85 flex items-center gap-4"
+                    >
                       <IoLogOutOutline />
                       Logout
                     </button>

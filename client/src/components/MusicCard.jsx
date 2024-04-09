@@ -1,11 +1,5 @@
-import React from 'react'
-
 const MusicCard = () => {
-    return (
-        <div>
+  return <div></div>;
+};
 
-        </div>
-    )
-}
-
-export default MusicCard
+export default MusicCard;

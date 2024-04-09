@@ -8,9 +8,6 @@ import axios from "axios";
 import { server } from "../services/api";
 import { toast } from "react-hot-toast";
 const AddSong = () => {
-
-
-
   const [data, setData] = useState({
     name: "",
     artist: "",
@@ -41,9 +38,7 @@ const AddSong = () => {
         img: null,
         song: null,
         duration: 0,
-      })
-
-
+      });
     } catch (error) {
       toast.error(error?.response?.data?.message);
       console.log(error);
@@ -52,7 +47,7 @@ const AddSong = () => {
 
   return (
     <AppLayout>
-      <div className="h-full pb-20 bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
+      <div className="h-[85%] pb-20 bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
         <div className="pt-6 pb-2">
           <Link to="/">
             {" "}

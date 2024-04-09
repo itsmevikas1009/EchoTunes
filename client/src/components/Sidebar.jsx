@@ -9,6 +9,7 @@ import { FaMusic } from "react-icons/fa";
 
 const Sidebar = () => {
   const { user } = useSelector((state) => state.auth);
+  const { isPlaying } = useSelector((state) => state.audioPlayer);
 
   const path = useLocation().pathname;
 
@@ -18,8 +19,9 @@ const Sidebar = () => {
         <div>
           <Link
             to="/"
-            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/" && "opacity-100 font-bold"
-              }`}
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
+              path === "/" && "opacity-100 font-bold"
+            }`}
           >
             <MdHomeFilled size={30} />
             Home
@@ -28,8 +30,9 @@ const Sidebar = () => {
         <div>
           <Link
             to="/search"
-            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === "/search" && "opacity-100 font-bold"
-              }`}
+            className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
+              path === "/search" && "opacity-100 font-bold"
+            }`}
           >
             <IoSearch size={30} />
             Search
@@ -39,8 +42,9 @@ const Sidebar = () => {
           <div>
             <Link
               to={`/profile/${user?._id}`}
-              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` && "opacity-100 font-bold"
-                }`}
+              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
+                path === `/profile/${user?._id}` && "opacity-100 font-bold"
+              }`}
             >
               <CgProfile size={30} />
               Profile
@@ -52,8 +56,9 @@ const Sidebar = () => {
           <div>
             <Link
               to={`/create-song`}
-              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` && "opacity-100 font-bold"
-                }`}
+              className={`flex items-center opacity-70  hover:opacity-100 py-1 px-3 gap-4 text-xl ${
+                path === `/profile/${user?._id}` && "opacity-100 font-bold"
+              }`}
             >
               <FaMusic size={24} />
               Add Song
@@ -61,9 +66,17 @@ const Sidebar = () => {
           </div>
         )}
       </div>
-      <div className="bg-[#1a1a1a] rounded-lg px-4 py-3 mx-2 my-3">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
+      <div
+        className={`bg-[#1a1a1a] rounded-lg px-4 py-3 mx-2 my-3  ${
+          isPlaying
+            ? user?.isAdmin
+              ? "h-[49%] overflow-auto"
+              : "h-[57%] overflow-auto"
+            : !user && "h-[75%]"
+        }`}
+      >
+        <div className="flex justify-between items-center ">
+          <div className=" flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
             <VscLibrary />
             <a className="text-xl" href="#">
               Your Library
@@ -73,7 +86,7 @@ const Sidebar = () => {
             <FaPlus />
           </div>
         </div>
-        <div className="">
+        <div className="overflow-auto">
           <div className="bg-[#232323] rounded-lg h-auto mt-2 mb-4 px-5 py-5">
             <div className="text-lg font-bold mb-3">
               Create your frist playlist
