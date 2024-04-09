@@ -48,3 +48,26 @@ export const getSingleSongs = async (req, res) => {
         return res.status(400).json({ success: false, msg: error.message });
     }
 }
+
+
+
+
+export const searchSong = async (req, res) => {
+    const { name = "" } = req.query;
+
+
+    const song = await Song.find({ name: { $regex: name, $options: 'i' } });
+    if (!song) {
+        return res.status(400).send({
+            success: false,
+            message: "Not"
+        });
+    }
+
+    return res.status(200).json({
+        success: true,
+        song,
+    });
+};
+
+

@@ -54,7 +54,7 @@ const Dashboard = () => {
   return (
     <AppLayout>
       <div className="h-full pb-32 bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3">
-        {user && <> <h2 className="text-2xl font-bold">Recently Played</h2>
+        {user && <> <h2 className="text-2xl font-bold " >Recently Played</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             <div className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4">
               <img
@@ -76,6 +76,7 @@ const Dashboard = () => {
             allSongs.map((i, index) => (
               <div onClick={() => setCurrentPlaySong(index)}
                 key={index}
+                //  data-aos='fade-up' data-aos-offset='200' data-aos-delay='50'
                 className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
               >
                 <img

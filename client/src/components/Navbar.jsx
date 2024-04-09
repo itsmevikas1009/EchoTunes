@@ -9,6 +9,12 @@ import axios from "axios";
 import { server } from "../services/api";
 import toast from "react-hot-toast";
 import { setAllSongs, setIsPlaying } from "../redux/reducers/audioPlayer";
+import { motion } from "framer-motion"
+import { FaCaretDown } from "react-icons/fa";
+import { FaCaretUp } from "react-icons/fa";
+import { IoLogOutOutline } from "react-icons/io5";
+
+
 
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector((state) => state.auth);
@@ -52,30 +58,41 @@ const Navbar = ({ bg, text = "black" }) => {
         <div className="flex  items-center gap-6 text-lg font-semibold">
           {user ? (
             <div className="flex items-center">
-              <button onClick={() => setShowUserMenu(!showUserMenu)}>
-                {user?.profilePicture ? (
+              <button onClick={() => setShowUserMenu(!showUserMenu)} className="flex items-center gap-2">
+                {user?.profilePicture ? (<>
                   <img
                     src={user?.profilePicture}
                     alt={user?.name}
                     className="rounded-full h-10 w-10 object-contain"
                   />
+                  {showUserMenu ? <FaCaretUp size={24} /> : <FaCaretDown size={24} />}
+                </>
                 ) : (
                   <CgProfile size={30} />
                 )}
               </button>
 
               {showUserMenu && (
-                <div className="absolute top-[4rem] bg-black p-6 px-8 right-[1.5rem] rounded-lg  transition-all duration-500 z-50 flex justify-center flex-col ">
-                  <Link
-                    to={`/profile/${user?._id}`}
-                    className="mb-4 hover:opacity-85"
-                  >
-                    Profile
-                  </Link>
-                  <button onClick={handleLogout} className="hover:opacity-85">
-                    Logout
-                  </button>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 50 }}
+                  className="absolute z-50 right-0 w-275 p-4 gap-4 bg-card shadow-lg rounded-lg backdrop-blur-sm flex flex-col"
+                >
+                  <div className="absolute top-[3rem] bg-black p-6 px-8 right-[1.5rem] rounded-lg  transition-all duration-500 z-50 flex justify-center flex-col ">
+                    <Link
+                      to={`/profile/${user?._id}`}
+                      className="mb-4 hover:opacity-85 flex items-center gap-4"
+                    >
+                      <CgProfile />
+                      Profile
+                    </Link>
+                    <button onClick={handleLogout} className="hover:opacity-85 flex items-center gap-4">
+                      <IoLogOutOutline />
+                      Logout
+                    </button>
+                  </div>
+                </motion.div>
               )}
             </div>
           ) : (

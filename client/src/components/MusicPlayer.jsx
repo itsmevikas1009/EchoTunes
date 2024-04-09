@@ -30,7 +30,7 @@ const MusicPlayer = () => {
         }
     };
     return (
-        <div className='fixed bottom-0 w-full bg-black bg-opacity-90'>
+        <div className='fixed bottom-0 w-full bg-black bg-opacity-90 ' >
             <div className='flex items-center px-8'>
 
                 <div className='w-[25%]'>

@@ -49,7 +49,7 @@ const Google = () => {
       onClick={handleGoogleClick}
     >
       <FcGoogle size={28} />
-      Login With Google
+      Continue With Google
     </button>
   );
 };
