@@ -6,7 +6,7 @@ import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import axios from "axios";
 import { server } from "../services/api";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentSong, setIsPlaying } from "../redux/reducers/audioPlayer";
+import { setCurrentSong, setIsPlaying, setIsSearch } from "../redux/reducers/audioPlayer";
 // import { useHistory } from "react-router-dom"
 
 const browse = [
@@ -68,12 +68,16 @@ const Search = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
 
-  const { isPlaying, songIndex, allSongs } = useSelector((state) => state.audioPlayer);
-  // const { name } = useParams();
+  const { isPlaying, songIndex } = useSelector((state) => state.audioPlayer);
+
   const [results, setResults] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  // const history = useHistory()
-  // console.log(name);
+
+
+
+  console.log(results);
+
+
   const handleInput = (e) => {
     setSearchParams({ name: e.target.value });
   }
@@ -81,8 +85,11 @@ const Search = () => {
   const search = async (query) => {
     try {
       const response = await axios.get(`${server}/song/search?name=${query}`);
-      // console.log("response data", response.data.song);
+      console.log("response data", response.data.song);
       setResults(response.data.song);
+      // dispatch(setSearchResults(response.data.data));
+      // dispatch(setCurrentSong(0));
+      dispatch(setIsSearch(true));
     } catch (error) {
       console.log(error);
     }
@@ -149,7 +156,7 @@ const Search = () => {
 
         <h1 className="text-2xl font-bold">Browse all </h1>
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 z-10 ">
-          {results.length === 0 ? <h1 className="text-lg text-center py-6  w-full"> No Song Found</h1> :
+          {results?.length === 0 ? <h1 className="text-lg text-center py-6  w-full"> No Song Found</h1> :
             results?.map((i, index) => {
               const { name, img, artist } = i;
 

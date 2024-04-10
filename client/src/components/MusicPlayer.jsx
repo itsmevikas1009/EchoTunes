@@ -4,12 +4,15 @@ import "react-h5-audio-player/lib/styles.css";
 import { setCurrentSong } from "../redux/reducers/audioPlayer";
 
 const MusicPlayer = () => {
-  const { songIndex, allSongs, autoPlay, isPlaying } = useSelector(
+  const { songIndex, allSongs, autoPlay, isPlaying, isSearch, results } = useSelector(
     (state) => state.audioPlayer
   );
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
+  console.log(results);
+
 
   const nextTrack = () => {
     if (songIndex > allSongs.length) {
@@ -26,6 +29,9 @@ const MusicPlayer = () => {
       dispatch(setCurrentSong(songIndex - 1));
     }
   };
+
+
+
   return (
     <div className="fixed bottom-0 w-full bg-black bg-opacity-90 ">
       <div className="flex items-center px-8">

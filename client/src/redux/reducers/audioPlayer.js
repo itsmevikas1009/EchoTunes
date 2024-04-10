@@ -6,7 +6,8 @@ export const audioPlayer = createSlice({
         songIndex: 0,
         isPlaying: false,
         allSongs: [],
-        autoPlay: false
+        autoPlay: false,
+        searchResults: []
     },
     reducers: {
         setAllSongs: (state, action) => {
@@ -24,6 +25,7 @@ export const audioPlayer = createSlice({
     },
 });
 
-export const { setAllSongs, setIsPlaying, setCurrentSong, setAutoPlay } = audioPlayer.actions;
+
+export const { setAllSongs, setIsPlaying, setIsSearch, setCurrentSong, setAutoPlay } = audioPlayer.actions;
 
 export default audioPlayer.reducer;
