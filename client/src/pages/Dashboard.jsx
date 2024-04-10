@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AppLayout from "../components/AppLayout";
 import axios from "axios";
 import { server } from "../services/api";
@@ -15,16 +15,17 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
 
-  const { isPlaying, songIndex, allSongs } = useSelector(
+  const { isPlaying, allSongs } = useSelector(
     (state) => state.audioPlayer
   );
 
-  const newRelaeses = async () => {
+
+
+  const allSongsFetch = async () => {
     try {
       const response = await axios.get(`${server}/song/get`, {
         withCredentials: true,
       });
-      // console.log(response);
 
       if (response.status === 200) {
         dispatch(setAllSongs(response.data.data));
@@ -35,30 +36,29 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    newRelaeses();
+    allSongsFetch();
   }, []);
 
-  const setCurrentPlaySong = (songindexx) => {
+
+
+  const handlePlaySong = (data) => {
     if (!user) {
-      navigate("/login");
-    }
-    if (!isPlaying) {
-      dispatch(dispatch(setIsPlaying(true)));
+      navigate("/login")
     }
 
-    if (songIndex !== songindexx) {
-      dispatch(setCurrentSong(songindexx));
-    } else {
-      dispatch(setCurrentSong(songindexx));
+    if (!isPlaying) {
+      dispatch(setIsPlaying(true));
     }
-  };
+
+    dispatch(setCurrentSong(data))
+    dispatch(dispatch(setIsPlaying(true)));
+  }
 
   return (
     <AppLayout>
       <div
-        className={`h-[85%] bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3 ${
-          isPlaying ? "h-[85%]" : "h-[95%]"
-        }`}
+        className={`h-[85%] bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[95%]"
+          }`}
       >
         {user && (
           <>
@@ -84,9 +84,8 @@ const Dashboard = () => {
           {allSongs ? (
             allSongs.map((i, index) => (
               <div
-                onClick={() => setCurrentPlaySong(index)}
+                onClick={() => handlePlaySong(i)}
                 key={index}
-                //  data-aos='fade-up' data-aos-offset='200' data-aos-delay='50'
                 className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
               >
                 <img src={i.img} alt="" className="rounded-lg " />
@@ -98,38 +97,9 @@ const Dashboard = () => {
               </div>
             ))
           ) : (
-            <h1>No Data</h1>
+            <h1>No Songs Available</h1>
           )}
         </div>
-
-        {/* <h2 className="text-2xl font-bold mt-8">All Songs</h2> */}
-        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {data ? (
-            data.map((i, index) => (
-              <div
-                key={index}
-                className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4"
-              >
-                <img
-                  src={i.img}
-                  alt=""
-                  className="rounded-lg "
-                />
-                <p className="text-xl my-2 font-semibold">
-                  {i.name.length > 15 ? i.name.slice(0, 15) : i.name}
-                </p>
-                <p className="text-sm">{i.artist}</p>
-
-
-              </div>
-
-
-            ))
-          ) : (
-            <h1>No Data</h1>
-          )}
-        </div> */}
-
         <div className="footer">
           <div className="line"></div>
         </div>

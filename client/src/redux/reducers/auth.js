@@ -16,6 +16,8 @@ const authSlice = createSlice({
         },
         logout: (state) => {
             state.user = null;
+            // localStorage.removeItem("persist:root"); // remove persisted state
+            // state = undefined
         },
         updateSuccess: (state, action) => {
             state.user = action.payload;

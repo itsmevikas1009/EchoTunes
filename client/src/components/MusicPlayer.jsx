@@ -4,14 +4,13 @@ import "react-h5-audio-player/lib/styles.css";
 import { setCurrentSong } from "../redux/reducers/audioPlayer";
 
 const MusicPlayer = () => {
-  const { songIndex, allSongs, autoPlay, isPlaying, isSearch, results } = useSelector(
+  const { songIndex, allSongs, currentSong } = useSelector(
     (state) => state.audioPlayer
   );
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
-  console.log(results);
 
 
   const nextTrack = () => {
@@ -38,15 +37,16 @@ const MusicPlayer = () => {
         <div className="w-[25%]">
           <div className="flex items-center ">
             <img
-              src={allSongs[songIndex]?.img}
+              // src={allSongs[songIndex]?.img}
+              src={currentSong?.img}
               alt=""
               height={60}
               width={60}
               className="rounded-lg"
             />
             <div className="flex flex-col text-white justify-center pl-6">
-              <h1>{allSongs[songIndex]?.name}</h1>
-              <h2 className="text-sm">{allSongs[songIndex]?.artist}</h2>
+              <h1>{currentSong?.name}</h1>
+              <h2 className="text-sm">{currentSong?.artist}</h2>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@ const MusicPlayer = () => {
         <div className="w-[75%]">
           <div className="w-full">
             <AudioPlayer
-              src={allSongs[songIndex]?.song}
+              src={currentSong?.song}
               onPlay={() => console.log("is playing")}
               autoPlay={true}
               showSkipControls={true}

@@ -27,9 +27,8 @@ const Navbar = ({ bg, text = "black" }) => {
       });
       if (res.data.success) {
         localStorage.removeItem("user");
-        localStorage.removeItem("persist:root");
-        dispatch(setAllSongs([]));
-        dispatch(setIsPlaying(false));
+        // dispatch(setAllSongs([]));
+        // dispatch(setIsPlaying(false));
         dispatch(logout());
         toast.success("Successfully logged out!");
         navigate("/login");
