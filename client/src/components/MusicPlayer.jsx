@@ -11,8 +11,6 @@ const MusicPlayer = () => {
 
   const dispatch = useDispatch();
 
-
-
   const nextTrack = () => {
     if (songIndex > allSongs.length) {
       dispatch(setCurrentSong(0));
@@ -28,8 +26,6 @@ const MusicPlayer = () => {
       dispatch(setCurrentSong(songIndex - 1));
     }
   };
-
-
 
   return (
     <div className="fixed bottom-0 w-full bg-black bg-opacity-90 ">

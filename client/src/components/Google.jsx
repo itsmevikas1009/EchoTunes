@@ -8,7 +8,6 @@ import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
 import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
 
-
 const Google = () => {
   const auth = getAuth(app);
   const navigate = useNavigate();

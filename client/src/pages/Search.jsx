@@ -6,8 +6,11 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { server } from "../services/api";
 import { useDispatch, useSelector } from "react-redux";
-import { addToRecentlyPlayed, setCurrentSong, setIsPlaying } from "../redux/reducers/audioPlayer";
-
+import {
+  addToRecentlyPlayed,
+  setCurrentSong,
+  setIsPlaying,
+} from "../redux/reducers/audioPlayer";
 
 const browse = [
   {
@@ -66,15 +69,16 @@ const Search = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { isPlaying, recentlyPlayed } = useSelector((state) => state.audioPlayer);
+  const { isPlaying, recentlyPlayed } = useSelector(
+    (state) => state.audioPlayer
+  );
 
   const [results, setResults] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
-
   const handleInput = (e) => {
     setSearchParams({ name: e.target.value });
-  }
+  };
 
   const searchFetch = async (query) => {
     try {
@@ -83,39 +87,38 @@ const Search = () => {
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   useEffect(() => {
-    if (!searchParams.get('name')) return;
+    if (!searchParams.get("name")) return;
 
     let timer = setTimeout(() => {
-      searchFetch(searchParams.get('name'));
+      searchFetch(searchParams.get("name"));
     }, 1000);
 
     return () => clearTimeout(timer);
-
-  }, [searchParams])
-
+  }, [searchParams]);
 
   const handlePlaySong = (data) => {
     if (!user) {
-      navigate("/login")
+      navigate("/login");
     }
     if (!isPlaying) {
       dispatch(setIsPlaying(true));
     }
-    dispatch(setCurrentSong(data))
+    dispatch(setCurrentSong(data));
     dispatch(addToRecentlyPlayed(data));
 
     dispatch(dispatch(setIsPlaying(true)));
-  }
-
-
+  };
 
   return (
     <AppLayout>
-      <div className="h-full bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
+      <div
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[95%]"
+        }`}
+      >
         <div className="mb-8 bg-opacity-95 z-40 hidden md:block my-2 sticky top-0 bg-[#1a1a1a]">
           <div className="flex items-center gap-6 z-10">
             <Link to="/">
@@ -141,68 +144,53 @@ const Search = () => {
           </div>
         </div>
 
+        {results?.length > 0 && (
+          <>
+            <h1 className="text-2xl font-bold">Browse all </h1>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {results?.map((i, index) => (
+                <div
+                  onClick={() => handlePlaySong(i)}
+                  key={index}
+                  className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                >
+                  <img src={i?.img} alt="" className="rounded-lg " />
 
+                  <p className="text-xl my-2 font-semibold">
+                    {i?.name.length > 15 ? i?.name.slice(0, 15) : i?.name}
+                  </p>
+                  <p className="text-sm">{i?.artist}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
 
+        {results?.length === 0 && recentlyPlayed.length > 0 && (
+          <>
+            <h2 className="text-2xl font-bold ">Recently Played</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {recentlyPlayed ? (
+                recentlyPlayed.map((i, index) => (
+                  <div
+                    onClick={() => handlePlaySong(i)}
+                    key={index}
+                    className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                  >
+                    <img src={i.img} alt="" className="rounded-lg " />
 
-        {
-          results?.length > 0 && (
-            <>
-              <h1 className="text-2xl font-bold">Browse all </h1>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {
-                  results?.map((i, index) => (
-                    <div onClick={() => handlePlaySong(i)}
-                      key={index}
-                      className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
-                    >
-                      <img
-                        src={i?.img}
-                        alt=""
-                        className="rounded-lg "
-                      />
-
-
-                      <p className="text-xl my-2 font-semibold">
-                        {i?.name.length > 15 ? i?.name.slice(0, 15) : i?.name}
-                      </p>
-                      <p className="text-sm">{i?.artist}</p>
-                    </div>
-                  ))
-                }
-              </div>
-            </>
-          )
-        }
-
-
-
-        {
-          results?.length === 0 && recentlyPlayed.length > 0 && (
-            <>
-              <h2 className="text-2xl font-bold ">Recently Played</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {recentlyPlayed ? (
-                  recentlyPlayed.map((i, index) => (
-                    <div
-                      onClick={() => handlePlaySong(i)}
-                      key={index}
-                      className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
-                    >
-                      <img src={i.img} alt="" className="rounded-lg " />
-
-                      <p className="text-xl my-2 font-semibold">
-                        {i.name.length > 15 ? i.name.slice(0, 15) : i.name}
-                      </p>
-                      <p className="text-sm">{i.artist}</p>
-                    </div>
-                  ))
-                ) : (
-                  <h1>No Songs Available</h1>
-                )}
-              </div>
-            </>
-          )
-        }
+                    <p className="text-xl my-2 font-semibold">
+                      {i.name.length > 15 ? i.name.slice(0, 15) : i.name}
+                    </p>
+                    <p className="text-sm">{i.artist}</p>
+                  </div>
+                ))
+              ) : (
+                <h1>No Songs Available</h1>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </AppLayout>
   );

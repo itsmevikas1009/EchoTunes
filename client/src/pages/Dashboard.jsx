@@ -20,9 +20,6 @@ const Dashboard = () => {
     (state) => state.audioPlayer
   );
 
-
-
-
   const allSongsFetch = async () => {
     try {
       const response = await axios.get(`${server}/song/get`, {
@@ -41,27 +38,26 @@ const Dashboard = () => {
     allSongsFetch();
   }, []);
 
-
-
   const handlePlaySong = (data) => {
     if (!user) {
-      navigate("/login")
+      navigate("/login");
     }
 
     if (!isPlaying) {
       dispatch(setIsPlaying(true));
     }
 
-    dispatch(setCurrentSong(data))
+    dispatch(setCurrentSong(data));
     dispatch(addToRecentlyPlayed(data));
     dispatch(dispatch(setIsPlaying(true)));
-  }
+  };
 
   return (
     <AppLayout>
       <div
-        className={`h-[85%] bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-full"
-          }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[95%]"
+        }`}
       >
         {user && recentlyPlayed.length > 0 && (
           <>

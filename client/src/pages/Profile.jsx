@@ -13,6 +13,9 @@ import { IoMdEyeOff } from "react-icons/io";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
+
+  const { isPlaying } = useSelector((state) => state.audioPlayer);
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -49,7 +52,11 @@ const Profile = () => {
 
   return (
     <AppLayout>
-      <div className="h-full bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
+      <div
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[95%]"
+        }`}
+      >
         <div className="pt-6 pb-2">
           <Link to="/">
             {" "}
@@ -70,7 +77,7 @@ const Profile = () => {
             />
 
             <form
-              className="w-full my-6 flex flex-col gap-6 justify-center mb-12"
+              className="w-full my-6 flex flex-col gap-6 justify-center "
               onSubmit={handleSave}
             >
               <div>

@@ -1,11 +1,6 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-// import { CircularProgress } from "@mui/material";
 import toast from "react-hot-toast";
-// import storage from "../../../firebase";
-// import Button from "../../Button";
-// import BackupIcon from "@mui/icons-material/Backup";
-// import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { FaCheckCircle } from "react-icons/fa";
 import storage from "../firebase";
 import { FaCloudUploadAlt } from "react-icons/fa";

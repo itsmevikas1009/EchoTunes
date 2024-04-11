@@ -8,7 +8,6 @@ import { useState } from "react";
 import axios from "axios";
 import { server } from "../services/api";
 import toast from "react-hot-toast";
-import { setAllSongs, setIsPlaying } from "../redux/reducers/audioPlayer";
 import { motion } from "framer-motion";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
@@ -54,7 +53,6 @@ const Navbar = ({ bg, text = "black" }) => {
         <div className="flex  items-center gap-6 text-lg font-semibold">
           {user ? (
             <div className="flex items-center gap-6">
-
               {user?.isAdmin && (
                 <div>
                   <Link
@@ -131,7 +129,7 @@ const Navbar = ({ bg, text = "black" }) => {
           )}
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

@@ -7,11 +7,10 @@ import { FaMusic } from "react-icons/fa";
 import axios from "axios";
 import { server } from "../services/api";
 import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { setAddAllSongs } from "../redux/reducers/audioPlayer";
+import { useSelector } from "react-redux";
+
 const AddSong = () => {
-  const dispatch = useDispatch();
-  const { addAllSongs } = useSelector((state) => state.audioPlayer);
+  const { isPlaying } = useSelector((state) => state.audioPlayer);
 
   const [data, setData] = useState({
     name: "",
@@ -53,7 +52,11 @@ const AddSong = () => {
 
   return (
     <AppLayout>
-      <div className="h-full pb-20 bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
+      <div
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[95%]"
+        }`}
+      >
         <div className="pt-6 pb-2">
           <Link to="/">
             {" "}
@@ -65,7 +68,7 @@ const AddSong = () => {
           <h1 className="text-3xl font-bold mb-6">Add Song</h1>
           <div className="w-[60%] mx-auto flex flex-col justify-center">
             <form
-              className="w-full my-6 flex flex-col gap-6 justify-center mb-12"
+              className="w-full my-6 flex flex-col gap-6 justify-center "
               onSubmit={handleSave}
             >
               <div>
