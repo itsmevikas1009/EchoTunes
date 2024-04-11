@@ -26,7 +26,7 @@ const Artists = () => {
     ]
     return (
         <div className='mb-20'>
-            <h2 className="text-2xl font-bold mt-12 mb-4">Artists</h2>
+            <h2 className="text-2xl font-bold mt-4 mb-4">Artists</h2>
 
             <div className="flex items-center gap-10 flex-wrap space-y-3" >
                 {

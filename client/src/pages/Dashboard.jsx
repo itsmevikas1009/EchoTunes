@@ -75,7 +75,7 @@ const Dashboard = () => {
                     <p className="text-xl my-2 font-semibold">
                       {i.name.length > 15 ? i.name.slice(0, 15) : i.name}
                     </p>
-                    <p className="text-sm">{i.artist}</p>
+                    <p className="text-sm">{i.artist.length > 15 ? i.artist.slice(0, 15) : i.artist}</p>
                   </div>
                 ))
               ) : (
@@ -99,10 +99,10 @@ const Dashboard = () => {
               >
                 <img src={i.img} alt="" className="rounded-lg " />
 
-                <p className="text-xl my-2 font-semibold">
-                  {i.name.length > 15 ? i.name.slice(0, 15) : i.name}
+                <p className="text-xl my-2 font-semibold opacity-90">
+                  {i.name.length > 10 ? i.name.slice(0, 10) + "..." : i.name}
                 </p>
-                <p className="text-sm">{i.artist}</p>
+                <p className="text-sm opacity-90">{i.artist.length > 15 ? i.artist.slice(0, 15) + "..." : i.artist}</p>
               </div>
             ))
           ) : (

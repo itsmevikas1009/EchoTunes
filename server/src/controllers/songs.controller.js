@@ -97,7 +97,7 @@ export const getSongsByArtistName = async (req, res) => {
     // console.log(name);
 
     try {
-        const songs = await Song.find({ artist: name });
+        const songs = await Song.find({ artist: { $regex: name, $options: 'i' } });
         if (!songs) {
             return res.status(404).json({ success: false, message: 'No song found' });
         }
