@@ -59,7 +59,7 @@ const FileInput = ({
   };
 
   return (
-    <div className="flex items-center justify-between px-6 border rounded-lg p-1">
+    <div className="flex items-center justify-between px-6 border rounded-lg p-4 py-6">
       <label
         htmlFor={name}
         className="border p-2 rounded-md bg-white text-black font-semibold"
@@ -102,7 +102,7 @@ const FileInput = ({
         </div>
       )}
       {progress === 100 && (
-        <div className="">
+        <div style={{ width: 50, height: 50 }} className="flex items-center">
           <FaCheckCircle size={30} />
         </div>
       )}

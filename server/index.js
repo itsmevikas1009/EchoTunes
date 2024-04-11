@@ -18,7 +18,7 @@ const localURL = "http://localhost:5173";
 
 const corsOption = {
     origin: localURL,
-    methods: ['POST', 'GET', 'PUT'],
+    methods: ['POST', 'GET', 'PUT', 'DELETE'],
     credentials: true,
     optionSuccessStatus: 200
 }

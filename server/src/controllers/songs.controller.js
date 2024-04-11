@@ -22,6 +22,23 @@ export const createSong = async (req, res) => {
 
 
 
+//delete Song
+export const deleteSong = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const song = await Song.findByIdAndDelete(id, { new: true });
+        const newSongs = await Song.find();
+
+        if (!song) return res.status(400).send({ message: "No such song found." })
+
+        return res.status(200).send({ success: true, data: newSongs, message: `Song Deleted Successfully` });
+
+    } catch (error) {
+        return res.status(500).send({ message: error.message || 'Server Error' });
+    }
+}
+
 
 //get All song
 export const getAllSongs = async (req, res) => {
@@ -71,3 +88,24 @@ export const searchSong = async (req, res) => {
 };
 
 
+
+
+
+export const getSongsByArtistName = async (req, res) => {
+
+    const { name } = req.params;
+    // console.log(name);
+
+    try {
+        const songs = await Song.find({ artist: name });
+        if (!songs) {
+            return res.status(404).json({ success: false, message: 'No song found' });
+        }
+
+        return res.status(200).json({ success: true, data: songs });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ success: false, msg: error.message });
+    }
+}

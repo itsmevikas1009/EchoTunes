@@ -10,6 +10,7 @@ import {
   setCurrentSong,
   setIsPlaying,
 } from "../redux/reducers/audioPlayer";
+import Artists from "../components/Artists";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -55,14 +56,13 @@ const Dashboard = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3 ${
-          isPlaying ? "h-[85%]" : "h-[95%]"
-        }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
+          }`}
       >
         {user && recentlyPlayed.length > 0 && (
           <>
             <h2 className="text-2xl font-bold ">Recently Played</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {recentlyPlayed ? (
                 recentlyPlayed.map((i, index) => (
                   <div
@@ -85,8 +85,11 @@ const Dashboard = () => {
           </>
         )}
 
+
+        <Artists />
+
         <h2 className="text-2xl font-bold mt-8">All Songs</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {allSongs ? (
             allSongs.map((i, index) => (
               <div

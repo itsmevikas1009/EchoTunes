@@ -115,9 +115,8 @@ const Search = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
-          isPlaying ? "h-[85%]" : "h-[95%]"
-        }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
+          }`}
       >
         <div className="mb-8 bg-opacity-95 z-40 hidden md:block my-2 sticky top-0 bg-[#1a1a1a]">
           <div className="flex items-center gap-6 z-10">
@@ -147,7 +146,7 @@ const Search = () => {
         {results?.length > 0 && (
           <>
             <h1 className="text-2xl font-bold">Browse all </h1>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {results?.map((i, index) => (
                 <div
                   onClick={() => handlePlaySong(i)}
@@ -169,7 +168,7 @@ const Search = () => {
         {results?.length === 0 && recentlyPlayed.length > 0 && (
           <>
             <h2 className="text-2xl font-bold ">Recently Played</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {recentlyPlayed ? (
                 recentlyPlayed.map((i, index) => (
                   <div

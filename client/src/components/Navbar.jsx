@@ -42,12 +42,14 @@ const Navbar = ({ bg, text = "black" }) => {
     <div className={`absolute w-full  py-2 bg-${bg} text-${text}`}>
       <div className="w-11/12 mx-auto flex items-center justify-between">
         <div className="flex gap-2 items-center">
-          <img
-            src={Logo}
-            alt=""
-            className="h-[3rem] w-[3rem] bg-white rounded-full "
-          />
-          <h1 className="text-2xl font-bold">Spotify</h1>
+          <Link to="/" className="flex items-center gap-2">
+            <img
+              src={Logo}
+              alt=""
+              className="h-[3rem] w-[3rem] bg-white rounded-full "
+            />
+            <h1 className="text-2xl font-bold">Spotify</h1>
+          </Link>
         </div>
 
         <div className="flex  items-center gap-6 text-lg font-semibold">
@@ -57,7 +59,7 @@ const Navbar = ({ bg, text = "black" }) => {
                 <div>
                   <Link
                     to="/create-song"
-                    className={`flex items-center hover:opacity-100 py-1 px-3 gap-4 text-lg font-bold border rounded-3xl`}
+                    className={`flex items-center hover:bg-gray-600 py-1 px-3 gap-4 text-lg font-bold border rounded-3xl`}
                   >
                     Add Song
                   </Link>
