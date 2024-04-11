@@ -115,7 +115,7 @@ const Search = () => {
 
   return (
     <AppLayout>
-      <div className="h-[85%] bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
+      <div className="h-full bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
         <div className="mb-8 bg-opacity-95 z-40 hidden md:block my-2 sticky top-0 bg-[#1a1a1a]">
           <div className="flex items-center gap-6 z-10">
             <Link to="/">
@@ -140,6 +140,8 @@ const Search = () => {
             </form>
           </div>
         </div>
+
+
 
 
         {

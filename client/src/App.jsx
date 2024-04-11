@@ -13,6 +13,7 @@ import AddSong from "./pages/AddSong.jsx";
 import MusicPlayer from "./components/MusicPlayer.jsx";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import AllSongs from "./pages/admin/AllSongs.jsx";
 
 function App() {
   const { isPlaying } = useSelector((state) => state.audioPlayer);
@@ -35,6 +36,10 @@ function App() {
     {
       path: "/search",
       element: <Search />,
+    },
+    {
+      path: "/allsongs",
+      element: <AllSongs />,
     },
     {
       path: "/create-song",

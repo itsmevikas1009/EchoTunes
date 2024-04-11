@@ -53,7 +53,18 @@ const Navbar = ({ bg, text = "black" }) => {
 
         <div className="flex  items-center gap-6 text-lg font-semibold">
           {user ? (
-            <div className="flex items-center">
+            <div className="flex items-center gap-6">
+
+              {user?.isAdmin && (
+                <div>
+                  <Link
+                    to="/create-song"
+                    className={`flex items-center hover:opacity-100 py-1 px-3 gap-4 text-lg font-bold border rounded-3xl`}
+                  >
+                    Add Song
+                  </Link>
+                </div>
+              )}
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
                 className="flex items-center gap-2"
@@ -120,7 +131,7 @@ const Navbar = ({ bg, text = "black" }) => {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

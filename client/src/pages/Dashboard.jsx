@@ -60,7 +60,7 @@ const Dashboard = () => {
   return (
     <AppLayout>
       <div
-        className={`h-[85%] bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[95%]"
+        className={`h-[85%] bg-[#1a1a1a] flex-1 overflow-auto px-8 py-6 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-full"
           }`}
       >
         {user && recentlyPlayed.length > 0 && (

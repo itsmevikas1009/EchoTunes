@@ -49,7 +49,7 @@ const Profile = () => {
 
   return (
     <AppLayout>
-      <div className="h-[85%] bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
+      <div className="h-full bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3">
         <div className="pt-6 pb-2">
           <Link to="/">
             {" "}

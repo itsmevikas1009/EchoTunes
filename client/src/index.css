@@ -49,3 +49,15 @@
 .rhap_volume-indicator {
   background-color: #1bd760;
 }
+
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
+  color: white !important;
+}
+
+.css-zylse7-MuiButtonBase-root-MuiIconButton-root.Mui-disabled {
+  color: white !important;
+}
+
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon {
+  color: white !important;
+}

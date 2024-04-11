@@ -6,11 +6,15 @@ export const audioPlayer = createSlice({
         currentSong: null,
         isPlaying: false,
         allSongs: [],
-        recentlyPlayed: []
+        recentlyPlayed: [],
+        addAllSongs: []
     },
     reducers: {
         setAllSongs: (state, action) => {
             state.allSongs = action.payload;
+        },
+        setAddAllSongs: (state, action) => {
+            state.addAllSongs = action.payload;
         },
         setCurrentSong: (state, action) => {
             state.currentSong = action.payload;
@@ -41,6 +45,6 @@ export const audioPlayer = createSlice({
 });
 
 
-export const { addToRecentlyPlayed, setAllSongs, setIsPlaying, setCurrentSong } = audioPlayer.actions;
+export const { setAddAllSongs, addToRecentlyPlayed, setAllSongs, setIsPlaying, setCurrentSong } = audioPlayer.actions;
 
 export default audioPlayer.reducer;
