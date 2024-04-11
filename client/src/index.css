@@ -42,6 +42,10 @@
   background-color: #1bd760;
 }
 
+.rhap_container :nth-child(3) {
+  color: #fff;
+}
+
 .rhap_container svg:hover {
   color: #fff;
 }
