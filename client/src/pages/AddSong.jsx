@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 const AddSong = () => {
   const { isPlaying } = useSelector((state) => state.audioPlayer);
 
+
   const [data, setData] = useState({
     name: "",
     artist: "",
@@ -44,9 +45,10 @@ const AddSong = () => {
         song: null,
         duration: 0,
       });
+      window.location.reload(true);
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -112,7 +114,6 @@ const AddSong = () => {
               <div>
                 <FileInput
                   label="Choose image"
-                  // icon={<ImageIcon />}
                   type="image"
                   name="img"
                   value={data.img}
