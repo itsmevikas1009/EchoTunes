@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AppLayout from "../components/AppLayout";
 import axios from "axios";
 import { server } from "../services/api";
@@ -11,8 +11,10 @@ import {
   setIsPlaying,
 } from "../redux/reducers/audioPlayer";
 import Artists from "../components/Artists";
+import SimmerLoading from "../components/SimmerLoading";
 
 const Dashboard = () => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -22,6 +24,7 @@ const Dashboard = () => {
   );
 
   const allSongsFetch = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${server}/song/get`, {
         withCredentials: true,
@@ -29,9 +32,11 @@ const Dashboard = () => {
 
       if (response.status === 200) {
         dispatch(setAllSongs(response.data.data));
+        setLoading(false);
       }
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
 
@@ -90,7 +95,7 @@ const Dashboard = () => {
 
         <h2 className="text-2xl font-bold mt-8">All Songs</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {allSongs ? (
+          {loading ? <h1 className="text-white">Loading....</h1> : allSongs ? (
             allSongs.map((i, index) => (
               <div
                 onClick={() => handlePlaySong(i)}
