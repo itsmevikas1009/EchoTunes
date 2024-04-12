@@ -5,7 +5,6 @@ import { Song } from "../models/song.model.js"
 export const createSong = async (req, res) => {
 
     const { name, artist, song, img, duration } = req.body;
-    // console.log(song, img);
 
     if (!name || !artist || !song || !img) return res.status(400).send({ message: "Missing fields" });
 
@@ -15,8 +14,8 @@ export const createSong = async (req, res) => {
         return res.status(200).send({ success: true, data: newSong, message: "Song created successfully" });
 
     } catch (err) {
-        console.log(err);
-        res.status(500).send({ message: err.message || 'Server error' });
+        // console.log(err.message);
+        res.status(500).send({ message: err.message === 'song validation failed: song: Cast to string failed for value "{}" (type Object) at path "song"' ? 'Please wait few seconds to upload..' : 'Server error' });
     }
 };
 
