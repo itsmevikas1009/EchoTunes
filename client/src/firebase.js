@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    apiKey: "AIzaSyDuPUNcKqUk94Gwr0xQV7KlP_BIoJKxX4I",
     authDomain: "spotify-92d44.firebaseapp.com",
     projectId: "spotify-92d44",
     storageBucket: "spotify-92d44.appspot.com",

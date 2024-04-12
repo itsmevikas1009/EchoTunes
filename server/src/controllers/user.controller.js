@@ -57,11 +57,6 @@ export const signUp = async (req, res) => {
     }
 };
 
-
-
-
-
-
 // Function to handle user login
 export const login = async (req, res) => {
     // Destructure email and password from request body
@@ -107,7 +102,7 @@ export const login = async (req, res) => {
         };
 
         // Return user data, token, and success message
-        const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET);
+        const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, "Sorknesfnieb");
 
         return res.status(200).cookie("access-token", token, cookieOptions).json({
             success: true,
@@ -138,7 +133,7 @@ export const google = async (req, res) => {
             const { password: pass, ...rest } = user._doc;
 
             // Return user data, token, and success message
-            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+            const token = jwt.sign({ userId: user._id }, "Sorknesfnieb");
 
             return res.status(200).cookie("access-token", token, cookieOptions).json({
                 success: true,
@@ -160,7 +155,7 @@ export const google = async (req, res) => {
 
 
             // Return user data, token, and success message
-            const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET);
+            const token = jwt.sign({ userId: newUser._id }, "Sorknesfnieb");
 
             return res.status(200).cookie("access-token", token, cookieOptions).json({
                 success: true,
