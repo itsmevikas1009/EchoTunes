@@ -29,26 +29,24 @@ const MusicPlayer = () => {
 
   return (
     <div className="fixed bottom-0 w-full bg-black bg-opacity-90 ">
-      <div className="flex items-center px-8">
-        <div className="w-[25%]">
+      <div className="flex items-center px-2 md:px-8">
+        <div className="w-[100px] md:w-[300px]">
           <div className="flex items-center ">
             <img
               // src={allSongs[songIndex]?.img}
               src={currentSong?.img}
               alt=""
-              height={60}
-              width={60}
-              className="rounded-lg"
+              className="rounded-lg h-10 md:h-14"
             />
-            <div className="flex flex-col text-white justify-center pl-6">
-              <h1>{currentSong?.name}</h1>
+            <div className="flex flex-col text-white justify-center pl-1 md:pl-6">
+              <h1 className="md:text-lg text-sm ">{currentSong?.name}</h1>
               <h2 className="text-sm">{currentSong?.artist}</h2>
             </div>
           </div>
         </div>
 
-        <div className="w-[75%]">
-          <div className="w-full">
+        <div className=" md:w-full max-w-full">
+          <div className="w-full ">
             <AudioPlayer
               src={currentSong?.song}
               onPlay={() => console.log("is playing")}

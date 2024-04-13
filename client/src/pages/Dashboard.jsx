@@ -11,7 +11,6 @@ import {
   setIsPlaying,
 } from "../redux/reducers/audioPlayer";
 import Artists from "../components/Artists";
-import SimmerLoading from "../components/SimmerLoading";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -65,9 +64,10 @@ const Dashboard = () => {
           }`}
       >
         {user && recentlyPlayed.length > 0 && (
-          <>
+          <div className="mb-10">
             <h2 className="text-2xl font-bold ">Recently Played</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"> */}
               {recentlyPlayed ? (
                 recentlyPlayed.map((i, index) => (
                   <div
@@ -87,13 +87,13 @@ const Dashboard = () => {
                 <h1>No Songs Available</h1>
               )}
             </div>
-          </>
+          </div>
         )}
 
 
         <Artists />
 
-        <h2 className="text-2xl font-bold mt-8">All Songs</h2>
+        <h2 className="text-2xl font-bold ">All Songs</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {loading ? <h1 className="text-white">Loading....</h1> : allSongs ? (
             allSongs.map((i, index) => (

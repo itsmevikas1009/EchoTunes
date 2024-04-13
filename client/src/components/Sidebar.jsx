@@ -14,7 +14,7 @@ const Sidebar = () => {
   const path = useLocation().pathname;
 
   return (
-    <div className="w-[25%]">
+    <div className="hidden md:block md:w-[25%]">
       <div className="bg-[#1a1a1a] rounded-lg flex flex-col justify-center gap-4 px-3 py-4 mx-2 my-3">
         <div>
           <Link

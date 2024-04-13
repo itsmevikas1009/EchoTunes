@@ -12,6 +12,8 @@ import { motion } from "framer-motion";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
+import { FaMusic } from "react-icons/fa";
+
 
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector((state) => state.auth);
@@ -56,7 +58,7 @@ const Navbar = ({ bg, text = "black" }) => {
           {user ? (
             <div className="flex items-center gap-6">
               {user?.isAdmin && (
-                <div>
+                <div className="hidden md:block">
                   <Link
                     to="/create-song"
                     className={`flex items-center hover:bg-gray-600 py-1 px-3 gap-4 text-lg font-bold border rounded-3xl`}
@@ -102,6 +104,19 @@ const Navbar = ({ bg, text = "black" }) => {
                       <CgProfile />
                       Profile
                     </Link>
+
+                    {user?.isAdmin && (
+                      <div className="block md:hidden">
+                        <Link
+                          to="/create-song"
+                          className="mb-4 hover:opacity-85 flex items-center gap-4 "
+                        >
+                          <FaMusic />
+                          Add_Song
+                        </Link>
+                      </div>
+                    )}
+
                     <button
                       onClick={handleLogout}
                       className="hover:opacity-85 flex items-center gap-4"
@@ -114,20 +129,20 @@ const Navbar = ({ bg, text = "black" }) => {
               )}
             </div>
           ) : (
-            <>
+            <div className="gap-1 md:gap-6 flex items-center">
               <Link
                 to="/signup"
-                className="border border-white p-2 bg-black text-white  px-6 rounded-3xl hover:scale-105 transition-all duration-200"
+                className="border border-white p-1 md:p-2 bg-black text-white px-2  md:px-6 rounded-3xl hover:scale-105 transition-all duration-200"
               >
                 SignUp
               </Link>
               <Link
                 to="/login"
-                className="border border-black p-2 bg-white text-black  px-6 rounded-3xl hover:scale-105 transition-all duration-200"
+                className="border border-black p-1 md:p-2 bg-white text-black px-2 md:px-6 rounded-3xl hover:scale-105 transition-all duration-200"
               >
                 Login
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

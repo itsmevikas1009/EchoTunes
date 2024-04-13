@@ -25,10 +25,10 @@ const Artists = () => {
         },
     ]
     return (
-        <div className='mb-20'>
+        <div className='mb-10'>
             <h2 className="text-2xl font-bold mt-4 mb-4">Artists</h2>
 
-            <div className="flex items-center gap-10 flex-wrap space-y-3" >
+            <div className="flex items-center gap-10 overflow-y-hidden overflow-x-auto h-[13rem]" >
                 {
                     artists.map((i, index) => (
                         <Link to={`/artists/${i.name}`} key={index} className='cursor-pointer w-[160px] h-[160px]' >
