@@ -45,7 +45,7 @@ const Artists = () => {
           <Link
             to={`/artists/${i.name}`}
             key={i.id}
-            className="rounded-lg py-3 px-1 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
+            className="rounded-lg p-3 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
             id="artistLink"
           >
             <div className="relative">
