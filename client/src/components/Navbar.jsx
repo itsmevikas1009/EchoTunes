@@ -93,7 +93,7 @@ const Navbar = ({ bg, text = "black" }) => {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 50 }}
-                  className="absolute z-50 right-0 w-275 p-4 gap-4 bg-card shadow-lg rounded-lg backdrop-blur-sm flex flex-col"
+                  className="absolute z-50 right-0 w-275 p-4"
                 >
                   <div className="absolute top-[3rem] bg-black p-6 px-8 right-[1.5rem] rounded-lg  transition-all duration-500 z-50 flex justify-center flex-col ">
                     <Link
@@ -108,7 +108,7 @@ const Navbar = ({ bg, text = "black" }) => {
                       <div className="block md:hidden">
                         <Link
                           to="/create-song"
-                          className="mb-4 hover:opacity-85 flex items-center gap-4 "
+                          className="mb-4 hover:opacity-85 flex items-center gap-4"
                         >
                           <FaMusic />
                           Add_Song

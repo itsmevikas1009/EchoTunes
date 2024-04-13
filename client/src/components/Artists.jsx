@@ -57,7 +57,7 @@ const Artists = () => {
               <IoMdPlayCircle
                 size={45}
                 color="#1bd760"
-                className="absolute right-0 bottom-0 bg-[#232323] rounded-full playBtn"
+                className="absolute sm:right-0 sm:bottom-0 -right-0.5 -bottom-0.5 bg-[#232323] rounded-full playBtn"
               />
             </div>
             <p className="text-lg font-semibold opacity-90 py-2">{i.name}</p>

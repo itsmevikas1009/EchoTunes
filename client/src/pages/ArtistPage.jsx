@@ -10,6 +10,7 @@ import {
   setCurrentSong,
   setIsPlaying,
 } from "../redux/reducers/audioPlayer";
+import { IoMdPlayCircle } from "react-icons/io";
 
 const ArtistPage = () => {
   const dispatch = useDispatch();
@@ -63,10 +64,21 @@ const ArtistPage = () => {
               <div
                 onClick={() => handlePlaySong(i)}
                 key={index}
-                className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer hover:bg-green-300 hover:bg-opacity-20"
+                className="hover:bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                id="songLink"
               >
-                <img src={i.img} alt="" className="rounded-lg " />
-
+                <div className="relative">
+                  <img
+                    src={i.img}
+                    alt=""
+                    className="rounded-lg object-contain"
+                  />
+                  <IoMdPlayCircle
+                    size={45}
+                    color="#1bd760"
+                    className="absolute right-1 bottom-1 bg-[#232323] rounded-full playBtn"
+                  />
+                </div>
                 <p className="text-xl my-2 font-semibold">
                   {i.name.length > 10 ? i.name.slice(0, 10) + "..." : i.name}
                 </p>
