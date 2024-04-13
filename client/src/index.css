@@ -65,3 +65,15 @@
 .css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon {
   color: white !important;
 }
+
+.playBtn {
+  visibility: hidden;
+}
+
+#artistLink:hover .playBtn {
+  visibility: visible;
+}
+
+#songLink:hover .playBtn {
+  visibility: visible;
+}

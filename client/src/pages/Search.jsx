@@ -11,6 +11,7 @@ import {
   setCurrentSong,
   setIsPlaying,
 } from "../redux/reducers/audioPlayer";
+import { IoMdPlayCircle } from "react-icons/io";
 
 const browse = [
   {
@@ -119,7 +120,7 @@ const Search = () => {
           isPlaying ? "h-[85%]" : "h-[97%]"
         }`}
       >
-        <div className="mb-8 bg-opacity-95 z-40 hidden md:block my-2 sticky top-0 bg-[#1a1a1a]">
+        <div className="mb-8 bg-opacity-95 z-40 hidden md:block my-2 sticky top-0 ">
           <div className="flex items-center gap-6 z-10">
             <Link to="/">
               {" "}
@@ -152,14 +153,25 @@ const Search = () => {
                 <div
                   onClick={() => handlePlaySong(i)}
                   key={index}
-                  className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                  className="hover:bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                  id="songLink"
                 >
-                  <img src={i?.img} alt="" className="rounded-lg " />
-
+                  <div className="relative">
+                    <img src={i.img} alt="" className="rounded-lg" />
+                    <IoMdPlayCircle
+                      size={45}
+                      color="#1bd760"
+                      className="absolute right-1 bottom-1 bg-[#232323] rounded-full playBtn"
+                    />
+                  </div>
                   <p className="text-xl my-2 font-semibold">
-                    {i?.name.length > 15 ? i?.name.slice(0, 15) : i?.name}
+                    {i.name.length > 10 ? i.name.slice(0, 10) + "..." : i.name}
                   </p>
-                  <p className="text-sm">{i?.artist}</p>
+                  <p className="text-sm">
+                    {i.artist.length > 15
+                      ? i.artist.slice(0, 15) + "..."
+                      : i.artist}
+                  </p>
                 </div>
               ))}
             </div>
@@ -175,14 +187,27 @@ const Search = () => {
                   <div
                     onClick={() => handlePlaySong(i)}
                     key={index}
-                    className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                    className="hover:bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                    id="songLink"
                   >
-                    <img src={i.img} alt="" className="rounded-lg " />
-
+                    <div className="relative">
+                      <img src={i.img} alt="" className="rounded-lg" />
+                      <IoMdPlayCircle
+                        size={45}
+                        color="#1bd760"
+                        className="absolute right-1 bottom-1 bg-[#232323] rounded-full playBtn"
+                      />
+                    </div>
                     <p className="text-xl my-2 font-semibold">
-                      {i.name.length > 15 ? i.name.slice(0, 15) : i.name}
+                      {i.name.length > 10
+                        ? i.name.slice(0, 10) + "..."
+                        : i.name}
                     </p>
-                    <p className="text-sm">{i.artist}</p>
+                    <p className="text-sm">
+                      {i.artist.length > 15
+                        ? i.artist.slice(0, 15) + "..."
+                        : i.artist}
+                    </p>
                   </div>
                 ))
               ) : (

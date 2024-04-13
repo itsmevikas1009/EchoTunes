@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import AppLayout from "../components/AppLayout";
 import axios from "axios";
+import { IoMdPlayCircle } from "react-icons/io";
 import { server } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -73,15 +74,30 @@ const Dashboard = () => {
                   <div
                     onClick={() => handlePlaySong(i)}
                     key={index}
-                    className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                    className="hover:bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                    id="songLink"
                   >
-                    <img src={i.img} alt="" className="rounded-lg" />
-
+                    <div className="relative">
+                      <img
+                        src={i.img}
+                        alt=""
+                        className="rounded-lg object-contain"
+                      />
+                      <IoMdPlayCircle
+                        size={45}
+                        color="#1bd760"
+                        className="absolute right-1 bottom-1 bg-[#232323] rounded-full playBtn"
+                      />
+                    </div>
                     <p className="text-xl my-2 font-semibold">
-                      {i.name.length > 15 ? i.name.slice(0, 15) : i.name}
+                      {i.name.length > 10
+                        ? i.name.slice(0, 10) + "..."
+                        : i.name}
                     </p>
                     <p className="text-sm">
-                      {i.artist.length > 15 ? i.artist.slice(0, 15) : i.artist}
+                      {i.artist.length > 15
+                        ? i.artist.slice(0, 15) + "..."
+                        : i.artist}
                     </p>
                   </div>
                 ))
@@ -103,10 +119,21 @@ const Dashboard = () => {
               <div
                 onClick={() => handlePlaySong(i)}
                 key={index}
-                className="bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer hover:bg-green-300 hover:bg-opacity-20"
+                className="hover:bg-[#232323] rounded-lg  p-3 ms-4 mt-4 cursor-pointer"
+                id="songLink"
               >
-                <img src={i.img} alt="" className="rounded-lg " />
-
+                <div className="relative">
+                  <img
+                    src={i.img}
+                    alt=""
+                    className="rounded-lg object-contain"
+                  />
+                  <IoMdPlayCircle
+                    size={45}
+                    color="#1bd760"
+                    className="absolute right-1 bottom-1 bg-[#232323] rounded-full playBtn"
+                  />
+                </div>
                 <p className="text-xl my-2 font-semibold opacity-90">
                   {i.name.length > 10 ? i.name.slice(0, 10) + "..." : i.name}
                 </p>

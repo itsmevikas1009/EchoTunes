@@ -15,12 +15,10 @@ const FileInput = ({
   type,
   handleInputState,
   ...rest
-
 }) => {
   const [progress, setProgress] = useState(0);
 
   const [progressShow, setProgressShow] = useState(false);
-
 
   const handleUpload = () => {
     setProgressShow(true);

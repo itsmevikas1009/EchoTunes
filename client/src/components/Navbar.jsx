@@ -14,7 +14,6 @@ import { FaCaretUp } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { FaMusic } from "react-icons/fa";
 
-
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector((state) => state.auth);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -61,7 +60,7 @@ const Navbar = ({ bg, text = "black" }) => {
                 <div className="hidden md:block">
                   <Link
                     to="/create-song"
-                    className={`flex items-center hover:bg-gray-600 py-1 px-3 gap-4 text-lg font-bold border rounded-3xl`}
+                    className={`flex items-center hover:bg-[#232323] py-1 px-3 gap-4 text-lg font-bold border rounded-3xl hover:scale-105 transition-all duration-200`}
                   >
                     Add Song
                   </Link>

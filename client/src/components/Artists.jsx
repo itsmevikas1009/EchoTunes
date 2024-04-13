@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IoMdPlayCircle } from "react-icons/io";
 
 const artists = [
   {
@@ -39,21 +40,28 @@ const Artists = () => {
     <div className="mb-10">
       <h2 className="text-2xl font-bold mt-4 mb-4">Artists</h2>
 
-      <div className="flex items-center gap-10 overflow-y-hidden overflow-x-auto h-[14.5rem]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {artists.map((i) => (
           <Link
             to={`/artists/${i.name}`}
             key={i.id}
-            className="cursor-pointer w-[160px] h-[160px]"
+            className="rounded-lg p-3 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
+            id="artistLink"
           >
-            <img
-              src={i.image}
-              alt={`Image of ${i.name}`}
-              className="rounded-full object-contain"
-            />
-            <p className="text-lg font-semibold text-center opacity-90 py-2">
-              {i.name}
-            </p>
+            <div className="relative">
+              <img
+                src={i.image}
+                alt={`Image of ${i.name}`}
+                className="rounded-full object-contain"
+              />
+              <IoMdPlayCircle
+                size={45}
+                color="#1bd760"
+                className="absolute right-0 bottom-0 bg-[#232323] rounded-full playBtn"
+              />
+            </div>
+            <p className="text-lg font-semibold opacity-90 py-2">{i.name}</p>
+            <p className="text-sm italic opacity-90">Artist</p>
           </Link>
         ))}
       </div>
