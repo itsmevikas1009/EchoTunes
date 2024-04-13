@@ -15,21 +15,17 @@ const AllSongs = () => {
 
   const [rows, setRows] = useState([]);
 
-
-
   const deleteRow = async (id) => {
     try {
-      const res = await axios.delete(`${server}/song/delete/${id}`, { withCredentials: true });
+      const res = await axios.delete(`${server}/song/delete/${id}`, {
+        withCredentials: true,
+      });
       // console.log(res.data.data);
       dispatch(setAddAllSongs(res.data.data));
-
-
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
-
+  };
 
   const columns = [
     {
@@ -75,7 +71,6 @@ const AllSongs = () => {
     },
   ];
 
-
   const allSongsFetch = async () => {
     try {
       const response = await axios.get(`${server}/song/get`, {
@@ -106,8 +101,9 @@ const AllSongs = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] flex-1 overflow-auto text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
-          }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[97%]"
+        }`}
       >
         <Table heading={"All Songs"} columns={columns} rows={rows} />
       </div>

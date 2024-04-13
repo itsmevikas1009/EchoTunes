@@ -115,8 +115,9 @@ const Search = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
-          }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[97%]"
+        }`}
       >
         <div className="mb-8 bg-opacity-95 z-40 hidden md:block my-2 sticky top-0 bg-[#1a1a1a]">
           <div className="flex items-center gap-6 z-10">
@@ -129,7 +130,7 @@ const Search = () => {
               <div className="relative">
                 <input
                   type="text"
-                  className="w-[35%] p-4 px-12 rounded-full bg-[#232323]  shadow-slate-50 shadow-sm outline-none text-white "
+                  className="w-[35%] p-4 px-12 rounded-full bg-[#232323] outline-none text-white shadow-xl shadow-[#0d0d0d]"
                   placeholder="What do you want to play ?"
                   // value={searchValue}
                   onChange={handleInput}

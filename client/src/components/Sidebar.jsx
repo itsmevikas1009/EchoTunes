@@ -19,8 +19,9 @@ const Sidebar = () => {
         <div>
           <Link
             to="/"
-            className={`flex items-center py-1 px-3 gap-4 text-xl ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
-              }`}
+            className={`flex items-center py-1 px-3 gap-4 text-xl ${
+              path === "/" ? "opacity-100 font-semibold " : "opacity-80"
+            }`}
           >
             <MdHomeFilled size={30} />
             Home
@@ -29,8 +30,9 @@ const Sidebar = () => {
         <div>
           <Link
             to="/search"
-            className={`flex items-center py-1 px-3 gap-4 text-xl ${path === "/search" ? "opacity-100 font-semibold " : "opacity-80"
-              }`}
+            className={`flex items-center py-1 px-3 gap-4 text-xl ${
+              path === "/search" ? "opacity-100 font-semibold " : "opacity-80"
+            }`}
           >
             <IoSearch size={30} />
             Search
@@ -40,8 +42,11 @@ const Sidebar = () => {
           <div>
             <Link
               to={`/profile/${user?._id}`}
-              className={`flex items-center py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}` ? "opacity-100 font-semibold " : "opacity-80"
-                }`}
+              className={`flex items-center py-1 px-3 gap-4 text-xl ${
+                path === `/profile/${user?._id}`
+                  ? "opacity-100 font-semibold "
+                  : "opacity-80"
+              }`}
             >
               <CgProfile size={30} />
               Profile
@@ -53,8 +58,11 @@ const Sidebar = () => {
           <div>
             <Link
               to={`/allsongs`}
-              className={`flex items-center py-1 px-3 gap-4 text-xl ${path === `/allsongs` ? "opacity-100 font-semibold " : "opacity-80"
-                }`}
+              className={`flex items-center py-1 px-3 gap-4 text-xl ${
+                path === `/allsongs`
+                  ? "opacity-100 font-semibold "
+                  : "opacity-80"
+              }`}
             >
               <FaMusic size={24} />
               All Songs
@@ -63,15 +71,16 @@ const Sidebar = () => {
         )}
       </div>
       <div
-        className={`bg-[#1a1a1a] rounded-lg px-4 py-3 mx-2 my-3  ${isPlaying
-          ? user?.isAdmin
-            ? "h-[49%] overflow-auto"
-            : "h-[57%] overflow-auto"
-          : !user && "h-[75%]"
-          }`}
+        className={`bg-[#1a1a1a] rounded-lg px-4 py-3 mx-2 my-3  ${
+          isPlaying
+            ? user?.isAdmin
+              ? "h-[49%] overflow-auto"
+              : "h-[57%] overflow-auto"
+            : !user && "h-[76%]"
+        }`}
       >
-        <div className="flex justify-between items-center ">
-          <div className=" flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
             <VscLibrary />
             <a className="text-xl" href="#">
               Your Library
