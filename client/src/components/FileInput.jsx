@@ -80,7 +80,7 @@ const FileInput = ({
         <img
           height={100}
           width={100}
-          className="object-contain rounded-md"
+          className="object-contain hidden md:block rounded-md"
           src={typeof value === "string" ? value : URL.createObjectURL(value)}
           alt="file"
         />
@@ -89,6 +89,7 @@ const FileInput = ({
         <audio
           src={typeof value === "string" ? value : URL.createObjectURL(value)}
           controls
+          className="hidden md:block"
         />
       )}
 

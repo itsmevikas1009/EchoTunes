@@ -28,7 +28,7 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="fixed bottom-0 w-full bg-black bg-opacity-90 ">
+    <div className="fixed bottom-16 md:bottom-0 w-full bg-black bg-opacity-90 ">
       <div className="flex items-center px-2 md:px-8">
         <div className="w-[100px] md:w-[300px]">
           <div className="flex items-center ">

@@ -1,7 +1,7 @@
 import "./App.css";
 
 // Importing routing utilities from react-router-dom
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, createBrowserRouter, RouterProvider, Routes } from "react-router-dom";
 import SignUp from "./components/SignUp.jsx";
 import Login from "./components/Login.jsx";
 import { Toaster } from "react-hot-toast";
@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import AllSongs from "./pages/admin/AllSongs.jsx";
 import ArtistPage from "./pages/ArtistPage.jsx";
+import BottomBar from "./components/BottomBar.jsx";
 
 function App() {
   const { isPlaying } = useSelector((state) => state.audioPlayer);
@@ -63,8 +64,8 @@ function App() {
     <>
       <RouterProvider router={router} />
       <Toaster />
-      {/* <Player /> */}
 
+      {/* <Player /> */}
       {isPlaying && user && (
         <motion.div
           initial={{ opacity: 0, y: 50 }}

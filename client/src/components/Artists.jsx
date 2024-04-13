@@ -40,12 +40,12 @@ const Artists = () => {
     <div className="mb-10">
       <h2 className="text-2xl font-bold mt-4 mb-4">Artists</h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 space-x-4 space-y-6">
         {artists.map((i) => (
           <Link
             to={`/artists/${i.name}`}
             key={i.id}
-            className="rounded-lg p-3 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
+            className="rounded-lg py-3 px-1 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
             id="artistLink"
           >
             <div className="relative">

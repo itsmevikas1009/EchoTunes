@@ -34,7 +34,7 @@ const AddSong = () => {
         withCredentials: true,
       });
 
-      console.log(res);
+      // console.log(res);
       // dispatch(setAddAllSongs((prev) => [...prev, res.data.song]));
       toast.success(res.data.message);
       setData({
@@ -54,9 +54,8 @@ const AddSong = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
-          isPlaying ? "h-[85%]" : "h-[97%]"
-        }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
+          }`}
       >
         <div className="pt-6 pb-2">
           <Link to="/">
@@ -66,8 +65,8 @@ const AddSong = () => {
         </div>
 
         <div className="flex flex-col  gap-6 justify-center items-center">
-          <h1 className="text-3xl font-bold mb-6">Add Song</h1>
-          <div className="w-[60%] mx-auto flex flex-col justify-center">
+          <h1 className="text-3xl font-bold ">Add Song</h1>
+          <div className="w-full md:w-[60%] mx-auto flex flex-col justify-center">
             <form
               className="w-full my-6 flex flex-col gap-6 justify-center "
               onSubmit={handleSave}
