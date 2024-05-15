@@ -45,7 +45,7 @@ const BottomBar = () => {
                         Profile
                     </Link>
                 </div>
-                {user.isAdmin === false && <div>
+                {user?.isAdmin === false && <div>
                     <Link
                         to="/"
                         className={`flex flex-col items-center py-1 px-3 text-xs ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
@@ -55,7 +55,7 @@ const BottomBar = () => {
                         Get App
                     </Link>
                 </div>}
-                {user.isAdmin === true && <div>
+                {user?.isAdmin === true && <div>
                     <Link
                         to="/"
                         className={`flex flex-col items-center py-1 px-3 text-xs ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
