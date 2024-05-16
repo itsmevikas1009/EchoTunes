@@ -4,6 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { userRoute } from "./src/routes/user.js";
 import { songRoute } from "./src/routes/song.js";
+import artistRoute from "./src/routes/artist.js"
 
 import dotenv from "dotenv"
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 // Use the AuthMiddleware to protect the /api/ route
 app.use("/api", userRoute);
 app.use("/api/song", songRoute);
+app.use("/api/artist", artistRoute);
 
 // Connect the database
 connectDB.then(() => {

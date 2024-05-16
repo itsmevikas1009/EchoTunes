@@ -20,7 +20,7 @@ const AddSong = () => {
     duration: 0,
   });
 
-  // console.log(data);
+  console.log(data.img);
 
   const handleInputState = (name, value) => {
     setData((prev) => ({ ...prev, [name]: value }));
