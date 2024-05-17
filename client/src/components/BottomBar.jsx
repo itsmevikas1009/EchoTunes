@@ -11,61 +11,19 @@ const BottomBar = () => {
   const path = useLocation().pathname;
   const { user } = useSelector((state) => state.auth);
 
-    return (
-        <div className=' block md:hidden bg-black h-16 fixed bottom-0 w-full py-2'>
-            <div className='flex justify-between px-4 items-center'>
-                <div>
-                    <Link
-                        to="/"
-                        className={`flex flex-col items-center py-1 px-3 text-xs ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
-                            }`}
-                    >
-                        <MdHomeFilled size={25} />
-                        Home
-                    </Link>
-                </div>
-                <div>
-                    <Link
-                        to="/search"
-                        className={`flex flex-col items-center py-1 px-3 text-xs ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
-                            }`}
-                    >
-                        <IoSearch size={25} />
-                        Search
-                    </Link>
-                </div>
-                <div>
-                    <Link
-                        to={`/profile/${user?._id}`}
-                        className={`flex flex-col items-center py-1 px-3 text-xs ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
-                            }`}
-                    >
-                        <CgProfile size={25} />
-                        Profile
-                    </Link>
-                </div>
-                {user?.isAdmin === false && <div>
-                    <Link
-                        to="/"
-                        className={`flex flex-col items-center py-1 px-3 text-xs ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
-                            }`}
-                    >
-                        <FaSpotify size={24} />
-                        Get App
-                    </Link>
-                </div>}
-                {user?.isAdmin === true && <div>
-                    <Link
-                        to="/"
-                        className={`flex flex-col items-center py-1 px-3 text-xs ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
-                            }`}
-                    >
-                        <FaMusic size={24} />
-                        All Songs
-                    </Link>
-                </div>}
-
-            </div>
+  return (
+    <div className=" block md:hidden bg-black h-16 fixed bottom-0 w-full py-2">
+      <div className="flex justify-between px-4 items-center">
+        <div>
+          <Link
+            to="/"
+            className={`flex flex-col items-center py-1 px-3 text-xs ${
+              path === "/" ? "opacity-100 font-semibold " : "opacity-80"
+            }`}
+          >
+            <MdHomeFilled size={25} />
+            Home
+          </Link>
         </div>
         <div>
           <Link
