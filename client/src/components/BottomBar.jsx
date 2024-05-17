@@ -11,21 +11,6 @@ const BottomBar = () => {
   const path = useLocation().pathname;
   const { user } = useSelector((state) => state.auth);
 
-<<<<<<< HEAD
-  return (
-    <div className=" block md:hidden bg-black h-16 fixed bottom-0 w-full py-2">
-      <div className="flex justify-between px-4 items-center">
-        <div>
-          <Link
-            to="/"
-            className={`flex flex-col items-center py-1 px-3 text-xs ${
-              path === "/" ? "opacity-100 font-semibold " : "opacity-80"
-            }`}
-          >
-            <MdHomeFilled size={25} />
-            Home
-          </Link>
-=======
     return (
         <div className=' block md:hidden bg-black h-16 fixed bottom-0 w-full py-2'>
             <div className='flex justify-between px-4 items-center'>
@@ -81,7 +66,6 @@ const BottomBar = () => {
                 </div>}
 
             </div>
->>>>>>> 2e5066935745b96f8b4298a25e7840562c009fd1
         </div>
         <div>
           <Link
