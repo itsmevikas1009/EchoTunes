@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdPlayCircle } from "react-icons/io";
-import axios from "axios"
+import axios from "axios";
 import { server } from "../services/api";
 
 // const artists = [
@@ -32,27 +32,24 @@ import { server } from "../services/api";
 //   },
 // ];
 
-
 const Artists = () => {
-
   const [artistData, setArtistData] = useState([]);
-
 
   const fetchArtist = async () => {
     try {
-      const res = await axios.get(`${server}/artist/get`, { withCredentials: true });
+      const res = await axios.get(`${server}/artist/get`, {
+        withCredentials: true,
+      });
       console.log(res);
       setArtistData(res.data.data);
-
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   useEffect(() => {
     fetchArtist();
-  }, [])
+  }, []);
 
   return (
     <div className="mb-10">
