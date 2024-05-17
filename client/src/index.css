@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.rhap_container {
+  background-color: black;
+}
+
+.rhap_time {
+  color: #1bd760;
+}
+
+.rhap_progress-indicator {
+  background-color: #1bd760;
+}
+
+.rhap_progress-filled {
+  background-color: #1bd760;
+}
+
+.rhap_container :nth-child(3) {
+  color: #fff;
+}
+
+.rhap_container svg:hover {
+  color: #fff;
+}
+
+.rhap_volume-indicator {
+  background-color: #1bd760;
+}
+
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
+  color: white !important;
+}
+
+.css-zylse7-MuiButtonBase-root-MuiIconButton-root.Mui-disabled {
+  color: white !important;
+}
+
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon {
+  color: white !important;
+}
+
+.playBtn {
+  visibility: hidden;
+}
+
+#artistLink:hover .playBtn {
+  visibility: visible;
+}
+
+#songLink:hover .playBtn {
+  visibility: visible;
+}
