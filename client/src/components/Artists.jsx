@@ -59,8 +59,8 @@ const Artists = () => {
         {artistData?.map((i) => (
           <Link
             to={`/artists/${i.name}`}
-            key={i._id}
-            className="rounded-lg py-3 px-1 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
+            key={i.id}
+            className="rounded-lg p-3 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
             id="artistLink"
           >
             <div className="relative">
