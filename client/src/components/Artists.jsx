@@ -40,7 +40,6 @@ const Artists = () => {
       const res = await axios.get(`${server}/artist/get`, {
         withCredentials: true,
       });
-      console.log(res);
       setArtistData(res.data.data);
     } catch (error) {
       console.log(error);
@@ -59,7 +58,7 @@ const Artists = () => {
         {artistData?.map((i) => (
           <Link
             to={`/artists/${i.name}`}
-            key={i.id}
+            key={i._id}
             className="rounded-lg p-3 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
             id="artistLink"
           >
