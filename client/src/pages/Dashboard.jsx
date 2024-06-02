@@ -62,8 +62,9 @@ const Dashboard = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] mx-auto flex-1 overflow-auto p-4 md:p-6 text-white sm:rounded-lg my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
-          }`}
+        className={`bg-[#1a1a1a] mx-auto flex-1 overflow-auto p-4 md:p-6 text-white sm:rounded-lg my-3 ${
+          isPlaying ? "h-[85%]" : "h-[97%]"
+        }`}
       >
         {user && recentlyPlayed.length > 0 && (
           <div className="mb-10">
@@ -153,7 +154,6 @@ const Dashboard = () => {
         </div>
       </div>
       <BottomBar />
-
     </AppLayout>
   );
 };

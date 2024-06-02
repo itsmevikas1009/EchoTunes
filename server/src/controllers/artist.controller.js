@@ -1,6 +1,5 @@
 import { Artist } from "../models/artist.model.js";
 
-
 export const addArtist = async (req, res) => {
     try {
         const { name, profileImage } = req.body;
@@ -21,7 +20,6 @@ export const addArtist = async (req, res) => {
     }
 }
 
-
 export const getArtist = async (req, res) => {
     try {
 
@@ -39,5 +37,3 @@ export const getArtist = async (req, res) => {
         });
     }
 }
-
-

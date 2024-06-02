@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const songSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -25,6 +24,4 @@ const songSchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-
 export const Song = mongoose.model("song", songSchema);
-

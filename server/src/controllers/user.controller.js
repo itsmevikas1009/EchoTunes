@@ -9,10 +9,6 @@ const cookieOptions = {
     secure: true,
 };
 
-
-
-
-
 export const signUp = async (req, res) => {
 
     // Destructure the request body to get name, email, and password.
@@ -121,8 +117,6 @@ export const login = async (req, res) => {
     }
 };
 
-
-
 export const google = async (req, res) => {
     const { name, email, googlePhotoUrl } = req.body;
 
@@ -173,8 +167,6 @@ export const google = async (req, res) => {
     }
 }
 
-
-
 export const updateProfile = async (req, res) => {
     const { name, password } = req.body;
 
@@ -210,9 +202,6 @@ export const updateProfile = async (req, res) => {
     }
 }
 
-
-
-
 export const logout = async (req, res) => {
     return res
         .status(200)
@@ -222,4 +211,3 @@ export const logout = async (req, res) => {
             message: "Logged out successfully",
         });
 };
-

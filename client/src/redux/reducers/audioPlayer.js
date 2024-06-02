@@ -48,7 +48,6 @@ export const audioPlayer = createSlice({
     },
 });
 
-
 export const { setArtistSongs, setAddAllSongs, addToRecentlyPlayed, setAllSongs, setIsPlaying, setCurrentSong } = audioPlayer.actions;
 
 export default audioPlayer.reducer;

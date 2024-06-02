@@ -54,8 +54,9 @@ const AddSong = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
-          }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[97%]"
+        }`}
       >
         <div className="pt-6 pb-2">
           <Link to="/">
@@ -63,7 +64,6 @@ const AddSong = () => {
             <FaArrowLeft size={24} color="white" />
           </Link>
         </div>
-
         <div className="flex flex-col  gap-6 justify-center items-center">
           <h1 className="text-3xl font-bold ">Add Song</h1>
           <div className="w-full md:w-[60%] mx-auto flex flex-col justify-center">
@@ -84,7 +84,6 @@ const AddSong = () => {
                   className="w-full p-3 rounded-lg outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
-
               <div>
                 <label htmlFor="" className="block font-medium text-lg">
                   Artist
@@ -98,7 +97,6 @@ const AddSong = () => {
                   className="w-full p-3 rounded-lg outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
-
               <div>
                 <FileInput
                   label="Choose song"
@@ -109,7 +107,6 @@ const AddSong = () => {
                   value={data.song}
                 />
               </div>
-
               <div>
                 <FileInput
                   label="Choose image"
@@ -119,7 +116,6 @@ const AddSong = () => {
                   handleInputState={handleInputState}
                 />
               </div>
-
               <button className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg text-black cursor-pointer">
                 {false ? "Adding..." : "Add Song"}
               </button>

@@ -44,7 +44,6 @@ const MusicPlayer = () => {
             </div>
           </div>
         </div>
-
         <div className=" md:w-full max-w-full">
           <div className="w-full ">
             <AudioPlayer

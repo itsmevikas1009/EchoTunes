@@ -10,6 +10,5 @@ userRoute.post('/google', google);
 userRoute.post("/login", login);
 userRoute.get("/logout", logout);
 
-
 // Private route
 userRoute.put("/updateProfile/:id", AuthMiddleware, updateProfile);

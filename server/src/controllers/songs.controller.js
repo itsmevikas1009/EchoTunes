@@ -1,6 +1,5 @@
 import { Song } from "../models/song.model.js"
 
-
 // Create song
 export const createSong = async (req, res) => {
 
@@ -19,8 +18,6 @@ export const createSong = async (req, res) => {
     }
 };
 
-
-
 //delete Song
 export const deleteSong = async (req, res) => {
     const id = req.params.id;
@@ -38,7 +35,6 @@ export const deleteSong = async (req, res) => {
     }
 }
 
-
 //get All song
 export const getAllSongs = async (req, res) => {
     try {
@@ -51,8 +47,6 @@ export const getAllSongs = async (req, res) => {
     }
 }
 
-
-
 export const getSingleSongs = async (req, res) => {
     try {
         // console.log(req.params.id);
@@ -64,9 +58,6 @@ export const getSingleSongs = async (req, res) => {
         return res.status(400).json({ success: false, msg: error.message });
     }
 }
-
-
-
 
 export const searchSong = async (req, res) => {
     const { name = "" } = req.query;
@@ -85,10 +76,6 @@ export const searchSong = async (req, res) => {
         song,
     });
 };
-
-
-
-
 
 export const getSongsByArtistName = async (req, res) => {
 

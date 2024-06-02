@@ -1,7 +1,12 @@
 import "./App.css";
 
 // Importing routing utilities from react-router-dom
-import { BrowserRouter, createBrowserRouter, RouterProvider, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import SignUp from "./components/SignUp.jsx";
 import Login from "./components/Login.jsx";
 import { Toaster } from "react-hot-toast";

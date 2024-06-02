@@ -13,7 +13,6 @@ export const AuthMiddleware = (req, res, next) => {
     next();
 };
 
-
 export const adminOnly = (req, res, next) => {
     const token = req.cookies["access-token"];
 
@@ -30,4 +29,3 @@ export const adminOnly = (req, res, next) => {
 
     next();
 };
-

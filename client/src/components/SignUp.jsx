@@ -76,7 +76,6 @@ const SignUp = () => {
             <p className="text-xl font-semibold italic">Anytime, anywhere</p>
           </div>
         </div>
-
         <div className="flex flex-col items-center justify-center w-full   md:w-[50%] mx-auto absolute right-0 top-[3rem] p-[2.5rem] ">
           <div className="w-11/12 md:max-w-sm">
             <h1 className="text-4xl font-bold ">Welcome to Spotify</h1>
@@ -98,7 +97,6 @@ const SignUp = () => {
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
-
               <div className="w-full">
                 <label htmlFor="" className="block font-medium">
                   Email
@@ -111,7 +109,6 @@ const SignUp = () => {
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
-
               <div className="w-full relative">
                 <label htmlFor="" className="block font-medium">
                   Password
@@ -123,7 +120,6 @@ const SignUp = () => {
                   onChange={password.changeHandler}
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
-
                 <span
                   className="absolute right-4 my-4 cursor-pointer "
                   onClick={() => setSeePassword(!seePassword)}
@@ -134,7 +130,6 @@ const SignUp = () => {
                   <p className="text-sm p-1 text-red-500">{password.error}</p>
                 )}
               </div>
-
               <button
                 className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg"
                 disabled={password.error}
@@ -144,7 +139,6 @@ const SignUp = () => {
               <div className="text-center font-bold text-lg">Or</div>
             </form>
             <Google />
-
             <p className="mt-4 text-lg">
               Already Have a Account ?{" "}
               <Link to="/login" className="text-blue-500">

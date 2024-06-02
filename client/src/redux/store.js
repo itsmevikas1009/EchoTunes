@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./reducers/auth";
 import { audioPlayer } from "./reducers/audioPlayer";
 
-
 const store = configureStore({
     reducer: {
         [authSlice.name]: authSlice.reducer,
@@ -11,7 +10,6 @@ const store = configureStore({
 });
 
 export default store;
-
 
 // import { configureStore, combineReducers } from '@reduxjs/toolkit'
 // import authSlice from "./reducers/auth";

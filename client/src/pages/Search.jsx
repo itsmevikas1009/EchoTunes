@@ -116,8 +116,9 @@ const Search = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
-          }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[97%]"
+        }`}
       >
         <div className="mb-8 bg-opacity-95 z-40  my-2 sticky top-0 ">
           <div className="flex items-center gap-6 z-10 ">

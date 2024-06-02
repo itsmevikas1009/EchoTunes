@@ -80,7 +80,6 @@ const Login = () => {
             <p className="text-xl font-semibold italic">Anytime, anywhere</p>
           </div>
         </div>
-
         <div className="flex flex-col items-center justify-center w-full  md:w-[50%] mx-auto absolute right-0 top-[5rem] p-[2.5rem] ">
           <div className="w-11/12 md:max-w-sm">
             <h1 className="sm:text-4xl text-2xl font-bold ">
@@ -104,7 +103,6 @@ const Login = () => {
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
-
               <div className="w-full relative">
                 <label htmlFor="" className="block font-medium">
                   Password
@@ -116,7 +114,6 @@ const Login = () => {
                   onChange={password.changeHandler}
                   className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
-
                 <span
                   className="absolute right-4 my-4 cursor-pointer "
                   onClick={() => setSeePassword(!seePassword)}
@@ -124,7 +121,6 @@ const Login = () => {
                   {seePassword ? <IoMdEyeOff size={20} /> : <IoEye size={20} />}
                 </span>
               </div>
-
               <button className=" w-full mx-auto  bg-green-500 rounded-lg p-3 mt-6 font-semibold text-lg">
                 {loading ? "Signing..." : "SignIn"}
               </button>
@@ -132,7 +128,6 @@ const Login = () => {
               <div className="text-center font-bold text-lg">Or</div>
             </form>
             <Google />
-
             <p className="mt-6 text-lg ">
               New User ?{" "}
               <Link to="/signup" className="text-blue-500">
