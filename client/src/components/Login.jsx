@@ -83,7 +83,7 @@ const Login = () => {
         <div className="flex flex-col items-center justify-center w-full  md:w-[50%] mx-auto absolute right-0 top-[5rem] p-[2.5rem] ">
           <div className="w-11/12 md:max-w-sm">
             <h1 className="sm:text-4xl text-2xl font-bold ">
-              Welcome to Spotify
+              Welcome to EchoTunes
             </h1>
             <p className="sm:text-xl text-md p-1">Login with your email...</p>
 

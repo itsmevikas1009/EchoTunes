@@ -1,4 +1,4 @@
-import Logo from "../assets/spotify-logo.png";
+import Logo from "../assets/EchoTunes-logo.png";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/auth";
@@ -44,12 +44,12 @@ const Navbar = ({ bg, text = "black" }) => {
       <div className="w-11/12 mx-auto flex items-center justify-between">
         <div className="flex gap-2 items-center">
           <Link to="/" className="flex items-center gap-2">
-            <img
+            {/* <img
               src={Logo}
               alt=""
               className="h-[3rem] w-[3rem] bg-white rounded-full "
-            />
-            <h1 className="text-2xl font-bold">Spotify</h1>
+            /> */}
+            <h1 className="text-2xl font-bold">EchoTunes</h1>
           </Link>
         </div>
 

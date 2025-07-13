@@ -17,7 +17,7 @@ dotenv.config();
 
 const localURL = "http://localhost:5173";
 
-const remoteURL = "https://spotify-project-client.vercel.app";
+const remoteURL = "https://echo-tunes-client.vercel.app";
 
 const corsOption = {
     origin: remoteURL,

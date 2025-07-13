@@ -78,7 +78,7 @@ const SignUp = () => {
         </div>
         <div className="flex flex-col items-center justify-center w-full   md:w-[50%] mx-auto absolute right-0 top-[3rem] p-[2.5rem] ">
           <div className="w-11/12 md:max-w-sm">
-            <h1 className="text-4xl font-bold ">Welcome to Spotify</h1>
+            <h1 className="text-4xl font-bold ">Welcome to EchoTunes</h1>
             <p className="text-xl p-1">Sign up with your details...</p>
 
             <form
