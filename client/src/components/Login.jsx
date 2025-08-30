@@ -43,7 +43,7 @@ const Login = () => {
       const res = await axios.post(`${server}/login`, data, {
         withCredentials: true,
       });
-      console.log(res);
+      // console.log(res);
 
       if (res.status === 200) {
         if (res.data.success === true) {
