@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
@@ -8,7 +9,9 @@ import artistRoute from "./src/routes/artist.js"
 
 import dotenv from "dotenv"
 
-const connectDB = mongoose.connect('mongodb+srv://spotify-sms:3wEP40zDugishYwG@cluster0.fcgapxd.mongodb.net/spotify', { useNewUrlParser: true });
+dotenv.config();
+
+const connectDB = mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
 const PORT = 3000;
 const app = express();
 
