@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDuPUNcKqUk94Gwr0xQV7KlP_BIoJKxX4I",
-    authDomain: "spotify-92d44.firebaseapp.com",
-    projectId: "spotify-92d44",
-    storageBucket: "spotify-92d44.appspot.com",
-    messagingSenderId: "309204703063",
-    appId: "1:309204703063:web:c8ab7c1772d4f976dd5012",
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 export const app = initializeApp(firebaseConfig);
