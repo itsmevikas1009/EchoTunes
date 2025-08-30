@@ -64,8 +64,8 @@ const SignUp = () => {
   return (
     <>
       <Navbar />
-      <div className=" w-full h-screen ">
-        <div className=" hidden md:flex md:w-[50%]  flex-col items-center bg-[rgb(213,129,53)]  h-screen">
+      <div className="flex w-full h-screen">
+        <div className="hidden md:flex md:w-[50%]  flex-col items-center bg-[rgb(213,129,53)] h-full">
           <img
             src="https://staticfe.saavn.com/web6/jioindw/dist/1712206575/_i/artist/Badshah.png"
             className="h-96 mt-[6rem]"
@@ -76,10 +76,10 @@ const SignUp = () => {
             <p className="text-xl font-semibold italic">Anytime, anywhere</p>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-full   md:w-[50%] mx-auto absolute right-0 top-[3rem] p-[2.5rem] ">
-          <div className="w-11/12 md:max-w-sm">
-            <h1 className="text-4xl font-bold ">Welcome to EchoTunes</h1>
-            <p className="text-xl p-1">Sign up with your details...</p>
+        <div className="flex flex-col items-center justify-center w-full md:w-[50%] mx-auto mt-[2.5rem] p-[1.5rem] ">
+          <div className="w-11/12 md:max-w-sm h-full">
+            <h1 className="text-2xl sm:text-3xl font-bold ">Welcome to EchoTunes</h1>
+            <p className="text-lg sm:text-xl p-1">Sign up with your details...</p>
 
             <form
               className="flex flex-col gap-3 mt-4 mb-3"
@@ -94,7 +94,7 @@ const SignUp = () => {
                   placeholder="Name"
                   value={name.value}
                   onChange={name.changeHandler}
-                  className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
+                  className="w-full p-2 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
               <div className="w-full">
@@ -106,7 +106,7 @@ const SignUp = () => {
                   placeholder="Email"
                   value={email.value}
                   onChange={email.changeHandler}
-                  className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
+                  className="w-full p-2 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
               <div className="w-full relative">
@@ -118,7 +118,7 @@ const SignUp = () => {
                   placeholder="Password"
                   value={password.value}
                   onChange={password.changeHandler}
-                  className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
+                  className="w-full p-2 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
                 <span
                   className="absolute right-4 my-4 cursor-pointer "
@@ -131,7 +131,7 @@ const SignUp = () => {
                 )}
               </div>
               <button
-                className="w-full bg-green-500 rounded-lg p-3 mt-3 font-semibold text-lg"
+                className="w-full bg-green-500 rounded-lg p-2 mt-3 font-semibold text-lg"
                 disabled={password.error}
               >
                 {loading ? "Registering..." : "Register"}

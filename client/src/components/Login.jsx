@@ -82,13 +82,13 @@ const Login = () => {
         </div>
         <div className="flex flex-col items-center justify-center w-full  md:w-[50%] mx-auto absolute right-0 top-[5rem] p-[2.5rem] ">
           <div className="w-11/12 md:max-w-sm">
-            <h1 className="sm:text-4xl text-2xl font-bold ">
+            <h1 className="text-2xl sm:text-3xl font-bold ">
               Welcome to EchoTunes
             </h1>
-            <p className="sm:text-xl text-md p-1">Login with your email...</p>
+            <p className="sm:text-xl text-lg p-1">Login with your email...</p>
 
             <form
-              className="flex flex-col gap-4 mt-10 mb-3"
+              className="flex flex-col gap-3 mt-4 mb-3"
               onSubmit={handleSubmit}
             >
               <div className="w-full">
@@ -100,7 +100,7 @@ const Login = () => {
                   placeholder="Email"
                   value={email.value}
                   onChange={email.changeHandler}
-                  className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
+                  className="w-full p-2 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
               </div>
               <div className="w-full relative">
@@ -112,7 +112,7 @@ const Login = () => {
                   placeholder="Password"
                   value={password.value}
                   onChange={password.changeHandler}
-                  className="w-full p-3 rounded-md outline-none  text-black border border-gray-300 px-4"
+                  className="w-full p-2 rounded-md outline-none  text-black border border-gray-300 px-4"
                 />
                 <span
                   className="absolute right-4 my-4 cursor-pointer "
@@ -121,7 +121,7 @@ const Login = () => {
                   {seePassword ? <IoMdEyeOff size={20} /> : <IoEye size={20} />}
                 </span>
               </div>
-              <button className=" w-full mx-auto  bg-green-500 rounded-lg p-3 mt-6 font-semibold text-lg">
+              <button className=" w-full mx-auto  bg-green-500 rounded-lg p-2 mt-6 font-semibold text-lg">
                 {loading ? "Signing..." : "SignIn"}
               </button>
 

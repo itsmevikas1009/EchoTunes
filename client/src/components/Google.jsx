@@ -44,7 +44,7 @@ const Google = () => {
 
   return (
     <button
-      className="w-full bg-green-500 rounded-lg p-3  flex items-center justify-center gap-6 font-semibold text-lg"
+      className="w-full bg-green-500 rounded-lg p-2  flex items-center justify-center gap-6 font-semibold text-lg"
       onClick={handleGoogleClick}
     >
       <FcGoogle size={28} />
