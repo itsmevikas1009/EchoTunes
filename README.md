@@ -7,15 +7,13 @@ EchoTunes is a full-stack music streaming web application inspired by Spotify. I
 - User authentication (email/password & Google OAuth)
 - Browse and search songs by name or artist
 - Play music with a modern audio player
-- Recently played songs
-- Artist pages with their songs
 - Admin panel to add and delete songs
 - Responsive design for desktop and mobile
 - Profile management
 
 ## Tech Stack
 
-- **Frontend:** React, Redux Toolkit, Tailwind CSS, Material UI, Axios, React Router, Firebase Storage
+- **Frontend:** React, Tailwind CSS, Material UI, Axios, React Router, Firebase Storage
 - **Backend:** Node.js, Express, MongoDB, Mongoose, JWT, Bcrypt, Cookie-Parser, CORS
 - **Deployment:** Vercel
 
@@ -61,7 +59,6 @@ VITE_FIREBASE_API_KEY=your_firebase_api_key
 ```
 - Update Firebase config in src/firebase.js with your Firebase project details.
 
-...existing code...
 #### 4. Running the App
 
 Start the backend server:
