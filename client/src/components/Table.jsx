@@ -1,58 +1,88 @@
 import React from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import { Container, Paper, Typography } from "@mui/material";
-const matBlack = "#1F2739";
 
-const Table = ({ rows, columns, heading, rowHeight = 60 }) => {
+const Table = ({ rows, columns, heading }) => {
   return (
-    <Container
-      sx={{
-        height: "90vh",
-        width: "100%",
-      }}
-    >
-      <Paper
-        elevation={3}
-        sx={{
-          padding: "0 3.5rem",
-          margin: "auto",
-          width: "100%",
-          height: "100%",
-          boxShadow: "none",
-          backgroundColor: "#1a1a1a",
-          color: "white",
-        }}
-      >
-        <Typography
-          textAlign={"center"}
-          variant="h4"
-          sx={{
-            margin: "2rem",
-            textTransform: "uppercase",
-          }}
-        >
+    <div className="h-[90vh] p-4">
+      <div className="bg-[#1a1a1a] h-full rounded-lg shadow-lg overflow-hidden">
+        <h2 className="text-2xl font-bold text-center text-white uppercase py-6">
           {heading}
-        </Typography>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          rowHeight={rowHeight}
-          style={{
-            height: "80%",
-            // overflow: "auto",
-            // scrollBehavior: "smooth"
-          }}
-          sx={{
-            border: "black",
-            color: "#fff",
-            ".table-header": {
-              bgcolor: matBlack,
-              color: "white",
-            },
-          }}
-        />
-      </Paper>
-    </Container>
+        </h2>
+        <div className="relative h-[calc(100%-100px)]">
+          <table className="relative w-full text-white border-collapse">
+            <thead className="bg-[#1F2739] sticky top-0 z-10 table w-full table-fixed">
+              <tr>
+                {columns.map((column) => (
+                  <th
+                    key={column.field}
+                    className="p-4 text-left font-semibold"
+                    style={{
+                      width: column.field === 'id' ? '15%' :
+                        column.field === 'name' ? '25%' :
+                          column.field === 'avatar' ? '15%' :
+                            column.field === 'artist' ? '35%' : '10%'
+                    }}
+                  >
+                    {column.headerName}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="block overflow-y-auto h-[calc(100vh-300px)] divide-y divide-gray-700">
+              {rows.map((row) => (
+                <tr
+                  key={row.id}
+                  className="table w-full table-fixed hover:bg-[#2c3344] transition-colors duration-150"
+                >
+                  {columns.map((column) => (
+                    <td
+                      key={`${row.id}-${column.field}`}
+                      className="p-4"
+                      style={{
+                        width: column.field === 'id' ? '15%' :
+                          column.field === 'name' ? '25%' :
+                            column.field === 'avatar' ? '15%' :
+                              column.field === 'artist' ? '35%' : '10%'
+                      }}
+                    >
+                      <div className="w-full overflow-hidden">
+                        {column.renderCell ? (
+                          column.renderCell({ row })
+                        ) : (
+                          <span className="truncate block" title={row[column.field]}>
+                            {row[column.field]}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <style jsx>{`
+        tbody::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+        tbody::-webkit-scrollbar-track {
+          background: #1a1a1a;
+        }
+        tbody::-webkit-scrollbar-thumb {
+          background-color: #888;
+          border-radius: 4px;
+        }
+        tbody::-webkit-scrollbar-thumb:hover {
+          background-color: #555;
+        }
+        tbody tr {
+          display: table;
+          width: 100%;
+          table-layout: fixed;
+        }
+      `}</style>
+    </div>
   );
 };
 

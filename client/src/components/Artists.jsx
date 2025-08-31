@@ -55,17 +55,17 @@ const Artists = () => {
       <h2 className="text-2xl font-bold mt-4 mb-4">Artists</h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 space-x-4 space-y-6">
-        {artistData?.map((i) => (
+        {artistData?.map((artist) => (
           <Link
-            to={`/artists/${i.name}`}
-            key={i._id}
+            to={`/artists/${artist.name}`}
+            key={artist._id}
             className="rounded-lg p-3 ms-4 mt-4 cursor-pointer hover:bg-[#232323]"
             id="artistLink"
           >
             <div className="relative">
               <img
-                src={i.profileImage}
-                alt={`Image of ${i.name}`}
+                src={artist.profileImage}
+                alt={`Image of ${artist.name}`}
                 className="rounded-full object-contain"
               />
               <IoMdPlayCircle
@@ -74,7 +74,7 @@ const Artists = () => {
                 className="absolute sm:right-0 sm:bottom-0 -right-0.5 -bottom-0.5 bg-[#232323] rounded-full playBtn"
               />
             </div>
-            <p className="text-lg font-semibold opacity-90 py-2">{i.name}</p>
+            <p className="text-lg font-semibold opacity-90 py-2">{artist.name}</p>
             <p className="text-sm italic opacity-90">Artist</p>
           </Link>
         ))}
