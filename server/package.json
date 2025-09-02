@@ -8,7 +8,7 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Vikas Chaurasia, Aman Maurya, Ramdeep Kesharwani, Rashid Ansari",
+  "author": "Vikas Chaurasia",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
