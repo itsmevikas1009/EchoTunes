@@ -54,7 +54,7 @@ const limiter = rateLimit({
 
 app.use('/api/', limiter);
 
-// Enhanced CORS configuration
+// ✅ ONLY CHANGE: Enhanced CORS configuration to fix the error
 const corsOptions = {
     origin: function (origin, callback) {
         const allowedOrigins = getAllowedOrigins();
@@ -143,8 +143,8 @@ app.use('*', (req, res) => {
 const connectDB = async (retries = 5) => {
     try {
         await mongoose.connect(process.env.MONGO_URI, {
-            serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-            socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
         });
         console.log('✅ MongoDB connected successfully');
 
