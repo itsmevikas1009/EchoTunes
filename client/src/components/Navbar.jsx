@@ -6,13 +6,21 @@ import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
 import axios from "axios";
-import { server } from "../services/api";
+// Remove this import - we'll create a proper API instance
+// import { server } from "../services/api";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { FaMusic } from "react-icons/fa";
+
+// Create axios instance for CORS-free requests
+const api = axios.create({
+  baseURL: '/api', // Uses Vite proxy in development
+  withCredentials: true,
+  timeout: 10000
+});
 
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector((state) => state.auth);
@@ -22,9 +30,8 @@ const Navbar = ({ bg, text = "black" }) => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get(`${server}/logout`, {
-        withCredentials: true,
-      });
+      // Updated API call - now uses the proxy-friendly base URL
+      const res = await api.get('/logout');
       if (res.data.success) {
         localStorage.removeItem("user");
         // dispatch(setAllSongs([]));

@@ -6,11 +6,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { server } from "../services/api";
+// Remove this import - we'll create a proper API instance
+// import { server } from "../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
 import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
+
+// Create axios instance for CORS-free requests
+const api = axios.create({
+  baseURL: '/api', // Uses Vite proxy in development
+  withCredentials: true,
+  timeout: 10000
+});
 
 const Login = () => {
   const { user } = useSelector((state) => state.auth);
@@ -40,9 +48,8 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${server}/login`, data, {
-        withCredentials: true,
-      });
+      // Updated API call - now uses the proxy-friendly base URL
+      const res = await api.post('/login', data);
       // console.log(res);
 
       if (res.status === 200) {

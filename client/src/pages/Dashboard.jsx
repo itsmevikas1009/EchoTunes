@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import AppLayout from "../components/AppLayout";
 import axios from "axios";
 import { IoMdPlayCircle } from "react-icons/io";
-import { server } from "../services/api";
+// Remove this import - we'll create a proper API instance
+// import { server } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,6 +14,13 @@ import {
 } from "../redux/reducers/audioPlayer";
 import Artists from "../components/Artists";
 import BottomBar from "../components/BottomBar";
+
+// Create axios instance for CORS-free requests
+const api = axios.create({
+  baseURL: '/api', // Uses Vite proxy in development
+  withCredentials: true,
+  timeout: 10000
+});
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -27,9 +35,8 @@ const Dashboard = () => {
   const allSongsFetch = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${server}/song/get`, {
-        withCredentials: true,
-      });
+      // Updated API call - now uses the proxy-friendly base URL
+      const response = await api.get('/song/get');
 
       if (response.status === 200) {
         dispatch(setAllSongs(response.data.data));
@@ -62,9 +69,8 @@ const Dashboard = () => {
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] mx-auto flex-1 overflow-auto p-4 md:p-6 text-white sm:rounded-lg my-3 ${
-          isPlaying ? "h-[85%]" : "h-[97%]"
-        }`}
+        className={`bg-[#1a1a1a] mx-auto flex-1 overflow-auto p-4 md:p-6 text-white sm:rounded-lg my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
+          }`}
       >
         {user && recentlyPlayed.length > 0 && (
           <div className="mb-10">

@@ -1,12 +1,20 @@
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import toast from "react-hot-toast";
 import { app } from "../firebase";
-import { server } from "../services/api";
+// Remove this import - we'll create a proper API instance
+// import { server } from "../services/api";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
 import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
+
+// Create axios instance for CORS-free requests
+const api = axios.create({
+  baseURL: '/api', // Uses Vite proxy in development
+  withCredentials: true,
+  timeout: 10000
+});
 
 const Google = () => {
   const auth = getAuth(app);
@@ -25,9 +33,8 @@ const Google = () => {
         googlePhotoUrl: resultsFromGoogle.user.photoURL,
       };
 
-      const res = await axios.post(`${server}/google`, data, {
-        withCredentials: true,
-      });
+      // Updated API call - now uses the proxy-friendly base URL
+      const res = await api.post('/google', data);
       // console.log(res);
 
       if (res.data.success === true) {

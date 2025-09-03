@@ -2,44 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdPlayCircle } from "react-icons/io";
 import axios from "axios";
-import { server } from "../services/api";
+// Remove this import - we'll create a proper API instance
+// import { server } from "../services/api";
 
-// const artists = [
-//   {
-//     id: 1,
-//     name: "Darshan Raval",
-//     image: "/src/assets/darshan.jpeg"
-//   },
-//   {
-//     id: 2,
-//     name: "B Praak",
-//     image: "/src/assets/bpraak.jpg"
-//   },
-//   {
-//     id: 3,
-//     name: "Arijit Singh",
-//     image: "/src/assets/arigit.jpg"
-//   },
-//   {
-//     id: 4,
-//     name: "Sonu Nigam",
-//     image: "/src/assets/sonu.jpg"
-//   },
-//   {
-//     id: 5,
-//     name: "Shreya Ghoshal",
-//     image: "/src/assets/shreya.jpg"
-//   },
-// ];
+// Create axios instance for CORS-free requests
+const api = axios.create({
+  baseURL: '/api', // Uses Vite proxy in development, direct API URL in production
+  withCredentials: true,
+  timeout: 10000
+});
 
 const Artists = () => {
   const [artistData, setArtistData] = useState([]);
 
   const fetchArtist = async () => {
     try {
-      const res = await axios.get(`${server}/artist/get`, {
-        withCredentials: true,
-      });
+      // Updated API call - now uses the proxy-friendly base URL
+      const res = await api.get('/artist/get');
       setArtistData(res.data.data);
     } catch (error) {
       console.log(error);
