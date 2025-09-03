@@ -37,7 +37,7 @@ const Dashboard = () => {
     try {
       // Updated API call - now uses the proxy-friendly base URL
       const response = await api.get('/song/get');
-
+      console.log(response.data);
       if (response.status === 200) {
         dispatch(setAllSongs(response.data.data));
         setLoading(false);
