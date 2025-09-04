@@ -1,38 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdPlayCircle } from "react-icons/io";
-import axios from "axios";
-
-// Production-ready API instance
-const api = axios.create({
-  baseURL: import.meta.env.PROD
-    ? `${import.meta.env.VITE_API_URL}/api`  // Production: full URL
-    : '/api', // Development: use proxy
-  withCredentials: true,
-  timeout: 10000
-});
-
-// Request interceptor for debugging (development only)
-api.interceptors.request.use(
-  (config) => {
-    if (import.meta.env.DEV) {
-      console.log(`Making ${config.method?.toUpperCase()} request to ${config.url}`);
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-// Response interceptor for consistent error handling
-api.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    if (import.meta.env.DEV) {
-      console.error('API Error:', error.response?.data || error.message);
-    }
-    return Promise.reject(error);
-  }
-);
+import api from "../services/api.js";
 
 const Artists = () => {
   const [artistData, setArtistData] = useState([]);
@@ -40,79 +9,26 @@ const Artists = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const abortController = new AbortController();
+    const controller = new AbortController();
 
-    const fetchArtist = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const response = await api.get('/artist/get', {
-          signal: abortController.signal
-        });
-
-        setArtistData(response.data || []);
-      } catch (error) {
-        // Don't set error if request was cancelled
-        if (error.name !== 'CanceledError') {
-          setError(error.response?.data?.message || 'Failed to fetch artists');
-          console.error('Error fetching artists:', error);
-        }
-      } finally {
+    api.get('/artist/get', { signal: controller.signal })
+      .then(data => {
+        setArtistData(data.data || []);
         setLoading(false);
-      }
-    };
+      })
+      .catch(err => {
+        if (err.name !== 'CanceledError') {
+          setError(err.response?.data?.message || 'Failed to fetch artists');
+          setLoading(false);
+        }
+      });
 
-    fetchArtist();
-
-    // Cleanup function to cancel request if component unmounts
-    return () => {
-      abortController.abort();
-    };
+    return () => controller.abort();
   }, []);
 
-  // Loading state
-  if (loading) {
-    return (
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold mt-4 mb-4">Artists</h2>
-        <div className="flex items-center justify-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-          <span className="ml-2">Loading artists...</span>
-        </div>
-      </div>
-    );
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold mt-4 mb-4">Artists</h2>
-        <div className="text-red-500 text-center py-8">
-          <p>Error: {error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Empty state
-  if (!artistData || artistData.length === 0) {
-    return (
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold mt-4 mb-4">Artists</h2>
-        <div className="text-center py-8 text-gray-500">
-          <p>No artists found</p>
-        </div>
-      </div>
-    );
-  }
+  if (loading) return <div>Loading artists...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (artistData.length === 0) return <div>No artists found</div>;
 
   return (
     <div className="mb-10">

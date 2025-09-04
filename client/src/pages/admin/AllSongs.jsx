@@ -4,26 +4,23 @@ import { Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../components/Table";
 import { AiTwotoneDelete } from "react-icons/ai";
-import { server } from "../../services/api";
-import axios from "axios";
+import api from "../../services/api"; // import centralized axios instance
 import { setAddAllSongs } from "../../redux/reducers/audioPlayer";
 
 const AllSongs = () => {
   const dispatch = useDispatch();
-
   const { isPlaying, addAllSongs } = useSelector((state) => state.audioPlayer);
 
   const [rows, setRows] = useState([]);
 
   const deleteRow = async (id) => {
     try {
-      const res = await axios.delete(`${server}/song/delete/${id}`, {
-        withCredentials: true,
-      });
-      // console.log(res.data.data);
-      dispatch(setAddAllSongs(res.data.data));
+      const res = await api.delete(`/song/delete/${id}`);
+      if (res.success && res.data) {
+        dispatch(setAddAllSongs(res.data));
+      }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -63,7 +60,7 @@ const AllSongs = () => {
       renderCell: (params) => (
         <AiTwotoneDelete
           size={24}
-          className="hover:text-red-500 mt-4"
+          className="hover:text-red-500 mt-4 cursor-pointer"
           alt={params.row.name}
           onClick={() => deleteRow(params.row.id)}
         />
@@ -73,12 +70,9 @@ const AllSongs = () => {
 
   const allSongsFetch = async () => {
     try {
-      const response = await axios.get(`${server}/song/get`, {
-        withCredentials: true,
-      });
-
-      if (response.status === 200) {
-        dispatch(setAddAllSongs(response.data.data));
+      const response = await api.get("/song/get");
+      if (response.success && response.data) {
+        dispatch(setAddAllSongs(response.data));
       }
     } catch (error) {
       console.error(error);
@@ -94,7 +88,7 @@ const AllSongs = () => {
       addAllSongs?.map((i) => ({
         ...i,
         id: i._id,
-      }))
+      })) || []
     );
   }, [addAllSongs]);
 

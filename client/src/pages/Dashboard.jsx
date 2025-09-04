@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import AppLayout from "../components/AppLayout";
-import axios from "axios";
 import { IoMdPlayCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,37 +11,7 @@ import {
 } from "../redux/reducers/audioPlayer";
 import Artists from "../components/Artists";
 import BottomBar from "../components/BottomBar";
-
-// Production-ready API instance
-const api = axios.create({
-  baseURL: import.meta.env.PROD
-    ? `${import.meta.env.VITE_API_URL}/api`  // Production: full URL
-    : '/api', // Development: use proxy
-  withCredentials: true,
-  timeout: 10000
-});
-
-// Request interceptor for debugging (development only)
-api.interceptors.request.use(
-  (config) => {
-    if (import.meta.env.DEV) {
-      console.log(`Making ${config.method?.toUpperCase()} request to ${config.url}`);
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-// Response interceptor for consistent error handling
-api.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    if (import.meta.env.DEV) {
-      console.error('API Error:', error.response?.data || error.message);
-    }
-    return Promise.reject(error);
-  }
-);
+import api from "../services/api"; // centralized api instance
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -63,20 +32,19 @@ const Dashboard = () => {
         setLoading(true);
         setError(null);
 
-        const response = await api.get('/song/get', {
-          signal: abortController.signal
+        const response = await api.get("/song/get", {
+          signal: abortController.signal,
         });
 
         if (response.success && response.data) {
           dispatch(setAllSongs(response.data));
         } else {
-          throw new Error('Invalid response format');
+          throw new Error("Invalid response format");
         }
       } catch (error) {
-        // Don't set error if request was cancelled
-        if (error.name !== 'CanceledError') {
-          setError(error.response?.data?.message || 'Failed to fetch songs');
-          console.error('Error fetching songs:', error);
+        if (error.name !== "CanceledError") {
+          setError(error.response?.data?.message || "Failed to fetch songs");
+          console.error("Error fetching songs:", error);
         }
       } finally {
         setLoading(false);
@@ -85,7 +53,6 @@ const Dashboard = () => {
 
     allSongsFetch();
 
-    // Cleanup function to cancel request if component unmounts
     return () => {
       abortController.abort();
     };
@@ -96,8 +63,6 @@ const Dashboard = () => {
       navigate("/login");
       return;
     }
-
-    // Fixed: Remove double dispatch
     dispatch(setCurrentSong(data));
     dispatch(addToRecentlyPlayed(data));
     dispatch(setIsPlaying(true));
@@ -107,12 +72,13 @@ const Dashboard = () => {
     window.location.reload();
   };
 
-  // Error state
   if (error) {
     return (
       <AppLayout>
-        <div className={`bg-[#1a1a1a] mx-auto flex-1 overflow-auto p-4 md:p-6 text-white sm:rounded-lg my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
-          }`}>
+        <div
+          className={`bg-[#1a1a1a] mx-auto flex-1 overflow-auto p-4 md:p-6 text-white sm:rounded-lg my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
+            }`}
+        >
           <div className="text-center py-8">
             <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
             <p className="text-red-400 mb-4">{error}</p>
@@ -153,7 +119,7 @@ const Dashboard = () => {
                       className="rounded-lg object-cover w-full aspect-square"
                       loading="lazy"
                       onError={(e) => {
-                        e.target.src = '/fallback-song-cover.png';
+                        e.target.src = "/fallback-song-cover.png";
                       }}
                     />
                     <IoMdPlayCircle
@@ -162,11 +128,18 @@ const Dashboard = () => {
                       className="absolute right-1 bottom-1 bg-[#232323] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                     />
                   </div>
-                  <p className="text-xl my-2 font-semibold truncate" title={song.name}>
-                    {song.name.length > 10 ? `${song.name.slice(0, 10)}...` : song.name}
+                  <p
+                    className="text-xl my-2 font-semibold truncate"
+                    title={song.name}
+                  >
+                    {song.name.length > 10
+                      ? `${song.name.slice(0, 10)}...`
+                      : song.name}
                   </p>
                   <p className="text-sm truncate" title={song.artist}>
-                    {song.artist.length > 15 ? `${song.artist.slice(0, 15)}...` : song.artist}
+                    {song.artist.length > 15
+                      ? `${song.artist.slice(0, 15)}...`
+                      : song.artist}
                   </p>
                 </div>
               ))}
@@ -201,7 +174,7 @@ const Dashboard = () => {
                       className="rounded-lg object-cover w-full aspect-square"
                       loading="lazy"
                       onError={(e) => {
-                        e.target.src = '/fallback-song-cover.png';
+                        e.target.src = "/fallback-song-cover.png";
                       }}
                     />
                     <IoMdPlayCircle
@@ -210,11 +183,18 @@ const Dashboard = () => {
                       className="absolute right-1 bottom-1 bg-[#232323] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                     />
                   </div>
-                  <p className="text-xl my-2 font-semibold opacity-90 truncate" title={song.name}>
-                    {song.name.length > 10 ? `${song.name.slice(0, 10)}...` : song.name}
+                  <p
+                    className="text-xl my-2 font-semibold opacity-90 truncate"
+                    title={song.name}
+                  >
+                    {song.name.length > 10
+                      ? `${song.name.slice(0, 10)}...`
+                      : song.name}
                   </p>
                   <p className="text-sm opacity-90 truncate" title={song.artist}>
-                    {song.artist.length > 15 ? `${song.artist.slice(0, 15)}...` : song.artist}
+                    {song.artist.length > 15
+                      ? `${song.artist.slice(0, 15)}...`
+                      : song.artist}
                   </p>
                 </div>
               ))}

@@ -3,8 +3,6 @@ import AppLayout from "../components/AppLayout";
 import { FaSearch } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import axios from "axios";
-import { server } from "../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToRecentlyPlayed,
@@ -12,68 +10,13 @@ import {
   setIsPlaying,
 } from "../redux/reducers/audioPlayer";
 import { IoMdPlayCircle } from "react-icons/io";
-
-const browse = [
-  {
-    title: "Blinding ",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-
-  {
-    title: "Blinding ",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-  {
-    title: "Blinding Lights",
-    image_url: "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
-  },
-];
+import api from "../services/api";  // <-- Correct import
 
 const Search = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { isPlaying, recentlyPlayed } = useSelector(
-    (state) => state.audioPlayer
-  );
-
+  const { isPlaying, recentlyPlayed } = useSelector((state) => state.audioPlayer);
   const [results, setResults] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -83,8 +26,8 @@ const Search = () => {
 
   const searchFetch = async (query) => {
     try {
-      const response = await axios.get(`${server}/song/search?name=${query}`);
-      setResults(response.data.song);
+      const response = await api.get(`/song/search?name=${query}`);  // Use api here
+      setResults(response.song);  // Adjust based on your backend response shape
     } catch (error) {
       console.log(error);
     }
@@ -92,33 +35,28 @@ const Search = () => {
 
   useEffect(() => {
     if (!searchParams.get("name")) return;
-
-    let timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       searchFetch(searchParams.get("name"));
     }, 1000);
-
     return () => clearTimeout(timer);
   }, [searchParams]);
 
   const handlePlaySong = (data) => {
     if (!user) {
       navigate("/login");
+      return;
     }
     if (!isPlaying) {
       dispatch(setIsPlaying(true));
     }
     dispatch(setCurrentSong(data));
     dispatch(addToRecentlyPlayed(data));
-
-    dispatch(dispatch(setIsPlaying(true)));
   };
-
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
-          isPlaying ? "h-[85%]" : "h-[97%]"
-        }`}
+        className={`bg-[#1a1a1a] flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
+          }`}
       >
         <div className="mb-8 bg-opacity-95 z-40  my-2 sticky top-0 ">
           <div className="flex items-center gap-6 z-10 ">
@@ -220,5 +158,4 @@ const Search = () => {
     </AppLayout>
   );
 };
-
 export default Search;
