@@ -41,8 +41,8 @@ const Navbar = () => {
             <img src={Logo} alt="EchoTunes" className="h-full w-full object-cover scale-110" />
           </div>
           <div className="min-w-0">
-            <p className="eyebrow hidden md:inline-flex">Sound Reimagined</p>
-            <h1 className="hero-title truncate text-xl font-bold md:text-2xl">
+            <p className="eyebrow hidden lg:inline-flex">Sound Reimagined</p>
+            <h1 className="hero-title truncate text-lg font-bold md:text-2xl">
               EchoTunes
             </h1>
           </div>
@@ -51,7 +51,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2 md:gap-3">
           {user ? (
             <>
-              {user?.isAdmin && (
+              {(user?.isAdmin || user?.isArtist) && (
                 <Link
                   to="/create-song"
                   className="muted-button hidden rounded-full px-4 py-2 text-sm font-semibold text-white/90 transition duration-200 hover:bg-white/10 md:inline-flex"
@@ -62,7 +62,7 @@ const Navbar = () => {
 
               <button
                 onClick={() => setShowUserMenu((prev) => !prev)}
-                className="glass-card flex items-center gap-3 rounded-full px-2 py-2 pr-4 transition duration-200 hover:bg-white/10"
+                className="glass-card flex items-center gap-2 rounded-full px-2 py-2 md:gap-3 md:pr-4 transition duration-200 hover:bg-white/10"
               >
                 <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white/10">
                   {user?.profilePicture ? (
@@ -100,7 +100,7 @@ const Navbar = () => {
                     Profile
                   </Link>
 
-                  {user?.isAdmin && (
+                  {(user?.isAdmin || user?.isArtist) && (
                     <Link
                       to="/create-song"
                       onClick={() => setShowUserMenu(false)}
@@ -129,13 +129,13 @@ const Navbar = () => {
               </div>
               <Link
                 to="/login"
-                className="muted-button rounded-full px-4 py-2 text-sm font-semibold text-white transition duration-200 hover:bg-white/10"
+                className="muted-button rounded-full px-3 py-1.5 text-xs font-semibold text-white transition duration-200 hover:bg-white/10 md:px-4 md:py-2 md:text-sm"
               >
-                Login
+                Log in
               </Link>
               <Link
                 to="/signup"
-                className="accent-button rounded-full px-4 py-2 text-sm font-extrabold transition duration-200"
+                className="accent-button rounded-full px-3 py-1.5 text-xs font-extrabold transition duration-200 md:px-4 md:py-2 md:text-sm"
               >
                 Join Now
               </Link>

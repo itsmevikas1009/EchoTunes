@@ -33,19 +33,19 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
-      <div className="flex min-w-0 flex-shrink-0 items-center gap-3 md:w-[280px] md:gap-4">
+    <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-6">
+      <div className="flex min-w-0 flex-shrink-0 items-center gap-3 md:w-[280px] md:gap-4 px-1 md:px-0">
         <img
           src={currentSong?.img}
           alt={currentSong?.name || "Current song"}
-          className="h-12 w-12 rounded-xl object-cover shadow-lg transition-all md:h-16 md:w-16 md:rounded-2xl"
+          className="h-10 w-10 rounded-xl object-cover shadow-lg transition-all md:h-16 md:w-16 md:rounded-2xl"
           onError={(event) => fallbackImage(event, DEFAULT_SONG_COVER)}
         />
-        <div className="min-w-0">
-          <h1 className="truncate text-sm font-bold text-white md:text-base">
+        <div className="min-w-0 flex-1">
+          <h1 className="truncate text-xs font-bold text-white md:text-base">
             {currentSong?.name || "No song selected"}
           </h1>
-          <h2 className="truncate text-[10px] uppercase tracking-[0.2em] text-white/45 md:text-xs">
+          <h2 className="truncate text-[9px] uppercase tracking-[0.15em] text-white/45 md:text-xs">
             {currentSong?.artist || "Unknown artist"}
           </h2>
         </div>
@@ -57,6 +57,8 @@ const MusicPlayer = () => {
           onPlay={() => console.log("is playing")}
           autoPlay
           showSkipControls
+          showJumpControls={false}
+          layout="horizontal-reverse"
           onError={handlePlaybackError}
           onClickNext={nextTrack}
           onClickPrevious={previousTrack}

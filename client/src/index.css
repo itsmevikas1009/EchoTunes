@@ -237,7 +237,6 @@ textarea {
 .rhap_volume-indicator {
   width: 12px;
   height: 12px;
-  margin-top: -4px;
   box-shadow: 0 0 10px var(--glow);
 }
 
@@ -257,10 +256,6 @@ textarea {
   .rhap_container {
     padding: 10px 5px;
   }
-  
-  .rhap_volume-container {
-    display: none; /* Hide volume on small mobiles to save space if needed, or just make it compact */
-  }
 }
 
 
@@ -271,6 +266,7 @@ textarea {
 }
 
 @media (max-width: 768px) {
+
   .app-shell::before,
   .app-shell::after {
     width: 18rem;
