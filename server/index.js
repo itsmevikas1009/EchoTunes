@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import { userRoute } from "./src/routes/user.js";
 import { songRoute } from "./src/routes/song.js";
 import artistRoute from "./src/routes/artist.js";
+import uploadRoute from "./src/routes/upload.js";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -81,6 +82,7 @@ app.get('/health', (req, res) => {
 app.use("/api", userRoute);
 app.use("/api/song", songRoute);
 app.use("/api/artist", artistRoute);
+app.use("/api/upload", uploadRoute);
 
 app.use((err, req, res, next) => {
     if (process.env.NODE_ENV === 'production') {

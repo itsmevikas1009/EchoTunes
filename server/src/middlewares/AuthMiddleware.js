@@ -16,6 +16,8 @@ export const AuthMiddleware = (req, res, next) => {
 
         req.userId = decodedData.userId;
         req.isAdmin = decodedData.isAdmin;
+        req.isArtist = decodedData.isArtist;
+        req.artistName = decodedData.artistName || "";
 
         next();
     } catch (error) {
@@ -48,6 +50,8 @@ export const adminOnly = (req, res, next) => {
 
         req.userId = decodedData.userId;
         req.isAdmin = decodedData.isAdmin;
+        req.isArtist = decodedData.isArtist;
+        req.artistName = decodedData.artistName || "";
 
         next();
     } catch (error) {

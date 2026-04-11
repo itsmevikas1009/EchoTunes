@@ -2,18 +2,17 @@ import BottomBar from "./BottomBar";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import "react-h5-audio-player/lib/styles.css";
-// import "./library.scss"
 
 const AppLayout = ({ children }) => {
   return (
-    <>
-      <Navbar bg={"black"} text={"white"} />
-      <div className="flex h-screen pt-14 bg-black text-white">
+    <div className="app-shell px-3 pb-24 pt-4 md:px-5 md:pb-8 md:pt-5">
+      <Navbar />
+      <div className="mx-auto mt-4 flex w-full max-w-[1500px] gap-4 lg:gap-5">
         <Sidebar />
-        <div className="w-full md:w-[75%] overflow-hidden ">{children}</div>
+        <main className="min-w-0 flex-1">{children}</main>
       </div>
-      {/* <BottomBar /> */}
-    </>
+      <BottomBar />
+    </div>
   );
 };
 

@@ -1,117 +1,128 @@
 import { MdHomeFilled } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { VscLibrary } from "react-icons/vsc";
-import { FaPlus } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
-import { FaMusic } from "react-icons/fa";
+import { FaMusic, FaUserCheck } from "react-icons/fa";
+import { HiMiniFire, HiOutlineQueueList } from "react-icons/hi2";
+
+const navLinkBase =
+  "group relative flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition duration-200";
 
 const Sidebar = () => {
   const { user } = useSelector((state) => state.auth);
-  const { isPlaying } = useSelector((state) => state.audioPlayer);
+  const { recentlyPlayed, allSongs } = useSelector((state) => state.audioPlayer);
   const path = useLocation().pathname;
 
-  return (
-    <div className="hidden md:block md:w-[25%] h-full">
-      <div className="bg-[#1a1a1a] rounded-lg flex flex-col justify-center gap-4 px-3 py-4 mx-2 my-3 ">
-        <div>
-          <Link
-            to="/"
-            className={`flex items-center py-1 px-3 gap-4 text-xl ${path === "/" ? "opacity-100 font-semibold " : "opacity-80"
-              }`}
-          >
-            <MdHomeFilled size={30} />
-            Home
-          </Link>
-        </div>
-        <div>
-          <Link
-            to="/search"
-            className={`flex items-center py-1 px-3 gap-4 text-xl ${path === "/search" ? "opacity-100 font-semibold " : "opacity-80"
-              }`}
-          >
-            <IoSearch size={30} />
-            Search
-          </Link>
-        </div>
-        {user && (
-          <div>
-            <Link
-              to={`/profile/${user?._id}`}
-              className={`flex items-center py-1 px-3 gap-4 text-xl ${path === `/profile/${user?._id}`
-                ? "opacity-100 font-semibold "
-                : "opacity-80"
-                }`}
-            >
-              <CgProfile size={30} />
-              Profile
-            </Link>
-          </div>
-        )}
+  const links = [
+    { to: "/", label: "Home", icon: MdHomeFilled },
+    { to: "/search", label: "Search", icon: IoSearch },
+  ];
 
-        {user && user.isAdmin && (
-          <div>
-            <Link
-              to="/allsongs"
-              className={`flex items-center py-1 px-3 gap-4 text-xl ${path === "/allsongs"
-                ? "opacity-100 font-semibold"
-                : "opacity-80"
+  if (user) {
+    links.push({ to: `/profile/${user?._id}`, label: "Profile", icon: CgProfile });
+  }
+
+  if (user?.isAdmin) {
+    links.push({ to: "/allsongs", label: "All Songs", icon: FaMusic });
+    links.push({ to: "/applications", label: "Applications", icon: FaUserCheck });
+  } else if (user?.isArtist) {
+    links.push({ to: "/allsongs", label: "Artist Studio", icon: FaMusic });
+  }
+
+  return (
+    <aside className="hidden w-[320px] shrink-0 xl:block">
+      <div className="glass-panel sticky top-5 rounded-[32px] p-4">
+        <div className="mb-5">
+          <p className="eyebrow">Navigate</p>
+          <h2 className="hero-title mt-3 text-2xl font-bold">Your stage</h2>
+          <p className="mt-2 text-sm leading-6 text-white/60">
+            Move through your music like a curated set instead of a file list.
+          </p>
+        </div>
+
+        <nav className="space-y-2">
+          {links.map(({ to, label, icon: Icon }) => {
+            const isActive = path === to;
+
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`${navLinkBase} ${
+                  isActive
+                    ? "bg-white/12 text-white shadow-lg shadow-black/15"
+                    : "text-white/65 hover:bg-white/8 hover:text-white"
                 }`}
+              >
+                <Icon size={20} className={isActive ? "text-[#ffd166]" : "text-white/55"} />
+                <span>{label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="mesh-card mt-6 rounded-[26px] p-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#ff8552]/20 text-[#ffd166]">
+              <HiMiniFire size={22} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">Daily pulse</p>
+              <p className="text-xs uppercase tracking-[0.22em] text-white/40">
+                Listening snapshot
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            <div className="rounded-2xl bg-black/20 p-3">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+                Tracks
+              </p>
+              <p className="mt-2 text-2xl font-bold text-white">{allSongs?.length || 0}</p>
+            </div>
+            <div className="rounded-2xl bg-black/20 p-3">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+                Recents
+              </p>
+              <p className="mt-2 text-2xl font-bold text-white">
+                {recentlyPlayed?.length || 0}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="glass-card mt-6 rounded-[26px] p-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/8">
+              <VscLibrary size={20} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold">Curated flow</p>
+              <p className="text-xs text-white/45">Build momentum with quick jumps</p>
+            </div>
+          </div>
+
+          <div className="mt-4 space-y-2">
+            <div className="rounded-2xl border border-white/8 bg-white/4 px-3 py-3 text-sm text-white/75">
+              <div className="mb-1 flex items-center gap-2 text-[#ffd166]">
+                <HiOutlineQueueList size={16} />
+                Queue starter
+              </div>
+              Explore new artists or replay your recent favorites.
+            </div>
+            <Link
+              to="/search"
+              className="accent-button inline-flex rounded-full px-4 py-2 text-sm font-bold transition duration-200"
             >
-              <FaMusic size={24} />
-              All Songs
+              Discover something
             </Link>
           </div>
-        )}
-      </div>
-      <div
-        className={`bg-[#1a1a1a] rounded-lg px-4 py-3 mx-2 my-3 overflow-auto ${isPlaying
-          ? user?.isAdmin
-            ? "h-[42%]"
-            : "h-[48%]"
-          : user?.isAdmin
-            ? "h-[54%]"
-            : user
-              ? "h-[63%]"
-              : "h-[73%]"
-          }`}
-      >
-        <div className="flex justify-between items-center">
-          <div className="flex items-center opacity-70 py-1 px-3 text-3xl gap-4">
-            <VscLibrary />
-            <a className="text-xl" href="#">
-              Your Library
-            </a>
-          </div>
-          <div className="text-2xl opacity-70 hover:opacity-100">
-            <FaPlus />
-          </div>
-        </div>
-        <div className="bg-[#232323] rounded-lg h-auto mt-2 mb-4 px-5 py-5">
-          <div className="text-lg font-bold mb-3">
-            Create your first playlist
-          </div>
-          <div className="text-base font-semibold mb-5">
-            It&apos;s easy, we&apos;ll help you
-          </div>
-          <Link className="bg-white rounded-3xl px-4 py-2 font-semibold text-black text-md">
-            Create playlist
-          </Link>
-        </div>
-        <div className="box2 bg-[#232323] rounded-lg h-auto mt-2 mb-4 px-5 py-5">
-          <div className="text-lg font-bold mb-3">
-            Let&apos;s find some podcast to follow
-          </div>
-          <div className="text-base font-semibold mb-5">
-            We&apos;ll keep you updated on new episodes
-          </div>
-          <Link className="bg-white rounded-3xl px-4 py-2 font-semibold text-black text-md">
-            Browse podcasts
-          </Link>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 

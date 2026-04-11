@@ -1,19 +1,17 @@
-import Logo from "../assets/EchoTunes-logo.png";
-import { Link } from "react-router-dom";
+import Logo from "../assets/EchoTunes-logo-premium.png";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/auth";
-import { useNavigate } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import { FaCaretDown } from "react-icons/fa";
-import { FaCaretUp } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
 import { FaMusic } from "react-icons/fa";
+import { HiOutlineSparkles } from "react-icons/hi2";
 import api from "../services/api";
 
-const Navbar = ({ bg, text = "black" }) => {
+const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const dispatch = useDispatch();
@@ -22,10 +20,9 @@ const Navbar = ({ bg, text = "black" }) => {
   const handleLogout = async () => {
     try {
       const res = await api.get("/logout");
+
       if (res.success) {
         localStorage.removeItem("user");
-        // dispatch(setAllSongs([]));
-        // dispatch(setIsPlaying(false));
         dispatch(logout());
         toast.success("Successfully logged out!");
         navigate("/login");
@@ -37,112 +34,116 @@ const Navbar = ({ bg, text = "black" }) => {
   };
 
   return (
-    <div className={`absolute w-full  py-2 bg-${bg} text-${text}`}>
-      <div className="w-11/12 mx-auto flex items-center justify-between">
-        <div className="flex gap-2 items-center">
-          <Link to="/" className="flex items-center gap-2">
-            <img
-              src={Logo}
-              alt=""
-              className="h-[3rem] w-[3rem] bg-white rounded-full "
-            />
-            <h1 className="text-2xl font-bold">EchoTunes</h1>
-          </Link>
-        </div>
+    <header className="relative z-[200] mx-auto w-full max-w-[1500px]">
+      <div className="glass-panel spotlight-ring relative flex items-center justify-between rounded-[28px] px-4 py-3 md:px-6 md:py-4">
+        <Link to="/" className="flex min-w-0 items-center gap-3">
+          <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-[#120e17] ring-1 ring-white/10 shadow-2xl shadow-orange-500/10 transition-all md:h-14 md:w-14 md:rounded-2xl">
+            <img src={Logo} alt="EchoTunes" className="h-full w-full object-cover scale-110" />
+          </div>
+          <div className="min-w-0">
+            <p className="eyebrow hidden md:inline-flex">Sound Reimagined</p>
+            <h1 className="hero-title truncate text-xl font-bold md:text-2xl">
+              EchoTunes
+            </h1>
+          </div>
+        </Link>
 
-        <div className="flex  items-center gap-6 text-lg font-semibold">
+        <div className="flex items-center gap-2 md:gap-3">
           {user ? (
-            <div className="flex items-center gap-6">
+            <>
               {user?.isAdmin && (
-                <div className="hidden md:block">
-                  <Link
-                    to="/create-song"
-                    className={`flex items-center hover:bg-[#232323] py-1 px-3 gap-4 text-lg font-bold border rounded-3xl hover:scale-105 transition-all duration-200`}
-                  >
-                    Add Song
-                  </Link>
-                </div>
+                <Link
+                  to="/create-song"
+                  className="muted-button hidden rounded-full px-4 py-2 text-sm font-semibold text-white/90 transition duration-200 hover:bg-white/10 md:inline-flex"
+                >
+                  Add Song
+                </Link>
               )}
+
               <button
-                onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center gap-2"
+                onClick={() => setShowUserMenu((prev) => !prev)}
+                className="glass-card flex items-center gap-3 rounded-full px-2 py-2 pr-4 transition duration-200 hover:bg-white/10"
               >
-                {user?.profilePicture ? (
-                  <>
+                <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white/10">
+                  {user?.profilePicture ? (
                     <img
-                      src={user?.profilePicture}
+                      src={user.profilePicture}
                       alt={user?.name}
-                      className="rounded-full h-10 w-10 object-contain"
+                      className="h-full w-full object-cover"
                     />
-                    {showUserMenu ? (
-                      <FaCaretUp size={24} />
-                    ) : (
-                      <FaCaretDown size={24} />
-                    )}
-                  </>
-                ) : (
-                  <CgProfile size={30} />
-                )}
+                  ) : (
+                    <CgProfile size={24} />
+                  )}
+                </div>
+                <div className="hidden text-left md:block">
+                  <p className="max-w-[10rem] truncate text-sm font-semibold text-white">
+                    {user?.name}
+                  </p>
+                  <p className="text-xs uppercase tracking-[0.24em] text-white/50">
+                    {user?.isAdmin ? "Admin" : user?.isArtist ? "Artist" : "Listener"}
+                  </p>
+                </div>
               </button>
 
               {showUserMenu && (
                 <motion.div
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 50 }}
-                  className="absolute z-50 right-0 w-275 p-4"
+                  className="glass-panel absolute right-4 top-[calc(100%+0.8rem)] z-50 w-[17rem] rounded-[24px] p-3"
                 >
-                  <div className="absolute top-[3rem] bg-black p-6 px-8 right-[1.5rem] rounded-lg  transition-all duration-500 z-50 flex justify-center flex-col ">
+                  <Link
+                    to={`/profile/${user?._id}`}
+                    onClick={() => setShowUserMenu(false)}
+                    className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm text-white/80 transition hover:bg-white/8 hover:text-white"
+                  >
+                    <CgProfile size={18} />
+                    Profile
+                  </Link>
+
+                  {user?.isAdmin && (
                     <Link
-                      to={`/profile/${user?._id}`}
-                      className="mb-4 hover:opacity-85 flex items-center gap-4"
+                      to="/create-song"
+                      onClick={() => setShowUserMenu(false)}
+                      className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm text-white/80 transition hover:bg-white/8 hover:text-white md:hidden"
                     >
-                      <CgProfile />
-                      Profile
+                      <FaMusic size={16} />
+                      Add Song
                     </Link>
+                  )}
 
-                    {user?.isAdmin && (
-                      <div className="block md:hidden">
-                        <Link
-                          to="/create-song"
-                          className="mb-4 hover:opacity-85 flex items-center gap-4"
-                        >
-                          <FaMusic />
-                          Add_Song
-                        </Link>
-                      </div>
-                    )}
-
-                    <button
-                      onClick={handleLogout}
-                      className="hover:opacity-85 flex items-center gap-4"
-                    >
-                      <IoLogOutOutline />
-                      Logout
-                    </button>
-                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm text-white/80 transition hover:bg-white/8 hover:text-white"
+                  >
+                    <IoLogOutOutline size={18} />
+                    Logout
+                  </button>
                 </motion.div>
               )}
-            </div>
+            </>
           ) : (
-            <div className="gap-1 md:gap-6 flex items-center">
-              <Link
-                to="/signup"
-                className="border border-white p-1 md:p-2 bg-black text-white px-2  md:px-6 rounded-3xl hover:scale-105 transition-all duration-200"
-              >
-                SignUp
-              </Link>
+            <>
+              <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.2em] text-white/60 md:flex">
+                <HiOutlineSparkles size={16} className="text-[#ffd166]" />
+                Fresh Sessions
+              </div>
               <Link
                 to="/login"
-                className="border border-black p-1 md:p-2 bg-white text-black px-2 md:px-6 rounded-3xl hover:scale-105 transition-all duration-200"
+                className="muted-button rounded-full px-4 py-2 text-sm font-semibold text-white transition duration-200 hover:bg-white/10"
               >
                 Login
               </Link>
-            </div>
+              <Link
+                to="/signup"
+                className="accent-button rounded-full px-4 py-2 text-sm font-extrabold transition duration-200"
+              >
+                Join Now
+              </Link>
+            </>
           )}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

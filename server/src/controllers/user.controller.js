@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import mongoose from "mongoose";
 import { User } from "../models/user.model.js";
 import {
     generateCsrfToken,
@@ -7,9 +8,22 @@ import {
     signAuthToken,
 } from "../utils/auth.js";
 
-const issueSession = (res, user, message) => {
+const issueSession = async (res, user, message) => {
     const { password, ...rest } = user.toObject();
-    const token = signAuthToken({ userId: user._id, isAdmin: user.isAdmin });
+    
+    // Fetch artist name if user is an artist
+    let artistName = "";
+    if (user.isArtist && user.artistId) {
+        const artist = await mongoose.model("Artist").findById(user.artistId);
+        artistName = artist?.name || "";
+    }
+
+    const token = signAuthToken({ 
+        userId: user._id, 
+        isAdmin: user.isAdmin,
+        isArtist: user.isArtist,
+        artistName: artistName
+    });
     const csrfToken = generateCsrfToken();
 
     return res
@@ -18,7 +32,7 @@ const issueSession = (res, user, message) => {
         .cookie("csrf-token", csrfToken, getCsrfCookieOptions())
         .json({
             success: true,
-            rest,
+            rest: { ...rest, artistName },
             csrfToken,
             message,
         });
@@ -124,7 +138,7 @@ export const login = async (req, res) => {
             });
         }
 
-        return issueSession(res, user, `Welcome Back ${user.name}`);
+        return await issueSession(res, user, `Welcome Back ${user.name}`);
     } catch (err) {
         console.log("Login error", err);
         return res.status(500).json({
@@ -160,7 +174,7 @@ export const google = async (req, res) => {
                 profilePicture: googleUser.profilePicture,
             });
 
-            return issueSession(
+            return await issueSession(
                 res,
                 user,
                 `Registered Successfully, ${user.name}`
@@ -172,12 +186,12 @@ export const google = async (req, res) => {
             await user.save();
         }
 
-        return issueSession(res, user, `Welcome Back ${user.name}`);
+        return await issueSession(res, user, `Welcome Back ${user.name}`);
     } catch (err) {
         console.log("Google auth error", err);
         const statusCode =
             err.message === "GOOGLE_CLIENT_ID is not configured" ? 500 : 401;
-
+        console.log("Status code", res);
         return res.status(statusCode).json({
             success: false,
             message:
@@ -198,19 +212,15 @@ export const updateProfile = async (req, res) => {
         });
     }
 
-    if (!password) {
-        return res.status(400).json({
-            success: false,
-            message: "All fields are required!",
-        });
+    const updateData = { name };
+    if (password) {
+        updateData.password = await bcrypt.hash(password, 10);
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
         const user = await User.findByIdAndUpdate(
             req.userId,
-            { name, password: hashedPassword },
+            { $set: updateData },
             { new: true }
         );
 

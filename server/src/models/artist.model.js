@@ -7,6 +7,13 @@ const artistSchema = new mongoose.Schema({
     profileImage: {
         type: String,
     },
+    bio: {
+        type: String,
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
 },
     { timestamps: true }
 )

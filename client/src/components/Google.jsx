@@ -1,10 +1,10 @@
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import toast from "react-hot-toast";
-import { app } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
 import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
+import { app } from "../firebase";
+import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
 import api from "../services/api";
 
 const Google = () => {
@@ -15,6 +15,7 @@ const Google = () => {
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
+
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
       const credential = GoogleAuthProvider.credentialFromResult(resultsFromGoogle);
@@ -40,11 +41,12 @@ const Google = () => {
 
   return (
     <button
-      className="w-full bg-green-500 rounded-lg p-2  flex items-center justify-center gap-6 font-semibold text-lg"
+      className="glass-panel flex w-full items-center justify-center gap-4 rounded-2xl px-4 py-3 font-semibold text-white transition duration-200 hover:bg-white/10"
       onClick={handleGoogleClick}
+      type="button"
     >
-      <FcGoogle size={28} />
-      Continue With Google
+      <FcGoogle size={24} />
+      Continue with Google
     </button>
   );
 };
