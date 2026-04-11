@@ -1,5 +1,17 @@
 import axios from "axios";
 
+const getCookieValue = (name) => {
+    if (typeof document === "undefined") {
+        return "";
+    }
+
+    const cookie = document.cookie
+        .split("; ")
+        .find((entry) => entry.startsWith(`${name}=`));
+
+    return cookie ? decodeURIComponent(cookie.split("=").slice(1).join("=")) : "";
+};
+
 const api = axios.create({
     baseURL: import.meta.env.PROD
         ? `${import.meta.env.VITE_API_URL}/api`  // Production backend URL
@@ -10,6 +22,17 @@ const api = axios.create({
 
 api.interceptors.request.use(
     config => {
+        const method = config.method?.toLowerCase();
+
+        if (["post", "put", "patch", "delete"].includes(method)) {
+            const csrfToken = getCookieValue("csrf-token");
+
+            if (csrfToken) {
+                config.headers = config.headers || {};
+                config.headers["x-csrf-token"] = csrfToken;
+            }
+        }
+
         if (import.meta.env.DEV) {
             console.log(`Making ${config.method?.toUpperCase()} request to ${config.url}`);
         }

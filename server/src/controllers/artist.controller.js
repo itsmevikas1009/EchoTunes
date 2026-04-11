@@ -4,6 +4,13 @@ export const addArtist = async (req, res) => {
     try {
         const { name, profileImage } = req.body;
 
+        if (!name || !profileImage) {
+            return res.status(400).json({
+                success: false,
+                message: "Name and profile image are required.",
+            });
+        }
+
         const artist = await Artist.create({ name, profileImage });
 
         return res.status(200).json({
@@ -13,12 +20,12 @@ export const addArtist = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(200).json({
+        return res.status(500).json({
             success: false,
             message: "Something went wrong"
         });
     }
-}
+};
 
 export const getArtist = async (req, res) => {
     try {
@@ -36,4 +43,4 @@ export const getArtist = async (req, res) => {
             message: "Something went wrong"
         });
     }
-}
+};

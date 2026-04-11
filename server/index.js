@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import cookieParser from "cookie-parser";
 import { userRoute } from "./src/routes/user.js";
 import { songRoute } from "./src/routes/song.js";
 import artistRoute from "./src/routes/artist.js";
@@ -55,6 +56,7 @@ app.use(helmet({
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(cookieParser());
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,

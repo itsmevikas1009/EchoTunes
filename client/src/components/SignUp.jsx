@@ -1,23 +1,14 @@
 import { Link } from "react-router-dom";
 import { useInputValidation, useStrongPassword } from "6pp";
 import Navbar from "./Navbar";
-// Remove this import - we'll create a proper API instance
-// import { server } from "../services/api";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import Google from "./Google";
 import { useSelector } from "react-redux";
 import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
-
-// Create axios instance for CORS-free requests
-const api = axios.create({
-  baseURL: '/api', // Uses Vite proxy in development
-  withCredentials: true,
-  timeout: 10000
-});
+import api from "../services/api";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
@@ -48,23 +39,18 @@ const SignUp = () => {
     setLoading(true);
 
     try {
-      // Updated API call - now uses the proxy-friendly base URL
-      const res = await api.post('/signup', data);
+      const res = await api.post("/signup", data);
 
-      if (res.status === 200) {
-        if (res.data.success === true) {
-          toast.success(res.data.message);
-          setLoading(false);
-          navigate("/login");
-        } else {
-          toast.success(res.data.message);
-          setLoading(false);
-        }
+      if (res.success === true) {
+        toast.success(res.message);
+        navigate("/login");
+      } else {
+        toast.error(res.message);
       }
     } catch (err) {
-      setLoading(false);
-      console.log(err);
       toast.error(err?.response?.data?.message || "Failed to sign up.");
+    } finally {
+      setLoading(false);
     }
   };
 

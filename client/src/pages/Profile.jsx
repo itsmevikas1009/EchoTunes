@@ -31,7 +31,6 @@ const Profile = () => {
 
     try {
       const res = await api.put(`/updateProfile/${id}`, data);
-      console.log(res);
 
       if (res.success === true) {
         toast.success(res.message);
@@ -43,15 +42,20 @@ const Profile = () => {
       }
     } catch (err) {
       toast.error(err?.response?.data?.message || "Error on updating profile.");
-      dispatch(updateFailure(err?.response?.data?.message || "Error on updating profile."));
+      dispatch(
+        updateFailure(
+          err?.response?.data?.message || "Error on updating profile.",
+        ),
+      );
     }
   };
 
   return (
     <AppLayout>
       <div
-        className={`bg-[#1a1a1a] w-full flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${isPlaying ? "h-[85%]" : "h-[97%]"
-          }`}
+        className={`bg-[#1a1a1a] w-full flex-1 overflow-auto px-8 text-white rounded-lg mx-1 my-3 ${
+          isPlaying ? "h-[85%]" : "h-[97%]"
+        }`}
       >
         <div className="pt-6 pb-2">
           <Link to="/">

@@ -5,22 +5,13 @@ import { logout } from "../redux/reducers/auth";
 import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
-import axios from "axios";
-// Remove this import - we'll create a proper API instance
-// import { server } from "../services/api";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { FaMusic } from "react-icons/fa";
-
-// Create axios instance for CORS-free requests
-const api = axios.create({
-  baseURL: '/api', // Uses Vite proxy in development
-  withCredentials: true,
-  timeout: 10000
-});
+import api from "../services/api";
 
 const Navbar = ({ bg, text = "black" }) => {
   const { user } = useSelector((state) => state.auth);
@@ -30,9 +21,8 @@ const Navbar = ({ bg, text = "black" }) => {
 
   const handleLogout = async () => {
     try {
-      // Updated API call - now uses the proxy-friendly base URL
-      const res = await api.get('/logout');
-      if (res.data.success) {
+      const res = await api.get("/logout");
+      if (res.success) {
         localStorage.removeItem("user");
         // dispatch(setAllSongs([]));
         // dispatch(setIsPlaying(false));
@@ -42,7 +32,7 @@ const Navbar = ({ bg, text = "black" }) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error);
+      toast.error(error?.response?.data?.message || "Failed to logout.");
     }
   };
 

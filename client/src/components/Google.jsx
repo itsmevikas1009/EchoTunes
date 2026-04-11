@@ -1,20 +1,11 @@
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import toast from "react-hot-toast";
 import { app } from "../firebase";
-// Remove this import - we'll create a proper API instance
-// import { server } from "../services/api";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { signUpFailure, signUpSuccess } from "../redux/reducers/auth";
 import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
-
-// Create axios instance for CORS-free requests
-const api = axios.create({
-  baseURL: '/api', // Uses Vite proxy in development
-  withCredentials: true,
-  timeout: 10000
-});
+import api from "../services/api";
 
 const Google = () => {
   const auth = getAuth(app);
@@ -26,26 +17,24 @@ const Google = () => {
     provider.setCustomParameters({ prompt: "select_account" });
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
+      const credential = GoogleAuthProvider.credentialFromResult(resultsFromGoogle);
+      const idToken = credential?.idToken;
 
-      const data = {
-        name: resultsFromGoogle.user.displayName,
-        email: resultsFromGoogle.user.email,
-        googlePhotoUrl: resultsFromGoogle.user.photoURL,
-      };
+      if (!idToken) {
+        throw new Error("Unable to verify Google sign-in.");
+      }
 
-      // Updated API call - now uses the proxy-friendly base URL
-      const res = await api.post('/google', data);
-      // console.log(res);
+      const res = await api.post("/google", { idToken });
 
-      if (res.data.success === true) {
-        localStorage.setItem("user", JSON.stringify(res.data.rest));
-        dispatch(signUpSuccess(res.data.rest));
-        toast.success(res.data.message);
+      if (res.success === true) {
+        localStorage.setItem("user", JSON.stringify(res.rest));
+        dispatch(signUpSuccess(res.rest));
+        toast.success(res.message);
         navigate("/");
       }
     } catch (error) {
       dispatch(signUpFailure());
-      toast.error(error.response.data.message || "Something Went Wrong !");
+      toast.error(error?.response?.data?.message || error.message || "Something Went Wrong !");
     }
   };
 

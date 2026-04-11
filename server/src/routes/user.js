@@ -1,6 +1,6 @@
 import express from "express";
 import { google, login, logout, signUp, updateProfile } from "../controllers/user.controller.js";
-import { AuthMiddleware } from "../middlewares/AuthMiddleware.js";
+import { AuthMiddleware, requireCsrf } from "../middlewares/AuthMiddleware.js";
 
 export const userRoute = express.Router();
 
@@ -11,4 +11,4 @@ userRoute.post("/login", login);
 userRoute.get("/logout", logout);
 
 // Private route
-userRoute.put("/updateProfile/:id", AuthMiddleware, updateProfile);
+userRoute.put("/updateProfile/:id", AuthMiddleware, requireCsrf, updateProfile);
