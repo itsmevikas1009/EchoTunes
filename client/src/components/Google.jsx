@@ -1,4 +1,5 @@
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, getAuth } from "firebase/auth";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -12,30 +13,44 @@ const Google = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const handleRedirectResult = async () => {
+      try {
+        const resultsFromGoogle = await getRedirectResult(auth);
+        if (resultsFromGoogle) {
+          const credential = GoogleAuthProvider.credentialFromResult(resultsFromGoogle);
+          const idToken = credential?.idToken;
+
+          if (!idToken) {
+            throw new Error("Unable to verify Google sign-in.");
+          }
+
+          const res = await api.post("/google", { idToken });
+
+          if (res.success === true) {
+            localStorage.setItem("user", JSON.stringify(res.rest));
+            dispatch(signUpSuccess(res.rest));
+            toast.success(res.message);
+            navigate("/");
+          }
+        }
+      } catch (error) {
+        dispatch(signUpFailure());
+        toast.error(error?.response?.data?.message || error.message || "Redirect Authentication Failed!");
+      }
+    };
+
+    handleRedirectResult();
+  }, [auth, dispatch, navigate]);
+
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
     try {
-      const resultsFromGoogle = await signInWithPopup(auth, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(resultsFromGoogle);
-      const idToken = credential?.idToken;
-
-      if (!idToken) {
-        throw new Error("Unable to verify Google sign-in.");
-      }
-
-      const res = await api.post("/google", { idToken });
-
-      if (res.success === true) {
-        localStorage.setItem("user", JSON.stringify(res.rest));
-        dispatch(signUpSuccess(res.rest));
-        toast.success(res.message);
-        navigate("/");
-      }
+      await signInWithRedirect(auth, provider);
     } catch (error) {
-      dispatch(signUpFailure());
-      toast.error(error?.response?.data?.message || error.message || "Something Went Wrong !");
+      toast.error(error.message || "Something went wrong initiating login!");
     }
   };
 
